@@ -5,7 +5,7 @@
   <!-- Horizontal Form -->
   <div class="box box-info">
     <div class="box-header with-border">
-      <h3 class="box-title">Sing in to start your session</h3>
+      <h3 class="box-title">Sign in to start your session</h3>
     </div><!-- /.box-header -->
     <!-- form start -->
     <form class="form-horizontal">
@@ -39,7 +39,6 @@
         </div>
       </div><!-- /.box-body -->
       <div class="box-footer">
-        <button type="submit" class="btn btn-default">Cancel</button>
         <button type="submit" class="btn btn-info pull-right">Sign in</button>
       </div><!-- /.box-footer -->
     </form>
