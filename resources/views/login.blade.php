@@ -1,47 +1,37 @@
 @extends('layouts.one-column')
 
-@section('sidebar')
-<div>
-  <!-- Horizontal Form -->
-  <div class="box box-info">
-    <div class="box-header with-border">
-      <h3 class="box-title">Sign in to start your session</h3>
-    </div><!-- /.box-header -->
-    <!-- form start -->
-    <form class="form-horizontal">
-      <div class="box-body">
-        <div class="form-group">
-          <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-          <div class="col-sm-10">
-            <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+@section('content')
+  <div class="login-box-body">
+    <p class="login-box-msg">Sign in to start your session</p>
+    <form action="../../index2.html" method="post">
+      <div class="form-group has-feedback">
+        <input type="email" class="form-control" placeholder="Email">
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input type="password" class="form-control" placeholder="Password">
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+      <div class="row">
+        <div class="col-xs-8">
+          <div class="checkbox icheck">
+            <label>
+              <input type="checkbox"> Remember Me
+            </label>
           </div>
-        </div>
-        <div class="form-group">
-          <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
-          <div class="col-sm-10">
-            <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-10">
-            <div class="checkbox">
-              <label>
-                <input type="checkbox"> Remember me
-              </label>
-            </div>
-            <div>
-              <a href="#">I forgot my password</a>
-            </div>
-            <div>
-              <a href="/register">Register a new membership</a>
-            </div>
-          </div>
-        </div>
-      </div><!-- /.box-body -->
-      <div class="box-footer">
-        <button type="submit" class="btn btn-info pull-right">Sign in</button>
-      </div><!-- /.box-footer -->
+        </div><!-- /.col -->
+        <div class="col-xs-4">
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+        </div><!-- /.col -->
+      </div>
     </form>
-  </div><!-- /.box -->
-</div>
+
+    <div class="social-auth-links text-center">
+      <p>- OR -</p>
+    </div><!-- /.social-auth-links -->
+
+    <a href="#">I forgot my password</a><br>
+    <a href="/register" class="text-center">Register a new membership</a>
+
+  </div><!-- /.login-box-body -->
 @endsection
