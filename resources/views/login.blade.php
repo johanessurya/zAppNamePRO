@@ -1,5 +1,8 @@
 @extends('layouts.one-column')
 
+@section('title', 'Login')
+@section('logo-desc', '<b>zAdmin</b>LTE')
+
 @section('content')
   <div class="login-box-body">
     <p class="login-box-msg">Sign in to start your session</p>

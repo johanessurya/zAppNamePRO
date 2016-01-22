@@ -1,5 +1,8 @@
 @extends('layouts.one-column')
 
+@section('title', 'Register')
+@section('logo-desc', '<b>zLogo</b>')
+
 @section('content')
   <div class="login-box-body">
     <p class="login-box-msg">Register a new membership</p>
