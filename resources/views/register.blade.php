@@ -49,7 +49,7 @@
       </div><!-- /.box-footer -->
       <div class="box-body">
         <div>
-          <a href="#">I already have a membership</a>
+          <a href="/login">I already have a membership</a>
         </div>
       </div>
     </form>

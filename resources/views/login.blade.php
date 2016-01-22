@@ -33,7 +33,7 @@
               <a href="#">I forgot my password</a>
             </div>
             <div>
-              <a href="#">Register a new membership</a>
+              <a href="/register">Register a new membership</a>
             </div>
           </div>
         </div>
