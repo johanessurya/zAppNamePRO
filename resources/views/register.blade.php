@@ -5,22 +5,25 @@
 
 @section('content')
   <div class="login-box-body">
+    <div class="callout callout-danger">
+      <p>This is error message</p>
+    </div>
     <p class="login-box-msg">Register a new membership</p>
-    <form action="../../index2.html" method="post">
+    <form action="/register" method="post">
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" placeholder="Full Name">
+        <input type="text" class="form-control" placeholder="Full Name" name="full-name">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="email" class="form-control" placeholder="Email">
+        <input type="email" class="form-control" placeholder="Email" name="email">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Password">
+        <input type="password" class="form-control" placeholder="Password" name="password">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Retype Password">
+        <input type="password" class="form-control" placeholder="Retype Password" name="retype-password">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">

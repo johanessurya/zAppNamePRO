@@ -6,7 +6,7 @@
 @section('content')
   <div class="login-box-body">
     <p class="login-box-msg">Sign in to start your session</p>
-    <form action="../../index2.html" method="post">
+    <form action="/login" method="post">
       <div class="form-group has-feedback">
         <input type="email" class="form-control" placeholder="Email">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
