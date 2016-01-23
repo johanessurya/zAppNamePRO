@@ -17,14 +17,18 @@ class RegisterController extends Controller
         'message' => array()
       );
 
+      $messages = [
+        'agree.required' => 'Please check "I agree to the terms" checkbox',
+      ];
+
       // Validator
       $validator = Validator::make($request->all(), [
         'full-name' => 'required',
-        'email' => 'required|unique:users',
+        'email' => 'required|unique:users|email',
         'password' => 'required',
         'retype-password' => 'required',
         'agree' => 'required'
-      ]);
+      ], $messages);
 
       if ($validator->fails()) {
         $data['message'] = $validator->errors()->all();
