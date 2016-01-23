@@ -45,7 +45,7 @@
       </div>
     </form>
 
-    <a href="/login" class="text-center">I already have a membership</a>
+    <a href="/login" class="text-center"> I already have an account</a>
 
   </div><!-- /.login-box-body -->
 @endsection

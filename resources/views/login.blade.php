@@ -30,7 +30,7 @@
     </form>
 
     <a href="#">I forgot my password</a><br>
-    <a href="/register" class="text-center">Register a new membership</a>
+    <a href="/register" class="text-center">Register as a new user</a>
 
   </div><!-- /.login-box-body -->
 @endsection
