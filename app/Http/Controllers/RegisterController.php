@@ -28,7 +28,7 @@ class RegisterController extends Controller
 
         // Declare validator
         $validator = Validator::make($request->all(), [
-          'full-name' => 'required',
+          'username' => 'required',
           'email' => 'required|unique:users|email',
           'password' => 'required|confirmed',
           'password_confirmation' => 'required',
@@ -41,7 +41,7 @@ class RegisterController extends Controller
         } else {
           $params = $request->all();
           $rows = array(
-            'username' => $params['full-name'],
+            'username' => $params['username'],
             'password' => Hash::make($params['password']),
             'email' => $params['email']
           );
