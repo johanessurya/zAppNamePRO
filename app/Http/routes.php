@@ -32,6 +32,19 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 });
 
+Route::get('/api/v1/user', function (App\User $user) {
+  $users = $user->all();
+
+  $json['data'] = array();
+  foreach($users as $user) {
+    $json['data'][] = array(
+      $user->username, $user->email
+    );
+  }
+
+  return json_encode($json);
+});
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
