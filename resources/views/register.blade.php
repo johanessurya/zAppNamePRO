@@ -5,9 +5,14 @@
 
 @section('content')
   <div class="login-box-body">
+    @if (isset($message))
     <div class="callout callout-danger">
-      <p>This is error message</p>
+      @foreach ($message as $x)
+      <p>{{ $x }}</p>
+      @endforeach
     </div>
+    @endif
+
     <p class="login-box-msg">Register a new membership</p>
     <form action="/register" method="post">
       <div class="form-group has-feedback">
@@ -30,7 +35,7 @@
         <div class="col-xs-8">
           <div class="checkbox icheck">
             <label>
-              <input type="checkbox"> I agree to the <a href="#">terms</a>
+              <input type="checkbox" name="agree"> I agree to the <a href="#">terms</a>
             </label>
           </div>
         </div><!-- /.col -->

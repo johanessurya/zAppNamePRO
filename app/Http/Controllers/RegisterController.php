@@ -2,32 +2,43 @@
 
 namespace App\Http\Controllers;
 
+use Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
+use App\User;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 class RegisterController extends Controller
 {
     public function index(Request $request) {
+      $data = array(
+        'message' => array()
+      );
+
       // Validator
       $validator = Validator::make($request->all(), [
         'full-name' => 'required',
-        'email' => 'required'
+        'email' => 'required',
+        'password' => 'required',
+        'retype-password' => 'required',
+        'agree' => 'required'
       ]);
 
       if ($validator->fails()) {
-          return redirect()->back()->withErrors($validator->errors());
+        $data['message'] = $validator->errors()->all();
+      } else {
+        $params = $request->all();
+        $rows = array(
+          'username' => $params['full-name'],
+          'password' => Hash::make($params['password']),
+          'email' => $params['email']
+        );
+
+        User::create($rows);
       }
 
-      $post['name'] = $request->input();
-
-      if(!empty($post['name'])) {
-        var_dump($post);
-        die('index');
-      }
-
-      return view('register');
+      return view('register', $data);
     }
 }
