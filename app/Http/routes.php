@@ -38,7 +38,8 @@ Route::get('/api/v1/user', function (App\User $user) {
   $json['data'] = array();
   foreach($users as $user) {
     $json['data'][] = array(
-      $user->username, $user->email
+      'username' => $user->username,
+      'email' => $user->email
     );
   }
 
