@@ -1,7 +1,16 @@
-$global = {}
+$global = {
+
+}
 $(function () {
-  $global.editEl = '<button class="btn btn-block btn-primary">Edit</button>';
-  $global.deleteEl = '<button class="btn btn-block btn-danger">Delete</button>';
+  // ======= PopUp Modal =========
+  $('button[data-dismiss="modal"]').click(function() {
+    closeModal('.modal');
+  });
+
+  // ======= Datatables =========
+  // class prefix: "js-"" mean that class related to javascript method/function
+  $global.editEl = '<button class="js-btn-edit btn btn-block btn-primary" onclick="showModal(\'#user-edit\');">Edit</button>';
+  $global.deleteEl = '<button class="js-btn-delete btn btn-block btn-danger">Delete</button>';
 
   $('#user-table').DataTable( {
       'ajax': '/api/v1/user',
@@ -25,3 +34,11 @@ $(function () {
       }]
   } );
 });
+
+function showModal(selector) {
+  $(selector).fadeIn('slow');
+}
+
+function closeModal(selector) {
+  $(selector).fadeOut('slow');
+}
