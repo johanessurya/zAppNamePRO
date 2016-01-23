@@ -16,7 +16,7 @@
     <p class="login-box-msg">Register a new membership</p>
     <form action="/register" method="post">
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" placeholder="username" name="username">
+        <input type="text" class="form-control" placeholder="Username" name="username">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
