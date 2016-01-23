@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'RegisterController@index');
 
 Route::get('/demo', function () {
     return view('demo');

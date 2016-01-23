@@ -13,34 +13,41 @@ use App\Http\Controllers\Controller;
 class RegisterController extends Controller
 {
     public function index(Request $request) {
+      // Default message
       $data = array(
-        'message' => array()
+        'message' => array('Register successful'),
+        'messageType' => 'success'
       );
 
-      $messages = [
-        'agree.required' => 'Please check "I agree to the terms" checkbox',
-      ];
+      // Check if request is post
+      if($request->isMethod('post')) {
+        // Custom validator message
+        $messages = [
+          'agree.required' => 'Please check "I agree to the terms"',
+        ];
 
-      // Validator
-      $validator = Validator::make($request->all(), [
-        'full-name' => 'required',
-        'email' => 'required|unique:users|email',
-        'password' => 'required',
-        'retype-password' => 'required',
-        'agree' => 'required'
-      ], $messages);
+        // Declare validator
+        $validator = Validator::make($request->all(), [
+          'full-name' => 'required',
+          'email' => 'required|unique:users|email',
+          'password' => 'required|confirmed',
+          'password_confirmation' => 'required',
+          'agree' => 'required'
+        ], $messages);
 
-      if ($validator->fails()) {
-        $data['message'] = $validator->errors()->all();
-      } else {
-        $params = $request->all();
-        $rows = array(
-          'username' => $params['full-name'],
-          'password' => Hash::make($params['password']),
-          'email' => $params['email']
-        );
+        if ($validator->fails()) {
+          $data['message'] = $validator->errors()->all();
+          $data['messageType'] = 'danger';
+        } else {
+          $params = $request->all();
+          $rows = array(
+            'username' => $params['full-name'],
+            'password' => Hash::make($params['password']),
+            'email' => $params['email']
+          );
 
-        User::create($rows);
+          User::create($rows);
+        }
       }
 
       return view('register', $data);

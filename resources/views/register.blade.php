@@ -6,7 +6,7 @@
 @section('content')
   <div class="login-box-body">
     @if (isset($message))
-    <div class="callout callout-danger">
+    <div class="callout callout-{{ $messageType }}">
       @foreach ($message as $x)
       <p>{{ $x }}</p>
       @endforeach
