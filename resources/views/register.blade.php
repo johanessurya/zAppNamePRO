@@ -13,7 +13,7 @@
     </div>
     @endif
 
-    <p class="login-box-msg">Register a new membership</p>
+    <p class="login-box-msg">Register as a new user</p>
     <form action="/register" method="post">
       <div class="form-group has-feedback">
         <input type="text" class="form-control" placeholder="Username" name="username">
