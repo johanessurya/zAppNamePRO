@@ -6,7 +6,21 @@
 
 @section('content')
   <div class="login-box-body">
-    <p>	To reset your password, please enter your zAppName associated email address.</p>
+    @if (Session::has('message'))
+    <div class="callout callout-success">
+      <p>{{ Session::get('message') }}</p>
+    </div>
+    @endif
+
+    @if (count($errors) > 0)
+    <div class="callout callout-danger">
+      @foreach ($errors->all() as $error)
+        <p>{{ $error }}</p>
+      @endforeach
+    </div>
+    @endif
+    
+    <p>To reset your password, please enter your zAppName associated email address.</p>
     <form action="/resetpassword" method="post">
       <div class="form-group has-feedback">
 				<input type="email" class="form-control" placeholder="Email" name="email">
