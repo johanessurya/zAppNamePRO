@@ -77,6 +77,9 @@ return [
     'unique'               => 'The :attribute has already been taken.',
     'url'                  => 'The :attribute format is invalid.',
 
+    'one_or_more_lower_char'  => 'The :attribute must has one or more lower character',
+    'one_or_more_upper_char'  => 'The :attribute must has one or more upper character',
+    'one_or_more_number'  => 'The :attribute must has one or more number character',
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines

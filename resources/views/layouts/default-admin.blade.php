@@ -464,14 +464,12 @@
         <!-- Main content -->
         <section class="content">
           @section('popup-modal')
-            This is popup modal
           @show
           <div class="row">
             <div class="col-xs-12">
               @section('content')
                 This is content
               @show
-
               <div class="box">
               </div>
             </div><!-- /.col -->

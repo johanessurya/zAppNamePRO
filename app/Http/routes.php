@@ -39,6 +39,13 @@ Route::group(['middleware' => ['web']], function () {
     'middleware' => 'auth',
     'uses' => 'DashboardController@index'
   ));
+  Route::get('/dashboard/user', function () {
+    return view('dashboard.newuser', array('title' => 'Create New User'));
+  });
+  Route::get('/dashboard/user/{id}', function () {
+    return view('dashboard.newuser', array('title' => 'Edit User'));
+  });
+  Route::post('/dashboard/user', 'DashboardController@createUser');
 
   Route::get('/forgot', function () {
     return view('forgot');
