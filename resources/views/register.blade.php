@@ -16,19 +16,19 @@
 
     <form action="/register" method="post">
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" placeholder="User name" name="username">
+        <input type="text" class="form-control" placeholder="User name" name="username" value="{{ old('username') }}">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-         <input type="OfficeName" class="form-control" placeholder="Company name" name="company_name">
+         <input type="OfficeName" class="form-control" placeholder="Company name" name="company_name" value="{{ old('company_name')}}">
          <span class="glyphicon glyphicon-briefcase form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-         <input type="state" class="form-control" placeholder="State Abbreviation" name="state">
+         <input type="state" class="form-control" placeholder="State Abbreviation" name="state" value="{{ old('state') }}">
          <span class="glyphicon glyphicon-map-marker form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="email" class="form-control" placeholder="Email" name="email">
+        <input type="email" class="form-control" placeholder="Email" name="email" value="{{ old('email') }}">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">

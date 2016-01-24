@@ -11,42 +11,6 @@
 |
 */
 
-Route::get('/', 'RegisterController@index');
-Route::get('/forgot', function () {
-  return view('forgot');
-});
-
-Route::get('/demo', function () {
-    return view('demo');
-});
-
-Route::get('/login', function () {
-    return view('login');
-});
-
-Route::get('/register', function () {
-    return view('register');
-});
-Route::post('/register', 'RegisterController@index');
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-});
-
-Route::get('/api/v1/user', function (App\User $user) {
-  $users = $user->all();
-
-  $json['data'] = array();
-  foreach($users as $user) {
-    $json['data'][] = array(
-      'username' => $user->username,
-      'email' => $user->email
-    );
-  }
-
-  return json_encode($json);
-});
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -59,5 +23,40 @@ Route::get('/api/v1/user', function (App\User $user) {
 */
 
 Route::group(['middleware' => ['web']], function () {
-    //
+  Route::get('/', 'RegisterController@index');
+  Route::get('/flash', 'RegisterController@flash');
+  Route::get('/forgot', function () {
+    return view('forgot');
+  });
+
+  Route::get('/demo', function () {
+      return view('demo');
+  });
+
+  Route::get('/login', function () {
+      return view('login');
+  });
+
+  Route::get('/register', function () {
+      return view('register');
+  });
+  Route::post('/register', 'RegisterController@index');
+
+  Route::get('/dashboard', function () {
+      return view('dashboard');
+  });
+
+  Route::get('/api/v1/user', function (App\User $user) {
+    $users = $user->all();
+
+    $json['data'] = array();
+    foreach($users as $user) {
+      $json['data'][] = array(
+        'username' => $user->username,
+        'email' => $user->email
+      );
+    }
+
+    return json_encode($json);
+  });
 });

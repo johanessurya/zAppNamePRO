@@ -6,6 +6,11 @@
 
 @section('content')
   <div class="login-box-body">
+    @if (Session::has('message'))
+    <div class="callout callout-success">
+      <p>{{ Session::get('message') }}</p>
+    </div>
+    @endif
     <form action="/login" method="post">
       <div class="form-group has-feedback">
         <input type="text" class="form-control" placeholder="Username">

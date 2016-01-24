@@ -14,6 +14,8 @@ use App\Http\Controllers\Controller;
 class RegisterController extends Controller
 {
     public function index(Request $request) {
+      $return = null;
+
       // Default message
       $data = array(
         'message' => array('Register successful'),
@@ -41,6 +43,9 @@ class RegisterController extends Controller
         if ($validator->fails()) {
           $data['message'] = $validator->errors()->all();
           $data['messageType'] = 'danger';
+          $request->flash();
+
+          $return = view('register', $data);
         } else {
           $params = $request->all();
 
@@ -53,14 +58,12 @@ class RegisterController extends Controller
             'email' => $params['email']
           );
 
-          var_dump($rows, $company);
-          die('test');
           User::create($rows);
+
+          $return = redirect('/login')->with('message', 'Register successful');
         }
       }
 
-      var_dump($data);
-      die('out if');
-      return view('register', $data);
+      return $return;
     }
 }
