@@ -30,6 +30,8 @@ class LoginController extends Controller
     }
 
     public function resetPassword(Request $request) {
+      $return = redirect('/forgot')->with("We can't find your email in our database.")
+
       // Get email
       $email = $request->input('email');
 
@@ -50,8 +52,10 @@ class LoginController extends Controller
             $m->to($email, $row->username)->subject('Resetting password!');
         });
 
-        return redirect('/login')->with('message', 'Reset password link has been sent to your email.');
+        $return = redirect('/login')->with('message', 'Reset password link has been sent to your email.');
       }
+
+      return $return;
     }
 
     public function reset(Request $request, $token = null) {
