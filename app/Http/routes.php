@@ -12,6 +12,9 @@
 */
 
 Route::get('/', 'RegisterController@index');
+Route::get('/forgot', function () {
+  return view('forgot');
+});
 
 Route::get('/demo', function () {
     return view('demo');

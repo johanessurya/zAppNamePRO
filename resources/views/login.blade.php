@@ -33,10 +33,10 @@
 
 		<div class="row">
         <div class="col-xs-8">
-		<a href="forgotpassword.html">Forgot Your Password?</a>
+		<a href="/forgot">Forgot Your Password?</a>
         </div><!-- /.col -->
         <div class="col-xs-4">
-		<a href="register.html">Try for Free!</a><br>
+		<a href="/register">Try for Free!</a><br>
         </div><!-- /.col -->
     </div>
   </div><!-- /.login-box-body -->
