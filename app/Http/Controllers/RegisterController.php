@@ -6,6 +6,7 @@ use Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
+use Mail;
 use App\User;
 use App\Company;
 use App\Http\Requests;
@@ -95,9 +96,12 @@ class RegisterController extends Controller
     }
 
     public function test() {
-      $c = $this->companyExist('Apple','ca');
+      Mail::send([], [], function ($m) {
+          $email = 'johanes.surya43@gmail.com';
+          $m->from('hello@app.com', 'Your Application');
 
-      var_dump($c);
+          $m->to($email, 'Johanes Surya')->subject('Your Reminder!');
+      });
 
       die('test');
     }
