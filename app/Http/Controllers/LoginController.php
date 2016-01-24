@@ -30,7 +30,7 @@ class LoginController extends Controller
     }
 
     public function resetPassword(Request $request) {
-      $return = redirect('/forgot')->with("We can't find your email in our database.")
+      $return = redirect('/forgot')->with("We can't find your email in our database.");
 
       // Get email
       $email = $request->input('email');
