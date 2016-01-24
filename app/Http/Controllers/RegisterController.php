@@ -50,6 +50,21 @@ class RegisterController extends Controller
           $data['message'] = $validator->errors()->all();
         }
 
+        /* Password validation
+        - One lower case character
+        - One upper case character
+        - A Number
+        */
+        if (!preg_match("#[0-9]+#", $params['password'])) {
+            $data['message'][] = "Password must include at least one number!";
+        }
+        if (!preg_match("#[a-z]+#", $params['password'])) {
+            $data['message'][] = "Password must include at least one lower case character!";
+        }
+        if (!preg_match("#[A-Z]+#", $params['password'])) {
+            $data['message'][] = "Password must include at least one upper case character!";
+        }
+
         $company = $this->getCompany($params['company_name'], $params['state']);
         if(empty($company)){
           $error = true;
