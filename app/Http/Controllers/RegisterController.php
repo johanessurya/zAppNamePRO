@@ -96,7 +96,7 @@ class RegisterController extends Controller
     }
 
     public function test() {
-      Mail::send([], [], function ($m) {
+      Mail::send(['email.resetpassword'], ['users' => ''], function ($m) {
           $email = 'johanes.surya43@gmail.com';
           $m->from('hello@app.com', 'Your Application');
 
