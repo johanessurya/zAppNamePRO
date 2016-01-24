@@ -38,7 +38,7 @@ class RegisterController extends Controller
           'company_name' => 'required',
           'state' => 'required',
           'email' => 'required|unique:users|email',
-          'password' => 'required|confirmed',
+          'password' => 'required|alpha_num|min:7|confirmed',
           'password_confirmation' => 'required',
           'agree' => 'required'
         ], $messages);
@@ -63,10 +63,18 @@ class RegisterController extends Controller
           $company = Company::where('name', '=', $params['company_name']);
           $company = Company::where('name', '=', 'apple');
 
+          // Get today and today+14
+          $today=time();
+          $exp=$today + (14*24*60*60);
+          $date = date("Y-m-d H:i:s", $today);
+          $date2 = date("Y-m-d H:i:s", $exp);
+
           $rows = array(
             'username' => $params['username'],
             'password' => Hash::make($params['password']),
-            'email' => $params['email']
+            'email' => $params['email'],
+            'created' => $today,
+            'expires' => $date2
           );
 
           User::create($rows);
@@ -86,8 +94,11 @@ class RegisterController extends Controller
     }
 
     public function test() {
-      $company = Company::where('name', '=', 'apple')->get()->first();
-      var_dump($company->name);
+      $today=time();
+      $exp=$today + (14*24*60*60);
+      $date = date("Y-m-d H:i:s", $today);
+      $date2 = date("Y-m-d H:i:s", $exp);
+      var_dump($date, $date2);
 
       die('test');
     }

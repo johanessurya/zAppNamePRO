@@ -11,20 +11,28 @@
       <p>{{ Session::get('message') }}</p>
     </div>
     @endif
+
+    @if (count($errors) > 0)
+    <div class="callout callout-danger">
+      @foreach ($errors->all() as $error)
+        <p>{{ $error }}</p>
+      @endforeach
+    </div>
+    @endif
     <form action="/login" method="post">
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" placeholder="Username">
+        <input type="text" class="form-control" placeholder="Username" name="username">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Password">
+        <input type="password" class="form-control" placeholder="Password" name="password">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
         <div class="col-xs-8">
           <div class="checkbox icheck">
             <label>
-              <input type="checkbox"> Remember Me
+              <input type="checkbox" name="remember_me"> Remember Me
             </label>
           </div>
         </div><!-- /.col -->

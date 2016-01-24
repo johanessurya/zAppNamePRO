@@ -23,8 +23,23 @@
 */
 
 Route::group(['middleware' => ['web']], function () {
-  Route::get('/', 'RegisterController@index');
+
+  // Register
+  Route::get('/', function () {
+    return redirect('/login');
+  });
   Route::get('/test', 'RegisterController@test');
+  Route::get('/register', function () {
+      return view('register');
+  });
+  Route::post('/register', 'RegisterController@index');
+
+  // Dashboard
+  Route::get('/dashboard', array(
+    'middleware' => 'auth',
+    'uses' => 'DashboardController@index'
+  ));
+
   Route::get('/forgot', function () {
     return view('forgot');
   });
@@ -34,17 +49,13 @@ Route::group(['middleware' => ['web']], function () {
   });
 
   Route::get('/login', function () {
-      return view('login');
+    if(Auth::check()) {
+      return redirect('/dashboard');
+    }
+    return view('login');
   });
-
-  Route::get('/register', function () {
-      return view('register');
-  });
-  Route::post('/register', 'RegisterController@index');
-
-  Route::get('/dashboard', function () {
-      return view('dashboard');
-  });
+  Route::post('/login', 'LoginController@index');
+  Route::get('/logout', 'LoginController@logout');
 
   Route::get('/api/v1/user', function (App\User $user) {
     $users = $user->all();
