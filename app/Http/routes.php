@@ -48,6 +48,7 @@ Route::group(['middleware' => ['web']], function () {
       return view('demo');
   });
 
+  // Login
   Route::get('/login', function () {
     if(Auth::check()) {
       return redirect('/dashboard');
@@ -56,6 +57,11 @@ Route::group(['middleware' => ['web']], function () {
   });
   Route::post('/login', 'LoginController@index');
   Route::get('/logout', 'LoginController@logout');
+
+  // Forgot password
+  Route::post('/resetpassword', 'LoginController@resetPassword');
+  Route::get('/reset/{token}', 'LoginController@reset');
+  Route::post('/reset', 'LoginController@reset');
 
   Route::get('/api/v1/user', function (App\User $user) {
     $users = $user->all();

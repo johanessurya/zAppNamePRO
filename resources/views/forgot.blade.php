@@ -7,7 +7,7 @@
 @section('content')
   <div class="login-box-body">
     <p>	To reset your password, please enter your zAppName associated email address.</p>
-    <form action="/login" method="post">
+    <form action="/resetpassword" method="post">
       <div class="form-group has-feedback">
 				<input type="email" class="form-control" placeholder="Email" name="email">
 				<span class="glyphicon glyphicon-envelope form-control-feedback"></span>

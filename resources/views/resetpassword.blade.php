@@ -1,1 +1,1 @@
-This is email.resetpassword.blade.php
+{{ url('/reset/'.$token) }}
