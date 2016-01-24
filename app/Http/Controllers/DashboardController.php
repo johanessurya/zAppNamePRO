@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Hash;
+use Session;
 use App\User;
 use App\Company;
 use App\Http\Requests;
@@ -20,14 +21,21 @@ class DashboardController extends Controller
     public function createUser(Request $request) {
       $params = $request->all();
 
-      $this->validate($request, [
+      $rules = [
         'username' => 'required|unique:users',
         'company_name' => 'required',
         'state' => 'required',
         'email' => 'required|unique:users|email',
         'password' => 'required|min:7|one_or_more_lower_char|one_or_more_upper_char|one_or_more_number|confirmed',
         'password_confirmation' => 'required'
-      ]);
+      ];
+      $this->validate($request, $rules);
+
+      // Check if this user exists
+      $user = null;
+      if(!empty($params['id'])) {
+        $user = User::find($params['id']);
+      }
 
       $companyName = $params['company_name'];
       $state = $params['state'];
@@ -54,8 +62,33 @@ class DashboardController extends Controller
         'created' => date("Y-m-d H:i:s")
       );
 
-      User::create($rows);
+      $message = null;
+      if(!empty($user)) {
+        $user->username = $rows['username'];
+        $user->password = $rows['password'];
+        $user->email = $rows['email'];
+        $user->created = $rows['created'];
+        $user->expires = $rows['expires'];
+        $user->CompanyID = $rows['CompanyID'];
+        $user->created = $rows['created'];
+        $user->save();
 
-      return redirect('/dashboard/user')->with('message', 'User has been created');
+        $message = 'User has been updated';
+      } else {
+        User::create($rows);
+        $message = 'User has been created';
+      }
+
+      return redirect('/dashboard/user')->with('message', $message);
     }
+
+    public function editUser(Request $request, $id) {
+     $user = User::find($id);
+     return view('dashboard.edituser', array('title' => 'Edit User', 'user' => $user));
+   }
+
+   public function deleteUser($id) {
+     User::find($id)->delete();
+     return redirect('/dashboard')->with('message', 'Delete user successful');
+   }
 }

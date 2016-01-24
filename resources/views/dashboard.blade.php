@@ -71,7 +71,7 @@
 @section('content')
 <div class="box">
   <div class="box-header">
-    <h3 class="box-title">Data Table With Full Features</h3> <button class="btn btn-success btn-xs" onclick="showModal('#user-new')">Add New User</button>
+    <h3 class="box-title">Data Table With Full Features</h3> <a href="/dashboard/user" class="btn btn-success btn-xs">Add New User</a>
   </div><!-- /.box-header -->
   <div class="box-body">
     <table id="user-table" class="table table-bordered table-striped">

@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Routes File
@@ -42,10 +41,9 @@ Route::group(['middleware' => ['web']], function () {
   Route::get('/dashboard/user', function () {
     return view('dashboard.newuser', array('title' => 'Create New User'));
   });
-  Route::get('/dashboard/user/{id}', function () {
-    return view('dashboard.newuser', array('title' => 'Edit User'));
-  });
+  Route::get('/dashboard/user/{id}', 'DashboardController@editUser');
   Route::post('/dashboard/user', 'DashboardController@createUser');
+  Route::get('/dashboard/user/delete/{id}', 'DashboardController@deleteUser');
 
   Route::get('/forgot', function () {
     return view('forgot');
@@ -76,6 +74,7 @@ Route::group(['middleware' => ['web']], function () {
     $json['data'] = array();
     foreach($users as $user) {
       $json['data'][] = array(
+        'id' => $user->id,
         'username' => $user->username,
         'email' => $user->email
       );

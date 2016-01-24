@@ -9,8 +9,8 @@ $(function () {
 
   // ======= Datatables =========
   // class prefix: "js-"" mean that class related to javascript method/function
-  $global.editEl = '<button class="js-btn-edit btn btn-block btn-primary" onclick="showModal(\'#user-edit\');">Edit</button>';
-  $global.deleteEl = '<button class="js-btn-delete btn btn-block btn-danger">Delete</button>';
+  $global.editEl = '<a href="/dashboard/user/:user_id" class="js-btn-edit btn btn-block btn-primary">Edit</a>';
+  $global.deleteEl = '<a href="/dashboard/user/delete/:user_id" class="js-btn-delete btn btn-block btn-danger">Delete</a>';
 
   $('#user-table').DataTable( {
       'ajax': '/api/v1/user',
@@ -19,12 +19,12 @@ $(function () {
         {'data': 'email', 'searchable': true},
         {
           mRender: function (data, type, row) {
-              return $global.editEl;
-            }
+            return $global.editEl.replace(':user_id', row.id);
+          }
         },
         {
           mRender: function (data, type, row) {
-              return $global.deleteEl;
+              return $global.deleteEl.replace(':user_id', row.id);
             }
         },
       ],
