@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use Hash;
 use Auth;
+use App\User;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -20,6 +21,7 @@ class LoginController extends Controller
 
       $params = $request->all();
       if(Auth::attempt($params)) {
+        User::updateLogin(Auth::user()->id);
         return redirect()->intended('/dashboard');
       } else {
         return redirect('/login')->with('message', 'Incorrect username and password');
@@ -28,7 +30,7 @@ class LoginController extends Controller
 
     public function logout() {
       Auth::logout();
-      
+
       return redirect('/login')->with('message', 'Sign out successful');
     }
 }

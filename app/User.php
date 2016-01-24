@@ -32,7 +32,7 @@ class User extends Authenticatable
 
     public $timestamps = false;
 
-    public function updateLogin($id) {
+    public static function updateLogin($id) {
       $user = self::find($id);
       $user->loginCount++;
 
