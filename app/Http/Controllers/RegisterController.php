@@ -18,6 +18,7 @@ class RegisterController extends Controller
 
       $return = null;
       $error = false;
+      $company = null;
 
       // Default message
       $data = array(
@@ -48,7 +49,8 @@ class RegisterController extends Controller
           $data['message'] = $validator->errors()->all();
         }
 
-        if(!$this->companyExist($params['company_name'], $params['state'])) {
+        $company = $this->getCompany($params['company_name'], $params['state']);
+        if(empty($company)){
           $error = true;
 
           $data['message'][] = "Company doesn't exists";
@@ -60,9 +62,6 @@ class RegisterController extends Controller
           $request->flash();
           $return = view('register', $data);
         }else{
-          $company = Company::where('name', '=', $params['company_name']);
-          $company = Company::where('name', '=', 'apple');
-
           // Get today and today+14
           $today=time();
           $exp=$today + (14*24*60*60);
@@ -74,7 +73,9 @@ class RegisterController extends Controller
             'password' => Hash::make($params['password']),
             'email' => $params['email'],
             'created' => $today,
-            'expires' => $date2
+            'expires' => $date2,
+            'CompanyID' => $company->companyID,
+            'created' => date("Y-m-d H:i:s")
           );
 
           User::create($rows);
@@ -86,19 +87,17 @@ class RegisterController extends Controller
       return $return;
     }
 
-    private function companyExist($companyName, $state) {
+    private function getCompany($companyName, $state) {
       $company = Company::where('name', $companyName)
-                  ->where('state', $state)->get();
+                  ->where('state', $state)->first();
 
-      return count($company) > 0;
+      return $company;
     }
 
     public function test() {
-      $today=time();
-      $exp=$today + (14*24*60*60);
-      $date = date("Y-m-d H:i:s", $today);
-      $date2 = date("Y-m-d H:i:s", $exp);
-      var_dump($date, $date2);
+      $c = $this->companyExist('Apple','ca');
+
+      var_dump($c);
 
       die('test');
     }

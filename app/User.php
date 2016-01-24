@@ -12,7 +12,10 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username', 'email', 'password',
+        'username', 'password', 'userType', 'email', 'dt', 'showWeekends',
+        'dayStartTime', 'dayEndTime', 'CompanyID', 'state', 'OfficeNo',
+        'OfficeName', 'zipcode', 'created', 'active', 'firstLogin', 'lastLogin',
+        'loginCount', 'expires', 'resetToken', 'remember_token'
     ];
 
     /**
@@ -28,4 +31,17 @@ class User extends Authenticatable
     protected $table = 'users';
 
     public $timestamps = false;
+
+    public function updateLogin($id) {
+      $user = self::find($id);
+      $user->loginCount++;
+
+      if(empty($user->firstLogin)) {
+        $user->firstLogin = date("Y-m-d H:i:s");
+      }else{
+        $user->lastLogin = date("Y-m-d H:i:s");
+      }
+
+      $user->save();
+    }
 }
