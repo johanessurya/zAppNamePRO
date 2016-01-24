@@ -7,7 +7,7 @@
 @section('content')
   <div class="login-box-body">
     @if (Session::has('message'))
-    <div class="callout callout-success">
+    <div class="callout callout-danger">
       <p>{{ Session::get('message') }}</p>
     </div>
     @endif
@@ -19,7 +19,7 @@
       @endforeach
     </div>
     @endif
-    
+
     <p>To reset your password, please enter your zAppName associated email address.</p>
     <form action="/resetpassword" method="post">
       <div class="form-group has-feedback">
