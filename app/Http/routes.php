@@ -24,7 +24,7 @@
 
 Route::group(['middleware' => ['web']], function () {
   Route::get('/', 'RegisterController@index');
-  Route::get('/flash', 'RegisterController@flash');
+  Route::get('/test', 'RegisterController@test');
   Route::get('/forgot', function () {
     return view('forgot');
   });

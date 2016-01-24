@@ -14,7 +14,10 @@ use App\Http\Controllers\Controller;
 class RegisterController extends Controller
 {
     public function index(Request $request) {
+      $params = $request->all();
+
       $return = null;
+      $error = false;
 
       // Default message
       $data = array(
@@ -31,7 +34,7 @@ class RegisterController extends Controller
 
         // Declare validator
         $validator = Validator::make($request->all(), [
-          'username' => 'required',
+          'username' => 'required|unique:users',
           'company_name' => 'required',
           'state' => 'required',
           'email' => 'required|unique:users|email',
@@ -41,14 +44,22 @@ class RegisterController extends Controller
         ], $messages);
 
         if ($validator->fails()) {
+          $error = true;
           $data['message'] = $validator->errors()->all();
+        }
+
+        if(!$this->companyExist($params['company_name'], $params['state'])) {
+          $error = true;
+
+          $data['message'][] = "Company doesn't exists";
+        }
+
+        if($error){
           $data['messageType'] = 'danger';
+
           $request->flash();
-
           $return = view('register', $data);
-        } else {
-          $params = $request->all();
-
+        }else{
           $company = Company::where('name', '=', $params['company_name']);
           $company = Company::where('name', '=', 'apple');
 
@@ -65,5 +76,19 @@ class RegisterController extends Controller
       }
 
       return $return;
+    }
+
+    private function companyExist($companyName, $state) {
+      $company = Company::where('name', $companyName)
+                  ->where('state', $state)->get();
+
+      return count($company) > 0;
+    }
+
+    public function test() {
+      $company = Company::where('name', '=', 'apple')->get()->first();
+      var_dump($company->name);
+
+      die('test');
     }
 }
