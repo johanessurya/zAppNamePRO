@@ -28,6 +28,7 @@
     <div class="login-box">
       <div class="login-logo">
         <a href="../../index2.html"><img src="{{ asset('img/z-logo-50x50.png')}}" /> @yield('logo-desc')</a>
+        <h3>@yield('logo-text')</h3>
       </div><!-- /.login-logo -->
       @section('content')
         This is content

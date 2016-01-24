@@ -1,11 +1,11 @@
 @extends('layouts.one-column')
 
 @section('title', 'Login')
-@section('logo-desc', '<b>zAdmin</b>LTE')
+@section('logo-desc', '<b>zAppName</b>PRO')
+@section('logo-text', 'Please Log In.')
 
 @section('content')
   <div class="login-box-body">
-    <p class="login-box-msg">Please login</p>
     <form action="/login" method="post">
       <div class="form-group has-feedback">
         <input type="text" class="form-control" placeholder="Username">
@@ -29,8 +29,15 @@
       </div>
     </form>
 
-    <a href="#">I forgot my password</a><br>
-    <a href="/register" class="text-center">Register as a new user</a>
+    <hr width="80%" />
 
+		<div class="row">
+        <div class="col-xs-8">
+		<a href="forgotpassword.html">Forgot Your Password?</a>
+        </div><!-- /.col -->
+        <div class="col-xs-4">
+		<a href="register.html">Try for Free!</a><br>
+        </div><!-- /.col -->
+    </div>
   </div><!-- /.login-box-body -->
 @endsection
