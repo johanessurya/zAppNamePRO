@@ -38,7 +38,7 @@ class User extends Authenticatable
       $user = self::find($id);
       $user->loginCount++;
 
-      $dateTime = date("Y-m-d H:i:s");
+      $dateTime = date(DATETIME_FORMAT);
       if(empty($user->firstLogin) || $user->firstLogin == '0000-00-00 00:00:00') {
         $user->firstLogin = $dateTime;
       }

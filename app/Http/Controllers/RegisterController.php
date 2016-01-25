@@ -69,7 +69,7 @@ class RegisterController extends Controller
         $company = $this->getCompany($params['company_name'], $params['state']);
         $companyId = 0;
         if(!empty($company))
-          $companyId = $company->companyId;
+          $companyId = $company->companyID;
 
         if($error){
           $data['messageType'] = 'danger';
@@ -79,9 +79,9 @@ class RegisterController extends Controller
         }else{
           // Get today and today+14
           $today=time();
-          $exp=$today + (14*24*60*60);
-          $date = date("Y-m-d H:i:s", $today);
-          $date2 = date("Y-m-d H:i:s", $exp);
+          $exp=$today + (15*24*60*60);
+          $created = date(DATETIME_FORMAT, $today);
+          $expires = date(DATE_FORMAT, $exp);
 
           // Check if active record or not
           $active = 0;
@@ -93,10 +93,9 @@ class RegisterController extends Controller
             'password' => Hash::make($params['password']),
             'email' => $params['email'],
             'active' => $active,
-            'created' => $today,
-            'expires' => $date2,
-            'CompanyID' => $companyId,
-            'created' => date("Y-m-d H:i:s")
+            'created' => $created,
+            'expires' => $expires,
+            'CompanyID' => $companyId
           );
 
           User::create($rows);
