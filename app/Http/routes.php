@@ -1,4 +1,7 @@
 <?php
+define('DATETIME_FORMAT','m/d/y H:i');
+define('DATE_FORMAT', 'd/m/y');
+
 /*
 |--------------------------------------------------------------------------
 | Routes File
@@ -97,7 +100,7 @@ Route::group(['middleware' => ['web']], function () {
         'firstLogin' => $user->firstLogin,
         'lastLogin' => $user->lastLogin,
         'loginCount' => $user->loginCount,
-        'expires' => $user->expires        
+        'expires' => $user->expires
       );
     }
 

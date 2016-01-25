@@ -80,7 +80,7 @@ class User extends Authenticatable
       if(!empty($value)) {
         $dateTime = DateTime::createFromFormat('Y-m-d H:i:s', $value);
 
-        $return = $dateTime->format('m/d/y H:i');
+        $return = $dateTime->format(DATETIME_FORMAT);
       }
 
       return $return;
@@ -92,7 +92,7 @@ class User extends Authenticatable
       if(!empty($value)) {
         $dateTime = DateTime::createFromFormat('Y-m-d', $value);
 
-        $return = $dateTime->format('d/m/y');
+        $return = $dateTime->format(DATE_FORMAT);
       }
 
       return $return;
