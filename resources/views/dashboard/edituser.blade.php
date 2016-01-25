@@ -25,39 +25,67 @@
         <input type="hidden" name="id" value="{{ old('id', $user['id']) }}">
         <div class="box-body">
           <div class="form-group">
-            <label for="inputEmail3" class="col-sm-2 control-label">Username</label>
+            <label for="inputUsername" class="col-sm-2 control-label">Username</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputEmail3" placeholder="Username" name="username" value="{{ old('username', $user['username']) }}">
+              <input type="text" class="form-control" id="inputUsername" placeholder="Username" name="username" value="{{ old('username', $user['username']) }}">
             </div>
           </div>
           <div class="form-group">
-            <label for="inputEmail4" class="col-sm-2 control-label">Company Name</label>
+            <label for="inputUserType" class="col-sm-2 control-label">User Type</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputEmail4" placeholder="Company Name" name="company_name" value="{{ old('company_name', $user['company_name']) }}">
+              <select id="inputUserType" class="form-control" name="user_type">
+                <option value="0" selected="selected">User</option>
+                <option value="1">Manager</option>
+                <option value="2">Admin</option>
+              </select>
             </div>
           </div>
           <div class="form-group">
-            <label for="inputEmail5" class="col-sm-2 control-label">State Abbreviation</label>
+            <label for="inputEmail" class="col-sm-2 control-label">Email</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputEmail5" placeholder="State Abbreviation" name="state" value="{{ old('state', $user['state']) }}">
+              <input type="email" readonly="readonly" class="form-control" id="inputEmail" placeholder="Email" name="email" value="{{ old('email', $user['email']) }}">
             </div>
           </div>
           <div class="form-group">
-            <label for="inputEmail6" class="col-sm-2 control-label">Email</label>
+            <label for="inputCompanyId" class="col-sm-2 control-label">Company ID</label>
             <div class="col-sm-10">
-              <input type="email" class="form-control" id="inputEmail6" placeholder="Email" name="email" value="{{ old('email', $user['email']) }}">
+              <input type="text" class="form-control" id="inputCompanyId" placeholder="Company ID" name="company_id" value="{{ old('company_id', $user['CompanyID']) }}">
             </div>
           </div>
           <div class="form-group">
-            <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+            <label for="inputActive" class="col-sm-2 control-label">Active</label>
             <div class="col-sm-10">
-              <input type="password" class="form-control" id="inputPassword3" placeholder="Password" name="password">
+              <input type="text" class="form-control" id="inputActive" placeholder="Active" name="active" value="{{ old('created', $user['active']) }}">
             </div>
           </div>
           <div class="form-group">
-            <label for="inputPassword4" class="col-sm-2 control-label">Retype Password</label>
+            <label for="inputFirstLogin" class="col-sm-2 control-label">First Login</label>
             <div class="col-sm-10">
-              <input type="password" class="form-control" id="inputPassword4" placeholder="Retype Password" name="password_confirmation">
+              <input type="text" class="form-control" id="inputFirstLogin" placeholder="First Login" name="first_login" value="{{ old('first_login', $user['firstLogin']) }}">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputLastLogin" class="col-sm-2 control-label">Last Login</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="inputLastLogin" placeholder="Last Login" name="last_login" value="{{ old('last_login', $user['lastLogin']) }}">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputLoginCount" class="col-sm-2 control-label">Login Count</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="inputLoginCount" placeholder="Login Count" name="login_count" value="{{ old('login_count', $user['loginCount']) }}">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputCreated" class="col-sm-2 control-label">Created</label>
+            <div class="col-sm-10">
+              <input type="text" readonly="readyonly" class="form-control" id="inputCreated" placeholder="Created" name="created" value="{{ old('created', $user['created']) }}">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputExpires" class="col-sm-2 control-label">Expires</label>
+            <div class="col-sm-10">
+              <input type="text" readonly="readyonly" class="form-control" id="inputExpires" placeholder="Expires" name="expires" value="{{ old('expires', $user['expires']) }}">
             </div>
           </div>
         </div><!-- /.box-body -->

@@ -39,7 +39,15 @@ Route::group(['middleware' => ['web']], function () {
     'uses' => 'DashboardController@index'
   ));
   Route::get('/dashboard/user', function () {
-    return view('dashboard.newuser', array('title' => 'Create New User'));
+    $today = time();
+    $expires = time()+(15*24*60*60);
+
+    $data = array(
+      'title' => 'Create New User',
+      'created' => date("Y-m-d H:i:s", $today),
+      'expires' => date("Y-m-d H:i:s", $expires),
+    );
+    return view('dashboard.newuser', $data);
   });
   Route::get('/dashboard/user/{id}', 'DashboardController@editUser');
   Route::post('/dashboard/user', 'DashboardController@createUser');
