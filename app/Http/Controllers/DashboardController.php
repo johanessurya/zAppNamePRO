@@ -40,9 +40,15 @@ class DashboardController extends Controller
 
       // Get today and today+14
       $today=time();
-      $exp=$today + (14*24*60*60);
+      $exp=$today + (15*24*60*60);
       $date = date("d/m/y H:i:s", $today);
       $expires = date("d/m/y H:i:s", $exp);
+
+      $firstLogin = null;
+      if(!empty($params['firstLogin'])) $firstLogin = $params['firstLogin'];
+
+      $lastLogin = null;
+      if(!empty($params['lastLogin'])) $lastLogin = $params['lastLogin'];
 
       $rows = array(
         'username' => $params['username'],
@@ -50,10 +56,10 @@ class DashboardController extends Controller
         'email' => $params['email'],
         'CompanyID' => $params['CompanyID'],
         'active' => $params['active'],
-        'firstLogin' => $params['firstLogin'],
-        'lastLogin' => $params['lastLogin'],
+        'firstLogin' => $firstLogin,
+        'lastLogin' => $lastLogin,
         'loginCount'=> $params['loginCount'],
-        'created' => $today,
+        'created' => $date,
         'expires' => $expires
       );
 
