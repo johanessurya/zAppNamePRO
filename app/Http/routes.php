@@ -1,6 +1,6 @@
 <?php
 define('DATETIME_FORMAT','m/d/y H:i');
-define('DATE_FORMAT', 'd/m/y');
+define('DATE_FORMAT', 'm/d/y');
 
 /*
 |--------------------------------------------------------------------------
