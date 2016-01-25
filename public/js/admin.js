@@ -15,8 +15,6 @@ $(function () {
   $('#user-table').DataTable( {
       'ajax': '/api/v1/user',
       'columns': [
-        {'data': 'username', 'searchable': true},
-        {'data': 'email', 'searchable': true},
         {
           mRender: function (data, type, row) {
             return $global.editEl.replace(':user_id', row.id);
@@ -27,6 +25,15 @@ $(function () {
               return $global.deleteEl.replace(':user_id', row.id);
             }
         },
+        {'data': 'username', 'searchable': true},
+        {'data': 'userType', 'searchable': true},
+        {'data': 'email', 'searchable': true},
+        {'data': 'CompanyID', 'searchable': true},
+        {'data': 'created', 'searchable': true},
+        {'data': 'firstLogin', 'searchable': true},
+        {'data': 'lastLogin', 'searchable': true},
+        {'data': 'loginCount', 'searchable': true},
+        {'data': 'expires', 'searchable': true},
       ],
       'columnDefs': [{
         targets: [2,3],

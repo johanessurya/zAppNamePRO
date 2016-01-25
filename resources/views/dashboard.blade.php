@@ -77,10 +77,17 @@
     <table id="user-table" class="table table-bordered table-striped">
       <thead>
         <tr>
+          <th></th>
+          <th></th>
           <th>Username</th>
+          <th>User Type</th>
           <th>Email</th>
-          <th></th>
-          <th></th>
+          <th>Company ID</th>
+          <th>Created</th>
+          <th>First Login</th>
+          <th>Last Login</th>
+          <th>Login Count</th>
+          <th>Expires</th>
         </tr>
       </thead>
       <tbody>

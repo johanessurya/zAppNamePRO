@@ -89,7 +89,15 @@ Route::group(['middleware' => ['web']], function () {
       $json['data'][] = array(
         'id' => $user->id,
         'username' => $user->username,
-        'email' => $user->email
+        'userType' => $user->userType,
+        'email' => $user->email,
+        'CompanyID' => $user->CompanyID,
+        'created' => $user->created,
+        'active' => $user->active,
+        'firstLogin' => $user->firstLogin,
+        'lastLogin' => $user->lastLogin,
+        'loginCount' => $user->loginCount,
+        'expires' => $user->expires        
       );
     }
 
