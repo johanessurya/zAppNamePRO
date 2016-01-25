@@ -21,7 +21,8 @@
         <h3 class="box-title">{{ $title }}</h3>
       </div><!-- /.box-header -->
       <!-- form start -->
-      <form action="/dashboard/user/edit/do" method="post" class="form-horizontal">
+      <form action="/dashboard/user/edit/do
+      " method="post" class="form-horizontal">
         <input type="hidden" name="id" value="{{ old('id', $user['id']) }}">
         <div class="box-body">
           <div class="form-group">
@@ -33,7 +34,7 @@
           <div class="form-group">
             <label for="inputUserType" class="col-sm-2 control-label">User Type</label>
             <div class="col-sm-10">
-              <select id="inputUserType" class="form-control" name="user_type">
+              <select id="inputUserType" class="form-control" name="userType">
                 <option value="0" selected="selected">User</option>
                 <option value="1">Manager</option>
                 <option value="2">Admin</option>
@@ -49,7 +50,7 @@
           <div class="form-group">
             <label for="inputCompanyId" class="col-sm-2 control-label">Company ID</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputCompanyId" placeholder="Company ID" name="company_id" value="{{ old('company_id', $user['CompanyID']) }}">
+              <input type="text" class="form-control" id="inputCompanyId" placeholder="Company ID" name="CompanyID" value="{{ old('company_id', $user['CompanyID']) }}">
             </div>
           </div>
           <div class="form-group">
@@ -61,19 +62,19 @@
           <div class="form-group">
             <label for="inputFirstLogin" class="col-sm-2 control-label">First Login</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputFirstLogin" placeholder="First Login" name="first_login" value="{{ old('first_login', $user['firstLogin']) }}">
+              <input type="text" class="form-control" id="inputFirstLogin" placeholder="First Login" name="firstLogin" value="{{ old('first_login', $user['firstLogin']) }}">
             </div>
           </div>
           <div class="form-group">
             <label for="inputLastLogin" class="col-sm-2 control-label">Last Login</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputLastLogin" placeholder="Last Login" name="last_login" value="{{ old('last_login', $user['lastLogin']) }}">
+              <input type="text" class="form-control" id="inputLastLogin" placeholder="Last Login" name="lastLogin" value="{{ old('last_login', $user['lastLogin']) }}">
             </div>
           </div>
           <div class="form-group">
             <label for="inputLoginCount" class="col-sm-2 control-label">Login Count</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputLoginCount" placeholder="Login Count" name="login_count" value="{{ old('login_count', $user['loginCount']) }}">
+              <input type="text" class="form-control" id="inputLoginCount" placeholder="Login Count" name="loginCount" value="{{ old('login_count', $user['loginCount']) }}">
             </div>
           </div>
           <div class="form-group">

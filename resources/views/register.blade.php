@@ -24,7 +24,7 @@
          <span class="glyphicon glyphicon-briefcase form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-         <input type="state" class="form-control" placeholder="State Abbreviation" name="state" value="{{ old('state') }}">
+         <input type="state" class="form-control" maxlength="2" placeholder="State Abbreviation" name="state" value="{{ old('state') }}">
          <span class="glyphicon glyphicon-map-marker form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">

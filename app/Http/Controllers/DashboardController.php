@@ -72,6 +72,7 @@ class DashboardController extends Controller
 
      // Search users.id is exist or not
      $user = User::where('id', $params['id'])->first();
+     $message = 'User not found';
      if(!empty($user)) {
        // Grab all user except this this user
        $users = User::where('id', '!=', $params['id'])->get();
@@ -94,10 +95,15 @@ class DashboardController extends Controller
        $this->validate($request, $rules);
        $request->flash();
 
-       // Do user validate
+       $user->username = $params['username'];
+       $user->userType = $params['userType'];
+       $user->CompanyID = $params['CompanyID'];
+       $user->save();
+
+       $message = 'User has been updated';
      }
 
-     return redirect('/dashboard/user');
+     return redirect('/dashboard')->with('message', $message);
    }
 
    public function deleteUser($id) {
