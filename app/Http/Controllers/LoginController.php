@@ -21,6 +21,10 @@ class LoginController extends Controller
       ]);
 
       $params = $request->all();
+      $user = array(
+        'username' => $params['username'],
+        'password' => $params['password']
+      );
       if(Auth::attempt($params)) {
         User::updateLogin(Auth::user()->id);
         return redirect()->intended('/dashboard');

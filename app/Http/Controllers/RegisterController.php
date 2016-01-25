@@ -38,7 +38,7 @@ class RegisterController extends Controller
         $validator = Validator::make($request->all(), [
           'username' => 'required|unique:users',
           'company_name' => 'required',
-          'state' => 'required',
+          'state' => 'required|max:2',
           'email' => 'required|unique:users|email',
           'password' => 'required|alpha_num|min:7|confirmed',
           'password_confirmation' => 'required',
@@ -66,11 +66,6 @@ class RegisterController extends Controller
         }
 
         $company = $this->getCompany($params['company_name'], $params['state']);
-        if(empty($company)){
-          $error = true;
-
-          $data['message'][] = "Company doesn't exists";
-        }
 
         if($error){
           $data['messageType'] = 'danger';
