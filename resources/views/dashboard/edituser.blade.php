@@ -21,7 +21,7 @@
         <h3 class="box-title">{{ $title }}</h3>
       </div><!-- /.box-header -->
       <!-- form start -->
-      <form action="/dashboard/user" method="post" class="form-horizontal">
+      <form action="/dashboard/user/edit/do" method="post" class="form-horizontal">
         <input type="hidden" name="id" value="{{ old('id', $user['id']) }}">
         <div class="box-body">
           <div class="form-group">

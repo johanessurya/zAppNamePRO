@@ -32,7 +32,7 @@
           <div class="form-group">
             <label for="inputUserType" class="col-sm-2 control-label">User Type</label>
             <div class="col-sm-10">
-              <select id="inputUserType" class="form-control" name="user_type">
+              <select id="inputUserType" class="form-control" name="userType">
                 <option value="0" selected="selected">User</option>
                 <option value="1">Manager</option>
                 <option value="2">Admin</option>
@@ -48,31 +48,31 @@
           <div class="form-group">
             <label for="inputCompanyId" class="col-sm-2 control-label">Company ID</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputCompanyId" placeholder="Company ID" name="company_id" value="{{ old('company_id') }}">
+              <input type="text" class="form-control" id="inputCompanyId" placeholder="Company ID" name="CompanyID" value="{{ old('CompanyID') }}">
             </div>
           </div>
           <div class="form-group">
             <label for="inputActive" class="col-sm-2 control-label">Active</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputActive" placeholder="Active" name="active" value="{{ old('created', 0) }}">
+              <input type="text" class="form-control" id="inputActive" placeholder="Active" name="active" value="{{ old('active', 0) }}">
             </div>
           </div>
           <div class="form-group">
             <label for="inputFirstLogin" class="col-sm-2 control-label">First Login</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputFirstLogin" placeholder="First Login" name="first_login" value="{{ old('first_login') }}">
+              <input type="text" class="form-control" id="inputFirstLogin" placeholder="First Login" name="firstLogin" value="{{ old('firstLogin') }}">
             </div>
           </div>
           <div class="form-group">
             <label for="inputLastLogin" class="col-sm-2 control-label">Last Login</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputLastLogin" placeholder="Last Login" name="last_login" value="{{ old('last_login') }}">
+              <input type="text" class="form-control" id="inputLastLogin" placeholder="Last Login" name="lastLogin" value="{{ old('lastLogin') }}">
             </div>
           </div>
           <div class="form-group">
             <label for="inputLoginCount" class="col-sm-2 control-label">Login Count</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputLoginCount" placeholder="Login Count" name="login_count" value="{{ old('login_count') }}">
+              <input type="text" class="form-control" id="inputLoginCount" placeholder="Login Count" name="loginCount" value="{{ old('loginCount') }}">
             </div>
           </div>
           <div class="form-group">

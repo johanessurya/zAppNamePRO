@@ -23,11 +23,10 @@ class DashboardController extends Controller
 
       $rules = [
         'username' => 'required|unique:users',
-        'company_name' => 'required',
-        'state' => 'required',
+        'userType' => 'required|in:0,1,2',
         'email' => 'required|unique:users|email',
-        'password' => 'required|min:7|one_or_more_lower_char|one_or_more_upper_char|one_or_more_number|confirmed',
-        'password_confirmation' => 'required'
+        'active' => 'required',
+        'loginCount' => 'numeric'
       ];
       $this->validate($request, $rules);
       $request->flash();
@@ -38,54 +37,67 @@ class DashboardController extends Controller
         $user = User::find($params['id']);
       }
 
-      $companyName = $params['company_name'];
-      $state = $params['state'];
-      $company = Company::where('name', $companyName)->where('state', $state)->first();
-      if(!empty($company)){
-        $company = $company->companyID;
-      } else {
-        $company = 0;
-      }
-
       // Get today and today+14
       $today=time();
       $exp=$today + (14*24*60*60);
       $date = date("Y-m-d H:i:s", $today);
-      $date2 = date("Y-m-d H:i:s", $exp);
+      $expires = date("Y-m-d H:i:s", $exp);
 
       $rows = array(
         'username' => $params['username'],
-        'password' => Hash::make($params['password']),
+        'userType' => $params['userType'],
         'email' => $params['email'],
+        'CompanyID' => $params['CompanyID'],
+        'active' => $params['active'],
+        'firstLogin' => $params['firstLogin'],
+        'lastLogin' => $params['lastLogin'],
+        'loginCount'=> $params['loginCount'],
         'created' => $today,
-        'expires' => $date2,
-        'CompanyID' => $company,
-        'created' => date("Y-m-d H:i:s")
+        'expires' => $expires
       );
 
-      $message = null;
-      if(!empty($user)) {
-        $user->username = $rows['username'];
-        $user->password = $rows['password'];
-        $user->email = $rows['email'];
-        $user->created = $rows['created'];
-        $user->expires = $rows['expires'];
-        $user->CompanyID = $rows['CompanyID'];
-        $user->created = $rows['created'];
-        $user->save();
-
-        $message = 'User has been updated';
-      } else {
-        User::create($rows);
-        $message = 'User has been created';
-      }
+      User::create($rows);
+      $message = 'User has been created';
 
       return redirect('/dashboard')->with('message', $message);
     }
 
-    public function editUser(Request $request, $id) {
+   public function editUser(Request $request, $id) {
      $user = User::find($id);
      return view('dashboard.edituser', array('title' => 'Edit User', 'user' => $user));
+   }
+
+   public function doEditUser(Request $request) {
+     $params = $request->all();
+
+     // Search users.id is exist or not
+     $user = User::where('id', $params['id'])->first();
+     if(!empty($user)) {
+       // Grab all user except this this user
+       $users = User::where('id', '!=', $params['id'])->get();
+
+       $emails = array();
+       $usernames = array();
+       foreach($users as $user) {
+         $emails[] = $user->email;
+         $usernames[] = $user->username;
+       }
+
+       // Do validate
+       $rules = [
+         'username' => 'required|not_in:' . implode(',', $usernames),
+         'userType' => 'required|in:0,1,2',
+         'email' => 'required|email|not_in:' . implode(',', $emails),
+         'active' => 'required',
+         'loginCount' => 'numeric'
+       ];
+       $this->validate($request, $rules);
+       $request->flash();
+
+       // Do user validate
+     }
+
+     return redirect('/dashboard/user');
    }
 
    public function deleteUser($id) {
