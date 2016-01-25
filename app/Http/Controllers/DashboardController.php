@@ -71,7 +71,8 @@ class DashboardController extends Controller
      $params = $request->all();
 
      // Search users.id is exist or not
-     $user = User::where('id', $params['id'])->first();
+     $user = User::find($params['id']);
+
      $message = 'User not found';
      if(!empty($user)) {
        // Grab all user except this this user
@@ -79,9 +80,9 @@ class DashboardController extends Controller
 
        $emails = array();
        $usernames = array();
-       foreach($users as $user) {
-         $emails[] = $user->email;
-         $usernames[] = $user->username;
+       foreach($users as $x) {
+         $emails[] = $x->email;
+         $usernames[] = $x->username;
        }
 
        // Do validate
@@ -98,6 +99,11 @@ class DashboardController extends Controller
        $user->username = $params['username'];
        $user->userType = $params['userType'];
        $user->CompanyID = $params['CompanyID'];
+       $user->active = $params['active'];
+       $user->firstLogin = $params['firstLogin'];
+       $user->lastLogin = $params['lastLogin'];
+       $user->loginCount = $params['loginCount'];
+
        $user->save();
 
        $message = 'User has been updated';
