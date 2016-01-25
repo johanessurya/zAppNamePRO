@@ -87,8 +87,14 @@ class User extends Authenticatable
     }
 
     public static function date($value) {
-      $dateTime = DateTime::createFromFormat('Y-m-d', $value);
+      $return = null;
 
-      return $dateTime->format('d/m/y');
+      if(!empty($value)) {
+        $dateTime = DateTime::createFromFormat('Y-m-d', $value);
+
+        $return = $dateTime->format('d/m/y');
+      }
+
+      return $return;
     }
 }
