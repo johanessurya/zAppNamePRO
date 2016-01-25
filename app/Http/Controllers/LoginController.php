@@ -79,6 +79,7 @@ class LoginController extends Controller
         $user = User::where('resetToken', $token)->first();
         if(!empty($user)) {
           $user->password = Hash::make($params['password']);
+          $user->resetToken = null;
           $user->save();
 
           $return = redirect('/login')->with('message', 'Password has been reset.');

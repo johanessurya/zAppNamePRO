@@ -68,6 +68,10 @@ Route::group(['middleware' => ['web']], function () {
   Route::get('/reset/{token}', 'LoginController@reset');
   Route::post('/reset', 'LoginController@reset');
 
+  Route::get('/activation', function () {
+    return view('activation');
+  });
+
   Route::get('/api/v1/user', function (App\User $user) {
     $users = $user->all();
 

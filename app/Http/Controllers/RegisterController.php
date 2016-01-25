@@ -66,6 +66,9 @@ class RegisterController extends Controller
         }
 
         $company = $this->getCompany($params['company_name'], $params['state']);
+        $companyId = 0;
+        if(!empty($company))
+          $companyId = $company->companyId;
 
         if($error){
           $data['messageType'] = 'danger';
@@ -79,13 +82,19 @@ class RegisterController extends Controller
           $date = date("Y-m-d H:i:s", $today);
           $date2 = date("Y-m-d H:i:s", $exp);
 
+          // Check if active record or not
+          $active = 0;
+          if(preg_match("#(.org|.edu|.gov|.us)$#", $params['email']))
+            $active = 1;
+
           $rows = array(
             'username' => $params['username'],
             'password' => Hash::make($params['password']),
             'email' => $params['email'],
+            'active' => $active,
             'created' => $today,
             'expires' => $date2,
-            'CompanyID' => $company->companyID,
+            'CompanyID' => $companyId,
             'created' => date("Y-m-d H:i:s")
           );
 
@@ -106,13 +115,5 @@ class RegisterController extends Controller
     }
 
     public function test() {
-      Mail::send('resetpassword', ['users' => ''], function ($m) {
-          $email = 'johanes.surya43@gmail.com';
-          $m->from('hello@app.com', 'Your Application');
-
-          $m->to($email, 'Johanes Surya')->subject('Your Reminder!');
-      });
-
-      die('test');
     }
 }

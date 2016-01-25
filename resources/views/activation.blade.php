@@ -2,7 +2,7 @@
 
 @section('title', 'Reset Password')
 @section('logo-desc', '<b>zAppName</b>PRO')
-@section('logo-text', 'Reset password')
+@section('logo-text', 'Active.')
 
 @section('content')
   <div class="login-box-body">
@@ -20,25 +20,22 @@
     </div>
     @endif
     <form action="/reset" method="post">
-      <input type="hidden" name="token" value="{{ $token }}">
       <div class="form-group has-feedback">
         <input type="password" class="form-control" placeholder="Password" name="password">
-        <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
-      </div>
-      <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Retype password" name="password_confirmation">
-        <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+        <span class="glyphicon glyphicon-ok form-control-feedback"></span>
       </div>
       <div class="row">
         <div class="col-xs-4 pull-right">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Reset</button>
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Active</button>
         </div><!-- /.col -->
       </div>
     </form>
 
+    <hr width="80%" />
+
 		<div class="row">
         <div class="col-xs-8">
-		<a href="/login">Log In</a>
+		<a href="#">Buy a license</a>
         </div><!-- /.col -->
     </div>
   </div><!-- /.login-box-body -->
