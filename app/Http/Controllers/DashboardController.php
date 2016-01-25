@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use DateTime;
 use Hash;
 use Session;
 use App\User;
@@ -65,6 +66,7 @@ class DashboardController extends Controller
    public function editUser(Request $request, $id) {
      $user = User::find($id);
      $userType = array('User', 'Manager', 'Admin');
+
      $data = array(
        'title' => 'Edit User',
        'user' => $user,
@@ -121,5 +123,19 @@ class DashboardController extends Controller
    public function deleteUser($id) {
      User::find($id)->delete();
      return redirect('/dashboard')->with('message', 'Delete user successful');
+   }
+
+   // params $dateTimeString MySql standart format : Y-m-d H:i:s
+   private function dateTime1($dateTimeString) {
+     $dateTime = DateTime::createFromFormat('Y-m-d H:i:s', $dateTimeString);
+
+     return $dateTime->format('d/m/y H:i:s');
+   }
+
+   // params $dateTimeString format : Y-m-d
+   private function dateTime2($dateTimeString) {
+     $dateTime = DateTime::createFromFormat('Y-m-d', $dateTimeString);
+
+     return $dateTime->format('d/m/y');
    }
 }

@@ -6,6 +6,7 @@ use Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
+use DateTime;
 use Mail;
 use App\User;
 use App\Company;
@@ -115,5 +116,9 @@ class RegisterController extends Controller
     }
 
     public function test() {
+      $dateTimeString = '2016-01-24 08:05:34';
+      $dateTime = DateTime::createFromFormat('Y-m-d H:i:s', $dateTimeString);
+
+      var_dump($dateTime->format('d-m-Y')); die('test');
     }
 }

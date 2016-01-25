@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+use DateTime;
+
 class User extends Authenticatable
 {
     /**
@@ -43,5 +45,50 @@ class User extends Authenticatable
       }
 
       $user->save();
+    }
+
+    /**
+     * Change first login format to d-m-Y H:i:s
+     */
+    public function getFirstLoginAttribute($value) {
+      return self::dateTime($value);
+    }
+
+    /**
+     * Change last login format to d-m-Y H:i:s
+     */
+    public function getLastLoginAttribute($value) {
+      return self::dateTime($value);
+    }
+
+    /**
+     * Change created format to d-m-Y H:i:s
+     */
+    public function getCreatedAttribute($value) {
+      return self::dateTime($value);
+    }
+
+    /**
+     * Change created format to d-m-Y H:i:s
+     */
+    public function getExpiresAttribute($value) {
+      return self::date($value);
+    }
+
+    public static function dateTime($value) {
+      $return = null;
+      if(!empty($value)) {
+        $dateTime = DateTime::createFromFormat('Y-m-d H:i:s', $value);
+
+        $return = $dateTime->format('d/m/y H:i:s');
+      }
+
+      return $return;
+    }
+
+    public static function date($value) {
+      $dateTime = DateTime::createFromFormat('Y-m-d', $value);
+
+      return $dateTime->format('d/m/y');
     }
 }
