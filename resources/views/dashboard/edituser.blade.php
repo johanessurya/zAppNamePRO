@@ -22,30 +22,30 @@
       </div><!-- /.box-header -->
       <!-- form start -->
       <form action="/dashboard/user" method="post" class="form-horizontal">
-        <input type="hidden" name="id" value="{{ $user['id'] }}">
+        <input type="hidden" name="id" value="{{ old('id', $user['id']) }}">
         <div class="box-body">
           <div class="form-group">
             <label for="inputEmail3" class="col-sm-2 control-label">Username</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputEmail3" placeholder="Username" name="username" value="{{ $user['username'] }}">
+              <input type="text" class="form-control" id="inputEmail3" placeholder="Username" name="username" value="{{ old('username', $user['username']) }}">
             </div>
           </div>
           <div class="form-group">
             <label for="inputEmail4" class="col-sm-2 control-label">Company Name</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputEmail4" placeholder="Company Name" name="company_name" value="{{ $user['company_name'] }}">
+              <input type="text" class="form-control" id="inputEmail4" placeholder="Company Name" name="company_name" value="{{ old('company_name', $user['company_name']) }}">
             </div>
           </div>
           <div class="form-group">
             <label for="inputEmail5" class="col-sm-2 control-label">State Abbreviation</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputEmail5" placeholder="State Abbreviation" name="state" value="{{ $user['state'] }}">
+              <input type="text" class="form-control" id="inputEmail5" placeholder="State Abbreviation" name="state" value="{{ old('state', $user['state']) }}">
             </div>
           </div>
           <div class="form-group">
             <label for="inputEmail6" class="col-sm-2 control-label">Email</label>
             <div class="col-sm-10">
-              <input type="email" class="form-control" id="inputEmail6" placeholder="Email" name="email" value="{{ $user['email'] }}">
+              <input type="email" class="form-control" id="inputEmail6" placeholder="Email" name="email" value="{{ old('email', $user['email']) }}">
             </div>
           </div>
           <div class="form-group">

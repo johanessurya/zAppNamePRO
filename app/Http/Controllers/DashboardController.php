@@ -30,6 +30,7 @@ class DashboardController extends Controller
         'password_confirmation' => 'required'
       ];
       $this->validate($request, $rules);
+      $request->flash();
 
       // Check if this user exists
       $user = null;
@@ -79,7 +80,7 @@ class DashboardController extends Controller
         $message = 'User has been created';
       }
 
-      return redirect('/dashboard/user')->with('message', $message);
+      return redirect('/dashboard')->with('message', $message);
     }
 
     public function editUser(Request $request, $id) {
