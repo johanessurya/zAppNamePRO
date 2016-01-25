@@ -44,13 +44,13 @@
           <div class="form-group">
             <label for="inputEmail" class="col-sm-2 control-label">Email</label>
             <div class="col-sm-10">
-              <input type="email" readonly="readonly" class="form-control" id="inputEmail" placeholder="Email" name="email" value="{{ old('email', $user['email']) }}">
+              <input type="email" class="form-control" id="inputEmail" placeholder="Email" name="email" value="{{ old('email', $user['email']) }}">
             </div>
           </div>
           <div class="form-group">
             <label for="inputCompanyId" class="col-sm-2 control-label">Company ID</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputCompanyId" placeholder="Company ID" name="CompanyID" value="{{ old('company_id', $user['CompanyID']) }}">
+              <input type="text" readonly="readonly" class="form-control" id="inputCompanyId" placeholder="Company ID" name="CompanyID" value="{{ old('company_id', $user['CompanyID']) }}">
             </div>
           </div>
           <div class="form-group">
@@ -62,37 +62,37 @@
           <div class="form-group">
             <label for="inputFirstLogin" class="col-sm-2 control-label">First Login</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputFirstLogin" placeholder="First Login" name="firstLogin" value="{{ old('first_login', $user['firstLogin']) }}">
+              <input type="text" readonly="readonly" class="form-control" id="inputFirstLogin" placeholder="First Login" name="firstLogin" value="{{ old('first_login', $user['firstLogin']) }}">
             </div>
           </div>
           <div class="form-group">
             <label for="inputLastLogin" class="col-sm-2 control-label">Last Login</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputLastLogin" placeholder="Last Login" name="lastLogin" value="{{ old('last_login', $user['lastLogin']) }}">
+              <input type="text" readonly="readonly" class="form-control" id="inputLastLogin" placeholder="Last Login" name="lastLogin" value="{{ old('last_login', $user['lastLogin']) }}">
             </div>
           </div>
           <div class="form-group">
             <label for="inputLoginCount" class="col-sm-2 control-label">Login Count</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputLoginCount" placeholder="Login Count" name="loginCount" value="{{ old('login_count', $user['loginCount']) }}">
+              <input type="text" readonly="readonly" class="form-control" id="inputLoginCount" placeholder="Login Count" name="loginCount" value="{{ old('login_count', $user['loginCount']) }}">
             </div>
           </div>
           <div class="form-group">
             <label for="inputCreated" class="col-sm-2 control-label">Created</label>
             <div class="col-sm-10">
-              <input type="text" readonly="readyonly" class="form-control" id="inputCreated" placeholder="Created" name="created" value="{{ old('created', $user['created']) }}">
+              <input type="text" readonly="readonly" readonly="readyonly" class="form-control" id="inputCreated" placeholder="Created" name="created" value="{{ old('created', $user['created']) }}">
             </div>
           </div>
           <div class="form-group">
             <label for="inputExpires" class="col-sm-2 control-label">Expires</label>
             <div class="col-sm-10">
-              <input type="text" readonly="readyonly" class="form-control" id="inputExpires" placeholder="Expires" name="expires" value="{{ old('expires', $user['expires']) }}">
+              <input type="text" class="form-control" id="inputExpires" placeholder="Expires" name="expires" value="{{ old('expires', $user['expires']) }}">
             </div>
           </div>
         </div><!-- /.box-body -->
         <div class="box-footer">
           <button type="reset" class="btn btn-default">Reset</button>
-          <button type="submit" class="btn btn-info pull-right">Create</button>
+          <button type="submit" class="btn btn-info pull-right">Save</button>
         </div><!-- /.box-footer -->
       </form>
     </div><!-- /.box -->

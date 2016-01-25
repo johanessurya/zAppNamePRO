@@ -36,9 +36,10 @@ $(function () {
         {'data': 'expires', 'searchable': true},
       ],
       'columnDefs': [{
-        targets: [2,3],
+        targets: [0,1],
         orderable: false
-      }]
+      }],
+      "order": [[ 2, "asc" ]]
   } );
 });
 
