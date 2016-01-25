@@ -117,6 +117,7 @@ class DashboardController extends Controller
        $user->firstLogin = $params['firstLogin'];
        $user->lastLogin = $params['lastLogin'];
        $user->loginCount = $params['loginCount'];
+       $user->expires = $params['expires'];
 
        $user->save();
 
