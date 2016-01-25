@@ -47,6 +47,7 @@ class User extends Authenticatable
       $user->save();
     }
 
+    // ====== Accessor =======
     /**
      * Change first login format to d-m-Y H:i:s
      */
@@ -73,6 +74,71 @@ class User extends Authenticatable
      */
     public function getExpiresAttribute($value) {
       return self::date($value);
+    }
+
+    // ====== Mutator =======
+    /**
+     * Change first login format to d-m-Y H:i:s
+     */
+    public function setFirstLoginAttribute($value) {
+      $this->attributes['firstLogin'] = self::revDateTime($value);
+    }
+
+    /**
+     * Change last login format to d-m-Y H:i:s
+     */
+    public function setLastLoginAttribute($value) {
+      $this->attributes['lastLogin'] = self::revDateTime($value);
+    }
+
+    /**
+     * Change created format to d-m-Y H:i:s
+     */
+    public function setCreatedAttribute($value) {
+      $this->attributes['created'] = self::revDateTime($value);
+    }
+
+    /**
+     * Change created format to d-m-Y H:i:s
+     */
+    public function setExpiresAttribute($value) {
+      $this->attributes['expires'] = self::revDate($value);
+    }
+
+    // Reverse DateTime format to MySql standard
+    // param $value format : m/d/y H:i
+    public static function revDateTime($value) {
+      $return = null;
+      if(!empty($value) && $value != '0000-00-00 00:00:00') {
+        $dateTime = DateTime::createFromFormat(DATETIME_FORMAT, $value);
+
+        if($value == '25/01/16 18:42') {
+          var_dump($dateTime, $value, DATETIME_FORMAT);
+          die('bool');
+        }
+
+        $return = $dateTime->format('Y-m-d H:i:00');
+      }
+
+      return $return;
+    }
+
+    // Reverse Date format to MySql standard
+    // param $value format : d/m/y
+    public static function revDate($value) {
+      $return = null;
+
+      if(!empty($value)) {
+        $dateTime = DateTime::createFromFormat(DATE_FORMAT, $value);
+
+        if(!$dateTime) {
+          var_dump($dateTime, $value, DATE_FORMAT); die('bool');
+        }
+
+        $return = $dateTime->format('Y-m-d 00:00:00');
+      }
+
+      return $return;
     }
 
     public static function dateTime($value) {

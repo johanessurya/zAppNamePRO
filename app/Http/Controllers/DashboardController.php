@@ -41,8 +41,8 @@ class DashboardController extends Controller
       // Get today and today+14
       $today=time();
       $exp=$today + (15*24*60*60);
-      $date = date("d/m/y H:i:s", $today);
-      $expires = date("d/m/y H:i:s", $exp);
+      $date = date(DATETIME_FORMAT, $today);
+      $expires = date(DATE_FORMAT, $exp);
 
       $firstLogin = null;
       if(!empty($params['firstLogin'])) $firstLogin = $params['firstLogin'];
