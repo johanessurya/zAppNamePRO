@@ -103,12 +103,6 @@
           </td>
         </tr>
       </tbody>
-      <tfoot>
-        <tr>
-          <th>Rendering engine</th>
-          <th>Browser</th>
-        </tr>
-      </tfoot>
     </table>
   </div><!-- /.box-body -->
 </div><!-- /.box -->

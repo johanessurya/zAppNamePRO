@@ -9,8 +9,8 @@ $(function () {
 
   // ======= Datatables =========
   // class prefix: "js-"" mean that class related to javascript method/function
-  $global.editEl = '<a href="/dashboard/user/:user_id" class="js-btn-edit btn btn-block btn-primary">Edit</a>';
-  $global.deleteEl = '<a href="/dashboard/user/delete/:user_id" class="js-btn-delete btn btn-block btn-danger">Delete</a>';
+  $global.editEl = '<a href="/dashboard/user/:user_id" class="js-btn-edit btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>';
+  $global.deleteEl = '<a href="/dashboard/user/delete/:user_id" class="js-btn-delete btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a>';
 
   $('#user-table').DataTable( {
       'ajax': '/api/v1/user',
