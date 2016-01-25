@@ -38,12 +38,12 @@ class User extends Authenticatable
       $user = self::find($id);
       $user->loginCount++;
 
-      if(empty($user->firstLogin) || '0000-00-00 00:00:00') {
-        $user->firstLogin = date("Y-m-d H:i:s");
-      }else{
-        $user->lastLogin = date("Y-m-d H:i:s");
+      $dateTime = date("Y-m-d H:i:s");
+      if(empty($user->firstLogin) || $user->firstLogin == '0000-00-00 00:00:00') {
+        $user->firstLogin = $dateTime;
       }
 
+      $user->lastLogin = $dateTime;
       $user->save();
     }
 
