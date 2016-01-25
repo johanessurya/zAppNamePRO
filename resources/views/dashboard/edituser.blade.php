@@ -35,9 +35,9 @@
             <label for="inputUserType" class="col-sm-2 control-label">User Type</label>
             <div class="col-sm-10">
               <select id="inputUserType" class="form-control" name="userType">
-                <option value="0" selected="selected">User</option>
-                <option value="1">Manager</option>
-                <option value="2">Admin</option>
+                @for ($i=0; $i<count($userType); $i++)
+                  <option value="{{ $i }}" {{ $user['userType'] == $i ? 'selected="selected"' : '' }}>{{ $userType[$i] }}</option>
+                @endfor
               </select>
             </div>
           </div>
@@ -50,7 +50,7 @@
           <div class="form-group">
             <label for="inputCompanyId" class="col-sm-2 control-label">Company ID</label>
             <div class="col-sm-10">
-              <input type="text" readonly="readonly" class="form-control" id="inputCompanyId" placeholder="Company ID" name="CompanyID" value="{{ old('company_id', $user['CompanyID']) }}">
+              <input type="text" class="form-control" id="inputCompanyId" placeholder="Company ID" name="CompanyID" value="{{ old('company_id', $user['CompanyID']) }}">
             </div>
           </div>
           <div class="form-group">

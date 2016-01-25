@@ -64,7 +64,13 @@ class DashboardController extends Controller
 
    public function editUser(Request $request, $id) {
      $user = User::find($id);
-     return view('dashboard.edituser', array('title' => 'Edit User', 'user' => $user));
+     $userType = array('User', 'Manager', 'Admin');
+     $data = array(
+       'title' => 'Edit User',
+       'user' => $user,
+       'userType' => $userType
+     );
+     return view('dashboard.edituser', $data);
    }
 
    public function doEditUser(Request $request) {
