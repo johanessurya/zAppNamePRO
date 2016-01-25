@@ -77,7 +77,7 @@ class User extends Authenticatable
 
     public static function dateTime($value) {
       $return = null;
-      if(!empty($value)) {
+      if(!empty($value) && $value != '0000-00-00 00:00:00') {
         $dateTime = DateTime::createFromFormat('Y-m-d H:i:s', $value);
 
         $return = $dateTime->format(DATETIME_FORMAT);
