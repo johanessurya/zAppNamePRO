@@ -41,8 +41,8 @@ class DashboardController extends Controller
       // Get today and today+14
       $today=time();
       $exp=$today + (14*24*60*60);
-      $date = date("Y-m-d H:i:s", $today);
-      $expires = date("Y-m-d H:i:s", $exp);
+      $date = date("d/m/y H:i:s", $today);
+      $expires = date("d/m/y H:i:s", $exp);
 
       $rows = array(
         'username' => $params['username'],
@@ -123,19 +123,5 @@ class DashboardController extends Controller
    public function deleteUser($id) {
      User::find($id)->delete();
      return redirect('/dashboard')->with('message', 'Delete user successful');
-   }
-
-   // params $dateTimeString MySql standart format : Y-m-d H:i:s
-   private function dateTime1($dateTimeString) {
-     $dateTime = DateTime::createFromFormat('Y-m-d H:i:s', $dateTimeString);
-
-     return $dateTime->format('d/m/y H:i:s');
-   }
-
-   // params $dateTimeString format : Y-m-d
-   private function dateTime2($dateTimeString) {
-     $dateTime = DateTime::createFromFormat('Y-m-d', $dateTimeString);
-
-     return $dateTime->format('d/m/y');
    }
 }
