@@ -56,6 +56,7 @@ Route::group(['middleware' => ['web']], function () {
   Route::post('/dashboard/user', 'DashboardController@createUser');
   Route::post('/dashboard/user/edit/do', 'DashboardController@doEditUser');
   Route::get('/dashboard/user/delete/{id}', 'DashboardController@deleteUser');
+  Route::get('/dashboard/user/active/{id}', 'DashboardController@setActiveUser');
 
   Route::get('/forgot', function () {
     return view('forgot');

@@ -132,4 +132,23 @@ class DashboardController extends Controller
      User::find($id)->delete();
      return redirect('/dashboard')->with('message', 'Delete user successful');
    }
+
+   public function setActiveUser($id) {
+     $return = redirect('/dashboard')->with('message', 'User ID not found!');
+
+     $user = User::find($id);
+
+     if(!empty($user)) {
+       $exp = time() + (15*24*60*60);
+       $expires = date(DATE_FORMAT, $exp);
+
+       $user->active = 1;
+       $user->expires = $expires;
+       $user->save();
+
+       $return = redirect('/dashboard')->with('message', 'Set active successful. Expires +15 days');
+     }
+
+     return $return;
+   }
 }

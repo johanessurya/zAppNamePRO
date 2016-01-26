@@ -11,6 +11,7 @@ $(function () {
   // class prefix: "js-"" mean that class related to javascript method/function
   $global.editEl = '<a href="/dashboard/user/:user_id" class="js-btn-edit btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>';
   $global.deleteEl = '<a href="/dashboard/user/delete/:user_id" class="js-btn-delete btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a>';
+  $global.active = '<a href="/dashboard/user/active/:user_id" class="js-btn-delete btn btn-success"><span class="glyphicon glyphicon-ok"></span></a>';
 
   $('#user-table').DataTable( {
       'ajax': '/api/v1/user',
@@ -23,6 +24,11 @@ $(function () {
         {
           mRender: function (data, type, row) {
               return $global.deleteEl.replace(':user_id', row.id);
+            }
+        },
+        {
+          mRender: function (data, type, row) {
+              return $global.active.replace(':user_id', row.id);
             }
         },
         {'data': 'username', 'searchable': true},

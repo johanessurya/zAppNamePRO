@@ -79,6 +79,7 @@
         <tr>
           <th></th>
           <th></th>
+          <th></th>
           <th>Username</th>
           <th>Active</th>
           <th>User Type</th>
