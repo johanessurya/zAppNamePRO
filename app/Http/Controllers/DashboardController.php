@@ -112,6 +112,7 @@ class DashboardController extends Controller
 
        $user->username = $params['username'];
        $user->userType = $params['userType'];
+       $user->email = $params['email'];
        $user->CompanyID = $params['CompanyID'];
        $user->active = $params['active'];
        $user->firstLogin = $params['firstLogin'];
