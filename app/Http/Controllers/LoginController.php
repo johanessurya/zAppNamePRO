@@ -25,7 +25,7 @@ class LoginController extends Controller
         'username' => $params['username'],
         'password' => $params['password']
       );
-      if(Auth::attempt($params)) {
+      if(Auth::attempt($user)) {
         User::updateLogin(Auth::user()->id);
         return redirect()->intended('/dashboard');
       } else {
