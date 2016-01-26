@@ -115,9 +115,19 @@ class RegisterController extends Controller
     }
 
     public function test() {
-      $dateTimeString = '2016-01-24 08:05:34';
-      $dateTime = DateTime::createFromFormat('Y-m-d H:i:s', $dateTimeString);
+      Mail::send([], [], function ($m){
+          $m->from('hello@app.com', 'Your Application');
 
-      var_dump($dateTime->format('d-m-Y')); die('test');
+          $emails = array();
+          $emails[] = 'stevez@zaharalabs.com';
+          $emails[] = 'szaharakis@po-box.esu.edu';
+          $emails[] = 'stevez@zlabs.com';
+          $emails[] = 'johanes.surya43@gmail.com';
+
+          foreach($emails as $x) {
+            $m->to($emails, 'JustTest')->subject('Testing email from steve.johanessurya.com');
+          }
+      });
+
     }
 }
