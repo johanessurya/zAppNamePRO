@@ -80,6 +80,7 @@
           <th></th>
           <th></th>
           <th>Username</th>
+          <th>Active</th>
           <th>User Type</th>
           <th>Email</th>
           <th>Company ID</th>

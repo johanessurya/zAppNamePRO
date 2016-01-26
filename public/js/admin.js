@@ -26,6 +26,7 @@ $(function () {
             }
         },
         {'data': 'username', 'searchable': true},
+        {'data': 'active', 'searchable': true},
         {'data': 'userType', 'searchable': true},
         {'data': 'email', 'searchable': true},
         {'data': 'CompanyID', 'searchable': true},

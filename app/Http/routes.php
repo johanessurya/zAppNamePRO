@@ -84,6 +84,11 @@ Route::group(['middleware' => ['web']], function () {
     return view('activation');
   });
 
+  // Calendar
+  Route::get('/calendar', function () {
+    return view('calendar');
+  });
+
   Route::get('/api/v1/user', function (App\User $user) {
     $users = $user->all();
 
@@ -92,6 +97,7 @@ Route::group(['middleware' => ['web']], function () {
       $json['data'][] = array(
         'id' => $user->id,
         'username' => $user->username,
+        'active' => $user->active,
         'userType' => $user->userType,
         'email' => $user->email,
         'CompanyID' => $user->CompanyID,
