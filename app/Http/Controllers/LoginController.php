@@ -56,7 +56,7 @@ class LoginController extends Controller
             $m->to($email, $row->username)->subject('Resetting password!');
         });
 
-        $return = redirect('/login')->with('message', 'Reset password link has been sent to your email.');
+        $return = redirect('/login')->with('message', "Reset password link has been sent to your email. Please don't forget to look in your Spam folder.");
       }
 
       return $return;
