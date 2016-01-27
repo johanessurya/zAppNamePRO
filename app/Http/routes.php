@@ -36,11 +36,14 @@ Route::group(['middleware' => ['web']], function () {
   });
   Route::post('/register', 'RegisterController@index');
 
-  // Dashboard
+  // ==== Dashboard ====
   Route::get('/dashboard', array(
     'middleware' => 'auth',
     'uses' => 'DashboardController@index'
   ));
+
+  // User Management(START)
+  // Create user form
   Route::get('/dashboard/user', function () {
     $today = time();
     $expires = time()+(15*24*60*60);
@@ -52,11 +55,43 @@ Route::group(['middleware' => ['web']], function () {
     );
     return view('dashboard.newuser', $data);
   });
-  Route::get('/dashboard/user/{id}', 'DashboardController@editUser');
   Route::post('/dashboard/user', 'DashboardController@createUser');
+
+  // Edit user form
+  Route::get('/dashboard/user/{id}', 'DashboardController@editUser');
   Route::post('/dashboard/user/edit/do', 'DashboardController@doEditUser');
+
+  // Delete user
   Route::get('/dashboard/user/delete/{id}', 'DashboardController@deleteUser');
+  // Set user to active = 1 and expires = +15
   Route::get('/dashboard/user/active/{id}', 'DashboardController@setActiveUser');
+
+  // User Management(START)
+
+  // Client Management(START)
+  // List table
+  Route::get('/dashboard/client', function () {
+    return view('dashboard.listclient')
+  });
+
+  // Create form
+  Route::get('/dashboard/client/create', function() {
+    return view('dashboard.newclient');
+  })
+  Route::post('/dashboard/client/create', 'DashboardController@createClient');
+
+  // Edit form
+  Route::get('/dashboard/client/edit/{id}', function ($id) {
+    $user = User::find($id);
+    return view('dashboard.editclient');
+  });
+  Route::post('/dashboard/client/edit', 'DashboardController@editClient');
+
+  // Delete
+  Route::get('/dashboard/client/delete/{id}', 'DashboardController@deleteUser');
+  // Client Management(END)
+
+
 
   Route::get('/forgot', function () {
     return view('forgot');

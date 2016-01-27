@@ -34,10 +34,11 @@ $(function () {
           y = date.getFullYear();
 
   $().FullCalendarExt({
-		calendarSelector: '#calendar-2',
+		calendarSelector: '#calendar',
 		lang: 'en',
 	});
 
+  /*
   $('#calendar').fullCalendar({
     header: {
       left: 'prev,next today',
@@ -125,6 +126,7 @@ $(function () {
 
     }
   });
+  */
 
   /* ADDING EVENTS */
   var currColor = "#3c8dbc"; //Red by default

@@ -82,10 +82,9 @@
 @section('content')
 <div class="box">
   <div class="box-header">
-    <h3 class="box-title">Data Table With Full Features</h3> <a href="/dashboard/user" class="btn btn-success btn-xs">Add New User</a>
+    <h3 class="box-title">Data Table With Full Features</h3>
   </div><!-- /.box-header -->
   <div class="box-body">
-    <div id="calendar-2"></div>
     <div id="calendar"></div>
   </div><!-- /.box-body -->
 </div><!-- /.box -->
