@@ -14,6 +14,9 @@
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- DataTables -->
     <link rel="stylesheet" href="{{ asset('plugins/datatables/dataTables.bootstrap.css') }}">
+    <!-- fullCalendar 2.2.5-->
+    <link rel="stylesheet" href="{{ asset('plugins/fullcalendar/fullcalendar.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/fullcalendar/fullcalendar.print.css') }}" media="print">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('dist/css/AdminLTE.min.css') }}">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -452,7 +455,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Users List
+            @yield('title-h1')
             <small>Preview</small>
           </h1>
           <ol class="breadcrumb">
@@ -664,5 +667,6 @@
     <!-- AdminLTE for demo purposes -->
     <script src="{{ asset('dist/js/demo.js') }}"></script>
     <script src="{{ asset('js/admin.js') }}"></script>
+    @stack('scripts')
   </body>
 </html>

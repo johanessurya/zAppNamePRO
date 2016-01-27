@@ -43,10 +43,10 @@ $(function () {
         {'data': 'expires', 'searchable': true},
       ],
       'columnDefs': [{
-        targets: [0,1],
+        targets: [0,1,2],
         orderable: false
       }],
-      "order": [[ 2, "asc" ]]
+      "order": [[ 3, "asc" ]]
   } );
 });
 
