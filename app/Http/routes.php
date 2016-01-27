@@ -1,6 +1,18 @@
 <?php
 define('DATETIME_FORMAT','m/d/y H:i');
 define('DATE_FORMAT', 'm/d/y');
+config([
+  'app.gender' => [
+    'Male' => 'Male',
+    'Female' => 'Female'
+  ],
+  'app.client_type' => [
+    'Startup' => 'Startup',
+    'Small' => 'Small',
+    'Medium' => 'Medium',
+    'Large' => 'Large'
+  ]
+]);
 
 /*
 |--------------------------------------------------------------------------
@@ -71,13 +83,22 @@ Route::group(['middleware' => ['web']], function () {
   // Client Management(START)
   // List table
   Route::get('/dashboard/client', function () {
-    return view('dashboard.listclient')
+    return view('dashboard.listclient');
   });
 
   // Create form
   Route::get('/dashboard/client/create', function() {
-    return view('dashboard.newclient');
-  })
+    $today = time();
+    $expires = time()+(15*24*60*60);
+
+    $data = array(
+      'gender' => config('app.gender'),
+      'type' => config('app.client_type'),
+      'created' => date("Y-m-d H:i:s", $today),
+      'expires' => date("Y-m-d H:i:s", $expires)
+    );
+    return view('dashboard.newclient', $data);
+  });
   Route::post('/dashboard/client/create', 'DashboardController@createClient');
 
   // Edit form

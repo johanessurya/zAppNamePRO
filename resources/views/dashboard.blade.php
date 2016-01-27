@@ -1,5 +1,7 @@
 @extends('layouts.default-admin')
 
+@section('title-h1', 'User Management')
+
 @section('popup-modal')
 <div class="example-modal">
   <div id="user-edit" class="modal">
@@ -93,17 +95,6 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Trident</td>
-          <td>Internet
-            Explorer 4.0</td>
-          <td>
-            <button class="btn btn-block btn-primary">Edit</button>
-          </td>
-          <td>
-            <button class="btn btn-block btn-danger">Delete</button>
-          </td>
-        </tr>
       </tbody>
     </table>
   </div><!-- /.box-body -->
