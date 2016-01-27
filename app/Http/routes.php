@@ -134,7 +134,7 @@ Route::group(['middleware' => ['web']], function () {
   });
 
   // Calendar
-  Route::get('/calendar', function () {
+  Route::get('/dashboard/calendar', function () {
     return view('calendar');
   });
 
