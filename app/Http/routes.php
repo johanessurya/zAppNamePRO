@@ -101,7 +101,7 @@ Route::group(['middleware' => ['web']], function () {
   Route::post('/dashboard/client/edit', 'DashboardController@editClient');
 
   // Delete
-  Route::get('/dashboard/client/delete/{id}', 'DashboardController@deleteUser');
+  Route::get('/dashboard/client/delete/{id}', 'DashboardController@deleteClient');
   // Client Management(END)
 
 

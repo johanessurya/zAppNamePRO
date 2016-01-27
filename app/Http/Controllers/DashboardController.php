@@ -161,8 +161,8 @@ class DashboardController extends Controller
        'user_id' => 'required|exists:users,id',
        'clientCode' => 'required',
        'name' => 'required',
-       'gender' => 'required|in:' . implode(',', config('app.gender')),
-       'type' => 'required|in:' . implode(',', config('app.client_type'))
+       'gender' => 'required|in:' . implode(',', config('steve.gender')),
+       'type' => 'required|in:' . implode(',', config('steve.client_type'))
      ];
      $this->validate($request, $rules);
 
@@ -172,6 +172,40 @@ class DashboardController extends Controller
    }
 
    public function editClient(Request $request) {
-     
+     $params = $request->all();
+
+     // Validation
+     $rules = [
+       'user_id' => 'required|exists:users,id',
+       'clientCode' => 'required',
+       'name' => 'required',
+       'gender' => 'required|in:' . implode(',', config('steve.gender')),
+       'type' => 'required|in:' . implode(',', config('steve.client_type'))
+     ];
+     $this->validate($request, $rules);
+
+     // Update field
+     $row = Client::find($params['id']);
+     $message = 'Client not found!';
+     if(!empty($row)) {
+       $row->user_id = $params['user_id'];
+       $row->clientCode = $params['clientCode'];
+       $row->name = $params['name'];
+       $row->gender = $params['gender'];
+       $row->type = $params['type'];
+
+       // Save it
+       $row->save();
+
+       $message = 'Client has been updated';
+     }
+
+     return redirect('/dashboard/client')->with('message', $message);
+   }
+
+   public function deleteClient($id) {
+     Client::find($id)->delete();
+
+     return redirect('/dashboard/client')->with('message', 'Delete client successful');
    }
 }
