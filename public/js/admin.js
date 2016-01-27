@@ -51,7 +51,7 @@ $(function () {
   } );
 
   // class prefix: "js-"" mean that class related to javascript method/function
-  $global.editEl = '<a href="/dashboard/client/:user_id" class="js-btn-edit btn btn-block btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>';
+  $global.editEl = '<a href="/dashboard/client/edit/:user_id" class="js-btn-edit btn btn-block btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>';
   $global.deleteEl = '<a href="/dashboard/client/delete/:user_id" class="js-btn-delete btn btn-block btn-danger"><span class="glyphicon glyphicon-remove"></span></a>';
   $('#client-table').DataTable( {
       'ajax': '/api/v1/client',

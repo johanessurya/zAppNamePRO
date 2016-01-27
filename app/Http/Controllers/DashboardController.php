@@ -170,4 +170,8 @@ class DashboardController extends Controller
      Client::create($params);
      return redirect('/dashboard/client')->with('message', 'Client has been created.');
    }
+
+   public function editClient(Request $request) {
+     
+   }
 }

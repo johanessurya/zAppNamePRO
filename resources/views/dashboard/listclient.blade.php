@@ -5,7 +5,7 @@
 @section('content')
 <div class="box">
   <div class="box-header">
-    <h3 class="box-title">Data Table With Full Features</h3> <a href="/dashboard/user" class="btn btn-success btn-xs">Add New Client</a>
+    <h3 class="box-title">Data Table With Full Features</h3> <a href="/dashboard/client/create" class="btn btn-success btn-xs">Add New Client</a>
   </div><!-- /.box-header -->
   <div class="box-body">
     <table id="client-table" class="table table-bordered table-striped">

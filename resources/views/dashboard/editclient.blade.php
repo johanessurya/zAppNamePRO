@@ -47,17 +47,20 @@
           <div class="form-group">
             <label for="inputCompanyId" class="col-sm-2 control-label">Gender</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputCompanyId" placeholder="Gender" name="gender" value="{{ old('gender', $client['gender']) }}">
+              <select id="inputCompanyId" class="form-control" name="gender">
+                @foreach(config('steve.gender') as $x)
+                  <option value="{{ $x }}" {{ old('gender', $client['gender']) == $x ? 'selected="selected"' : '' }}>{{ $x }}</option>
+                @endforeach
+              </select>
             </div>
           </div>
           <div class="form-group">
             <label for="inputActive" class="col-sm-2 control-label">Type</label>
             <div class="col-sm-10">
               <select id="inputActive" class="form-control" name="type">
-                <option value="Startup" selected="selected">Startup</option>
-                <option value="Small">Small</option>
-                <option value="Medium">Medium</option>
-                <option value="Large">Large</option>
+                @foreach(config('steve.client_type') as $x)
+                  <option value="{{ $x }}" {{ old('type', $client['type']) == $x ? 'selected="selected"' : '' }}>{{ $x }}</option>
+                @endforeach
               </select>
             </div>
           </div>

@@ -1,18 +1,6 @@
 <?php
 define('DATETIME_FORMAT','m/d/y H:i');
 define('DATE_FORMAT', 'm/d/y');
-config([
-  'app.gender' => [
-    'Male' => 'Male',
-    'Female' => 'Female'
-  ],
-  'app.client_type' => [
-    'Startup' => 'Startup',
-    'Small' => 'Small',
-    'Medium' => 'Medium',
-    'Large' => 'Large'
-  ]
-]);
 
 /*
 |--------------------------------------------------------------------------
@@ -92,8 +80,8 @@ Route::group(['middleware' => ['web']], function () {
     $expires = time()+(15*24*60*60);
 
     $data = array(
-      'gender' => config('app.gender'),
-      'type' => config('app.client_type'),
+      'gender' => config('steve.gender'),
+      'type' => config('steve.client_type'),
       'created' => date("Y-m-d H:i:s", $today),
       'expires' => date("Y-m-d H:i:s", $expires)
     );
@@ -102,9 +90,13 @@ Route::group(['middleware' => ['web']], function () {
   Route::post('/dashboard/client/create', 'DashboardController@createClient');
 
   // Edit form
-  Route::get('/dashboard/client/edit/{id}', function ($id) {
-    $user = User::find($id);
-    return view('dashboard.editclient');
+  Route::get('/dashboard/client/edit/{id}', function (App\Client $client, $id) {
+    $rows = $client->find($id);
+    $data = array(
+      'client' => $rows
+    );
+
+    return view('dashboard.editclient', $data);
   });
   Route::post('/dashboard/client/edit', 'DashboardController@editClient');
 
