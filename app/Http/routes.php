@@ -90,27 +90,32 @@ Route::group(['middleware' => ['web']], function () {
     return view('calendar');
   });
 
-  Route::get('/api/v1/user', function (App\User $user) {
-    $users = $user->all();
+  // ==== API Route ====
+  // Prefix : /api/v1/
+  Route::group(['prefix' => '/api/v1/'], function () {
+    Route::get('user', function (App\User $user) {
+      // Matches The "/api/v1/users" URL
+      $users = $user->all();
 
-    $json['data'] = array();
-    foreach($users as $user) {
-      $json['data'][] = array(
-        'id' => $user->id,
-        'username' => $user->username,
-        'active' => $user->active,
-        'userType' => $user->userType,
-        'email' => $user->email,
-        'CompanyID' => $user->CompanyID,
-        'created' => $user->created,
-        'active' => $user->active,
-        'firstLogin' => $user->firstLogin,
-        'lastLogin' => $user->lastLogin,
-        'loginCount' => $user->loginCount,
-        'expires' => $user->expires
-      );
-    }
+      $json['data'] = array();
+      foreach($users as $user) {
+        $json['data'][] = array(
+          'id' => $user->id,
+          'username' => $user->username,
+          'active' => $user->active,
+          'userType' => $user->userType,
+          'email' => $user->email,
+          'CompanyID' => $user->CompanyID,
+          'created' => $user->created,
+          'active' => $user->active,
+          'firstLogin' => $user->firstLogin,
+          'lastLogin' => $user->lastLogin,
+          'loginCount' => $user->loginCount,
+          'expires' => $user->expires
+        );
+      }
 
-    return json_encode($json);
+      return json_encode($json);
+    });
   });
 });

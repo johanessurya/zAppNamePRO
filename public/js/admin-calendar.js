@@ -32,6 +32,12 @@ $(function () {
   var d = date.getDate(),
           m = date.getMonth(),
           y = date.getFullYear();
+
+  $().FullCalendarExt({
+		calendarSelector: '#calendar-2',
+		lang: 'en',
+	});
+
   $('#calendar').fullCalendar({
     header: {
       left: 'prev,next today',

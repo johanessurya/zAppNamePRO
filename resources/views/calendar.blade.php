@@ -5,7 +5,9 @@
 @push('scripts')
   <!-- fullCalendar 2.2.5 -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
-  <script src="{{ asset('plugins/fullcalendar/fullcalendar.min.js') }}"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.0/fullcalendar.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.0/fullcalendar.min.js"></script>
+  <script src="{{ asset('js/jquery.calendar.js')}}"></script>
   <script src="{{ asset('js/admin-calendar.js') }}"></script>
 @endpush
 
@@ -83,6 +85,7 @@
     <h3 class="box-title">Data Table With Full Features</h3> <a href="/dashboard/user" class="btn btn-success btn-xs">Add New User</a>
   </div><!-- /.box-header -->
   <div class="box-body">
+    <div id="calendar-2"></div>
     <div id="calendar"></div>
   </div><!-- /.box-body -->
 </div><!-- /.box -->
