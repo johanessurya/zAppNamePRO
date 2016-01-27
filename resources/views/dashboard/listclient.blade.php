@@ -13,7 +13,6 @@
         <tr>
           <th></th>
           <th></th>
-          <th></th>
           <th>User ID</th>
           <th>Client Code</th>
           <th>Name</th>

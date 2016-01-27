@@ -8,6 +8,7 @@ use DateTime;
 use Hash;
 use Session;
 use App\User;
+use App\Client;
 use App\Company;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -150,5 +151,23 @@ class DashboardController extends Controller
      }
 
      return $return;
+   }
+
+   public function createClient(Request $request) {
+     $params = $request->all();
+
+     // Validation
+     $rules = [
+       'user_id' => 'required|exists:users,id',
+       'clientCode' => 'required',
+       'name' => 'required',
+       'gender' => 'required|in:' . implode(',', config('app.gender')),
+       'type' => 'required|in:' . implode(',', config('app.client_type'))
+     ];
+     $this->validate($request, $rules);
+
+     // Insert
+     Client::create($params);
+     return redirect('/dashboard/client')->with('message', 'Client has been created.');
    }
 }

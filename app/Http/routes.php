@@ -149,6 +149,7 @@ Route::group(['middleware' => ['web']], function () {
   // ==== API Route ====
   // Prefix : /api/v1/
   Route::group(['prefix' => '/api/v1/'], function () {
+    // Get user list
     Route::get('user', function (App\User $user) {
       // Matches The "/api/v1/users" URL
       $users = $user->all();
@@ -168,6 +169,24 @@ Route::group(['middleware' => ['web']], function () {
           'lastLogin' => $user->lastLogin,
           'loginCount' => $user->loginCount,
           'expires' => $user->expires
+        );
+      }
+
+      return json_encode($json);
+    });
+
+    Route::get('client', function (App\Client $client) {
+      $rows = $client->all();
+
+      $json['data'] = array();
+      foreach($rows as $x) {
+        $json['data'][] = array(
+          'id' => $x->id,
+          'user_id' => $x->user_id,
+          'clientCode' => $x->clientCode,
+          'name' => $x->name,
+          'gender' => $x->gender,
+          'type' => $x->type
         );
       }
 

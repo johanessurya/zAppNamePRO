@@ -48,7 +48,7 @@
             <div class="col-sm-10">
               <select id="inputCompanyId" class="form-control" name="gender">
                 @foreach($gender as $x)
-                  <option value="{{ $x }}">{{ $x }}</option>
+                  <option value="{{ $x }}" {{ old('gender') == $x ? 'selected="selected"' : '' }}>{{ $x }}</option>
                 @endforeach
               </select>
             </div>
@@ -58,7 +58,7 @@
             <div class="col-sm-10">
               <select id="inputActive" class="form-control" name="type">
                 @foreach($type as $x)
-                  <option value="{{ $x }}">{{ $x }}</option>
+                  <option value="{{ $x }}" {{ old('type') == $x ? 'selected="selected"' : '' }}>{{ $x }}</option>
                 @endforeach
               </select>
             </div>
