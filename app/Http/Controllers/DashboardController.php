@@ -230,4 +230,8 @@ class DashboardController extends Controller
 
      return back()->with('message', 'Password has been updated');
    }
+
+   public function layoutSettings(Request $request) {
+     die('layout setting');
+   }
 }

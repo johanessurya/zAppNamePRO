@@ -188,11 +188,62 @@
       <aside class="control-sidebar control-sidebar-dark">
         <!-- Create the tabs -->
         <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+          <li class="active"><a href="#control-sidebar-theme-demo-options-tab" data-toggle="tab"><i class="fa fa-wrench"></i></a></li>
           <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
           <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
         </ul>
         <!-- Tab panes -->
         <div class="tab-content">
+          <!-- Layout option tab content -->
+          <div class="tab-pane active" id="control-sidebar-theme-demo-options-tab">
+            <h3 class="control-sidebar-heading">Layout Options</h3>
+            <form action="/dashboard/layoutsettings" method="post">
+              <div class="form-group">
+                <label class="control-sidebar-subheading">Dt</label>
+                <select class="form-control" name="dt">
+                  @foreach (config('steve.dt') as $key=>$val)
+                    <option value="{{ $val }}">{{ $val }}</option>
+                  @endforeach
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="control-sidebar-subheading">Day Start Time</label>
+                <select class="form-control" name="dayStartTime">
+                  @foreach (config('steve.time_list') as $key=>$val)
+                    <option value="{{ $key }}">{{ $val }}</option>
+                  @endforeach
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="control-sidebar-subheading">Day End Time</label>
+                <select class="form-control" name="dayEndTime">
+                  @foreach (config('steve.time_list') as $key=>$val)
+                    <option value="{{ $key }}">{{ $val }}</option>
+                  @endforeach
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="control-sidebar-subheading">Calendar Start Time</label>
+                <select class="form-control" name="calendarStartTime">
+                  @foreach (config('steve.time_list') as $key=>$val)
+                    <option value="{{ $key }}">{{ $val }}</option>
+                  @endforeach
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="control-sidebar-subheading">Calendar End Time</label>
+                <select class="form-control" name="calendarEndTime">
+                  @foreach (config('steve.time_list') as $key=>$val)
+                    <option value="{{ $key }}">{{ $val }}</option>
+                  @endforeach
+                </select>
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary pull-right">Change</button>
+              </div><!-- /.form-group -->
+            </form>
+          </div><!-- /.tab-pane -->
+
           <!-- Home tab content -->
           <div class="tab-pane" id="control-sidebar-home-tab">
             <h3 class="control-sidebar-heading">Recent Activity</h3>
@@ -321,8 +372,6 @@
     <script src="{{ asset('plugins/fastclick/fastclick.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('dist/js/app.min.js') }}"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="{{ asset('dist/js/demo.js') }}"></script>
     <script src="{{ asset('js/admin.js') }}"></script>
     @stack('scripts')
   </body>

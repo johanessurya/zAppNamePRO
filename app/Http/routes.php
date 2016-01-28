@@ -30,7 +30,7 @@ Route::group(['middleware' => ['web']], function () {
   Route::get('/', function () {
     return redirect('/login');
   });
-  Route::get('/test', 'RegisterController@test');
+  Route::get('/test', 'RegisterController@test2');
   Route::get('/register', function () {
       return view('register');
   });
@@ -115,6 +115,7 @@ Route::group(['middleware' => ['web']], function () {
 
   // Configuration setting
   Route::post('/dashboard/settings', 'DashboardController@settings');
+  Route::post('/dashboard/layoutsettings', 'DashboardController@layoutSettings');
 
   // Login
   Route::get('/login', function () {
