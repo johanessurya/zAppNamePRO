@@ -68,7 +68,7 @@ class CalendarController extends Controller
           'id' => $repeatId, // I don't know why, but just follow it. See calendar.php in fullcal project demo
           'original_id' => $x->id,
           'allDay' => $allDay,
-          'color' => $x->color,
+          'color' => '#587ca3',
           'start' => MyModel::revDateTime($x->start),
           'end' => MyModel::revDateTime($x->end),
           'title' => $x->title
