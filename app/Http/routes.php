@@ -171,7 +171,7 @@ Route::group(['middleware' => ['web']], function () {
     });
 
     Route::get('client', function (App\Client $client) {
-      $rows = $client->all();
+      $rows = $client->where('user_id', Auth::user()->id)->get();
 
       $json['data'] = array();
       foreach($rows as $x) {
