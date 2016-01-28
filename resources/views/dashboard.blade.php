@@ -1,6 +1,6 @@
 @extends('layouts.default-admin')
 
-@section('title-h1', 'User Management')
+@section('title-h1', 'User List')
 
 @section('popup-modal')
 <div class="example-modal">

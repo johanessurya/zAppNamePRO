@@ -460,7 +460,7 @@
           </h1>
           <ol class="breadcrumb">
             <li><a href="/dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Users List</li>
+            <li class="active">@yield('title-h1')</li>
           </ol>
         </section>
 
