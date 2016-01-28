@@ -4,19 +4,6 @@
 
 @section('content')
   <div class="box-body">
-    @if (Session::has('message'))
-    <div class="callout callout-success">
-      <p>{{ Session::get('message') }}</p>
-    </div>
-    @endif
-
-    @if (count($errors) > 0)
-    <div class="callout callout-danger">
-      @foreach ($errors->all() as $error)
-        <p>{{ $error }}</p>
-      @endforeach
-    </div>
-    @endif
     <!-- Horizontal Form -->
     <div class="box box-info">
       <div class="box-header with-border">

@@ -159,8 +159,6 @@ class DashboardController extends Controller
 
      // Validation
      $rules = [
-       'user_id' => 'required|exists:users,id',
-       'clientCode' => 'required',
        'name' => 'required',
        'gender' => 'required|in:' . implode(',', config('steve.gender')),
        'type' => 'required|in:' . implode(',', config('steve.client_type')),
@@ -168,7 +166,12 @@ class DashboardController extends Controller
      ];
      $this->validate($request, $rules);
 
+     // Client Code == name if blank
+     if(empty($params['clientCode']))
+      $params['clientCode'] = $params['name'];
+
      // Insert
+     $params['user_id'] = Auth::user()->id;
      Client::create($params);
      return redirect('/dashboard/client')->with('message', 'Client has been created.');
    }
