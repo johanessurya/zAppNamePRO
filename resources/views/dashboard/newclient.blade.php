@@ -26,21 +26,15 @@
       <form action="/dashboard/client/create" method="post" class="form-horizontal">
         <div class="box-body">
           <div class="form-group">
-            <label for="inputUsername" class="col-sm-2 control-label">User ID</label>
+            <label for="inputEmail" class="col-sm-2 control-label">Name</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputUsername" placeholder="User ID" name="user_id" value="{{ old('user_id') }}">
+              <input type="text" class="form-control" id="inputEmail" placeholder="Name" name="name" value="{{ old('name') }}">
             </div>
           </div>
           <div class="form-group">
             <label for="inputUserType" class="col-sm-2 control-label">Client Code</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="inputUserType" placeholder="Client Code" name="clientCode" value="{{ old('clientCode') }}">
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="inputEmail" class="col-sm-2 control-label">Name</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputEmail" placeholder="Name" name="name" value="{{ old('name') }}">
             </div>
           </div>
           <div class="form-group">
