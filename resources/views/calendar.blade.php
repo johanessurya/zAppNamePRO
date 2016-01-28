@@ -25,21 +25,17 @@
             <div class="form-group">
               <label for="inputCategory">Category</label>
               <select class="form-control" id="inputCategory" name="category">
-                <option>option 1</option>
-                <option>option 2</option>
-                <option>option 3</option>
-                <option>option 4</option>
-                <option>option 5</option>
+                @foreach($categories as $x)
+                  <option value="{{ $x['id'] }}">{{ $x['title'] }}</option>
+                @endforeach
               </select>
             </div>
             <div class="form-group">
               <label for="inputTopic">Topic</label>
-              <select class="form-control" id="inputTopic" name="topic">
-                <option>option 1</option>
-                <option>option 2</option>
-                <option>option 3</option>
-                <option>option 4</option>
-                <option>option 5</option>
+              <select class="form-control" id="inputTopic" name="subCategoryID">
+                @foreach($subCategories as $x)
+                  <option value="{{ $x['id'] }}">{{ $x['title'] }}</option>
+                @endforeach
               </select>
             </div>
             <div class="form-group">
@@ -63,6 +59,24 @@
               <input type="text" class="form-control" id="inputColor" placeholder="Color" name="color" value="#587ca3">
             </div>
             <div class="form-group">
+              <label for="inputRepeat">Repeat</label>
+              <select class="form-control" id="inputRepeat" name="repeat">
+                <option selected="selected">No</option>
+                <option value="day">Day</option>
+                <option value="week">Week</option>
+                <option value="Month">Month</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="inputRepeatN">How Many Repeat?</label>
+              <select class="form-control" id="inputRepeatN" name="repeatN">
+                <option value="1" selected="selected">1</option>
+                @for ($i = 2; $i <= 40; $i++)
+                  <option value="{{ $i }}">{{ $i }}</option>
+                @endfor;
+              </select>
+            </div>
+            <div class="form-group">
               <label for="inputAllDay">All Day</label>
               <select class="form-control" id="inputAllDay" name="allDay">
                 <option value="0" selected="selected">No</option>
@@ -71,11 +85,11 @@
             </div>
             <div class="form-group">
               <label for="inputStartTime">Start Time</label>
-              <input type="email" class="form-control" id="inputStartTime" placeholder="Start Time" name="start" value="{{ date(DATETIME_FORMAT) }}">
+              <input type="text" class="form-control" id="inputStartTime" placeholder="Start Time" name="start" value="{{ date(DATETIME_FORMAT) }}">
             </div>
             <div class="form-group">
               <label for="inputEndTime">End Time</label>
-              <input type="email" class="form-control" id="inputEndTime" placeholder="End Time" name="end" value="{{ date(DATETIME_FORMAT) }}">
+              <input type="text" class="form-control" id="inputEndTime" placeholder="End Time" name="end" value="{{ date(DATETIME_FORMAT) }}">
             </div>
           </div>
           <div class="modal-footer">

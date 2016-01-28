@@ -137,9 +137,7 @@ Route::group(['middleware' => ['web']], function () {
   });
 
   // Calendar
-  Route::get('/dashboard/calendar', function () {
-    return view('calendar');
-  });
+  Route::get('/dashboard/calendar', 'CalendarController@index');
 
   // ==== API Route ====
   // Prefix : /api/v1/
@@ -191,11 +189,7 @@ Route::group(['middleware' => ['web']], function () {
     });
 
     // Get event list
-    Route::get('/calendar/event', function () {
-      $return = '[{"id":"1","original_id":"1","title":"Test","start":"2016-01-01 00:00:00","end":"2016-01-01 06:30:00","allDay":false,"color":"#587ca3"}]';
-
-      return $return;
-    });
+    Route::get('/calendar/event', 'CalendarController@apiEventList');
 
     // Save an event
     Route::post('/calendar/save', 'CalendarController@save');
