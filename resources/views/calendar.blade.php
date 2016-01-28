@@ -64,7 +64,7 @@
                 <option selected="selected">No</option>
                 <option value="day">Day</option>
                 <option value="week">Week</option>
-                <option value="Month">Month</option>
+                <option value="month">Month</option>
               </select>
             </div>
             <div class="form-group">
