@@ -151,6 +151,23 @@
           @show
           <div class="row">
             <div class="col-xs-12">
+              @if (Session::has('message'))
+              <div class="callout callout-success">
+                <p>{{ Session::get('message') }}</p>
+              </div>
+              @endif
+
+              @if (count($errors) > 0)
+              <div class="callout callout-danger">
+                @foreach ($errors->all() as $error)
+                  <p>{{ $error }}</p>
+                @endforeach
+              </div>
+              @endif
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12">
               @section('content')
                 This is content
               @show
@@ -271,15 +288,15 @@
           <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div><!-- /.tab-pane -->
           <!-- Settings tab content -->
           <div class="tab-pane" id="control-sidebar-settings-tab">
-            <form method="post">
+            <form action="/dashboard/settings" method="post">
               <h3 class="control-sidebar-heading">General Settings</h3>
               <div class="form-group">
                 <label class="control-sidebar-subheading">
                   Change Password
                 </label>
                 <input class="form-control input-sm" type="password" placeholder="Old Password" name="old_password">
-                <input class="form-control input-sm" type="password" placeholder="New Password">
-                <input class="form-control input-sm" type="password" placeholder="Retype New Password">
+                <input class="form-control input-sm" type="password" placeholder="New Password" name="password">
+                <input class="form-control input-sm" type="password" placeholder="Retype New Password" name="password_confirmation">
               </div><!-- /.form-group -->
               <div class="form-group">
                 <button type="submit" class="btn btn-primary pull-right">Change</button>

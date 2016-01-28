@@ -104,8 +104,7 @@ Route::group(['middleware' => ['web']], function () {
   Route::get('/dashboard/client/delete/{id}', 'DashboardController@deleteClient');
   // Client Management(END)
 
-
-
+  // Forgot password
   Route::get('/forgot', function () {
     return view('forgot');
   });
@@ -113,6 +112,9 @@ Route::group(['middleware' => ['web']], function () {
   Route::get('/demo', function () {
       return view('demo');
   });
+
+  // Configuration setting
+  Route::post('/dashboard/settings', 'DashboardController@settings');
 
   // Login
   Route::get('/login', function () {

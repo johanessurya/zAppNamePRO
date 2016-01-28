@@ -212,4 +212,22 @@ class DashboardController extends Controller
 
      return redirect('/dashboard/client')->with('message', 'Delete client successful');
    }
+
+   public function settings(Request $request) {
+     $params = $request->all();
+
+     // Validation
+     $rules = [
+       'old_password' => 'required|alpha_num|min:7',
+       'password' => 'required|alpha_num|min:7|one_or_more_lower_char|one_or_more_upper_char|one_or_more_number| confirmed',
+       'password_confirmation' => 'required',
+     ];
+     $this->validate($request, $rules);
+
+     $row = User::find(Auth::user()->id);
+     $row->password = Hash::make($params['password']);
+     $row->save();
+
+     return back()->with('message', 'Password has been updated');
+   }
 }
