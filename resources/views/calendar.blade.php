@@ -13,20 +13,76 @@
 
 @section('popup-modal')
 <div class="example-modal">
-  <div id="user-edit" class="modal">
+  <div id="calendarModal" class="modal">
     <div class="modal-dialog">
       <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Modal Default</h4>
-        </div>
-        <div class="modal-body">
-          <p>One fine body&hellip;</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
+        <form id="quicksave-form-body">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Add Event</h4>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="inputCategory">Category</label>
+              <select class="form-control" id="inputCategory" name="category">
+                <option>option 1</option>
+                <option>option 2</option>
+                <option>option 3</option>
+                <option>option 4</option>
+                <option>option 5</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="inputTopic">Topic</label>
+              <select class="form-control" id="inputTopic" name="topic">
+                <option>option 1</option>
+                <option>option 2</option>
+                <option>option 3</option>
+                <option>option 4</option>
+                <option>option 5</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="inputTitle">Title</label>
+              <input type="text" class="form-control" id="inputTitle" placeholder="Title" name="title">
+            </div>
+            <div class="form-group">
+              <label for="inputDescription">Description</label>
+              <input type="text" class="form-control" id="inputDescription" placeholder="Description" name="description">
+            </div>
+            <div class="form-group">
+              <label for="inputClient">Client</label>
+              <input type="text" class="form-control" id="inputClient" placeholder="Client" name="client">
+            </div>
+            <div class="form-group">
+              <label for="inputNote">Note</label>
+              <input type="text" class="form-control" id="inputNote" placeholder="Note" name="note">
+            </div>
+            <div class="form-group">
+              <label for="inputColor">Color</label>
+              <input type="text" class="form-control" id="inputColor" placeholder="Color" name="color" value="#587ca3">
+            </div>
+            <div class="form-group">
+              <label for="inputAllDay">All Day</label>
+              <select class="form-control" id="inputAllDay" name="allDay">
+                <option value="0" selected="selected">No</option>
+                <option value="1">Yes</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="inputStartTime">Start Time</label>
+              <input type="email" class="form-control" id="inputStartTime" placeholder="Start Time" name="start" value="{{ date(DATETIME_FORMAT) }}">
+            </div>
+            <div class="form-group">
+              <label for="inputEndTime">End Time</label>
+              <input type="email" class="form-control" id="inputEndTime" placeholder="End Time" name="end" value="{{ date(DATETIME_FORMAT) }}">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+            <button id="add-event" type="button" class="btn btn-primary">Create</button>
+          </div>
+        </form>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->

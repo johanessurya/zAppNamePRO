@@ -170,6 +170,7 @@ Route::group(['middleware' => ['web']], function () {
       return json_encode($json);
     });
 
+    // Get client list
     Route::get('client', function (App\Client $client) {
       $rows = $client->where('user_id', Auth::user()->id)->get();
 
@@ -188,5 +189,15 @@ Route::group(['middleware' => ['web']], function () {
 
       return json_encode($json);
     });
+
+    // Get event list
+    Route::get('/calendar/event', function () {
+      $return = '[{"id":"1","original_id":"1","title":"Test","start":"2016-01-01 00:00:00","end":"2016-01-01 06:30:00","allDay":false,"color":"#587ca3"}]';
+
+      return $return;
+    });
+
+    // Save an event
+    Route::post('/calendar/save', 'CalendarController@save');
   });
 });
