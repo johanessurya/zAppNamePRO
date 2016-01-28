@@ -55,10 +55,6 @@
               <input type="text" class="form-control" id="inputNote" placeholder="Note" name="note">
             </div>
             <div class="form-group">
-              <label for="inputColor">Color</label>
-              <input type="text" class="form-control" id="inputColor" placeholder="Color" name="color" value="#587ca3">
-            </div>
-            <div class="form-group">
               <label for="inputRepeat">Repeat</label>
               <select class="form-control" id="inputRepeat" name="repeat_type">
                 <option selected="selected">No</option>
