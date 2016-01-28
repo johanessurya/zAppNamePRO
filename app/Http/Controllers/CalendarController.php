@@ -28,7 +28,7 @@ class CalendarController extends Controller
 
     public function save(Request $request) {
       $return = [
-        'success' => 1
+        'success' => 0
       ];
       $params = $request->all();
 
@@ -37,24 +37,23 @@ class CalendarController extends Controller
         'subCategoryID' => 'required',
         'title' => 'required',
         'description' => 'required',
-        'client' => '',
+        'client' => 'required',
         'note' => 'required',
         'color' => 'required',
-        'repeat' => 'required',
+        'repeat_type' => 'required',
         'allDay' => 'required',
         'start' => 'required',
         'end' => 'required'
       ];
       $validator = Validator::make($params, $rules);
 
-      if($validator->fails())
-        $return['success'] = 0;
+      if(!$validator->fails()) {
+        $return['success'] = 1;
 
-      $test = Calendar::createEvent($params);
+        $test = Calendar::createEvent($params);
+      }
 
-      var_dump($test); die('test');
-
-      return json_encode($return);
+      return response()->json($return);
     }
 
     public function apiEventList() {

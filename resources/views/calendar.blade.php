@@ -60,7 +60,7 @@
             </div>
             <div class="form-group">
               <label for="inputRepeat">Repeat</label>
-              <select class="form-control" id="inputRepeat" name="repeat">
+              <select class="form-control" id="inputRepeat" name="repeat_type">
                 <option selected="selected">No</option>
                 <option value="day">Day</option>
                 <option value="week">Week</option>

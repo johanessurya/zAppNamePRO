@@ -525,6 +525,7 @@
 						success: function(res)
 						{
 							$('.loadingDiv').hide();
+              console.log(res.success == 1, res);
 							if(res.success == 1)
 							{
 								$(opt.modalSelector).modal('hide');
