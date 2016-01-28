@@ -1,6 +1,6 @@
 @extends('layouts.default-admin')
 
-@section('title-h1', 'Client Management')
+@section('title-h1', 'Client List')
 
 @section('content')
   <div class="box-body">
@@ -64,10 +64,16 @@
               </select>
             </div>
           </div>
+          <div class="form-group">
+            <label for="inputActive" class="col-sm-2 control-label">Note</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="inputEmail" placeholder="Note" name="note" value="{{ old('note', $client['note']) }}">
+            </div>
+          </div>
         </div><!-- /.box-body -->
         <div class="box-footer">
           <button type="reset" class="btn btn-default">Reset</button>
-          <button type="submit" class="btn btn-info pull-right">Create</button>
+          <button type="submit" class="btn btn-info pull-right">Edit</button>
         </div><!-- /.box-footer -->
       </form>
     </div><!-- /.box -->

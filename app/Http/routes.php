@@ -178,7 +178,8 @@ Route::group(['middleware' => ['web']], function () {
           'clientCode' => $x->clientCode,
           'name' => $x->name,
           'gender' => $x->gender,
-          'type' => $x->type
+          'type' => $x->type,
+          'note' => $x->note
         );
       }
 

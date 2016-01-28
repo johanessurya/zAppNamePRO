@@ -66,11 +66,11 @@ $(function () {
               return $global.deleteEl.replace(':user_id', row.id);
             }
         },
-        {'data': 'user_id', 'searchable': true},
         {'data': 'clientCode', 'searchable': true},
         {'data': 'name', 'searchable': true},
         {'data': 'gender', 'searchable': true},
         {'data': 'type', 'searchable': true},
+        {'data': 'note', 'searchable': true},
       ],
       'columnDefs': [{
         targets: [0,1],

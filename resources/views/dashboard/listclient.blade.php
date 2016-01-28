@@ -1,6 +1,6 @@
 @extends('layouts.default-admin')
 
-@section('title-h1', 'Client Management')
+@section('title-h1', 'Client List')
 
 @section('content')
 <div class="box">
@@ -13,11 +13,11 @@
         <tr>
           <th></th>
           <th></th>
-          <th>User ID</th>
-          <th>Client Code</th>
+          <th>Code</th>
           <th>Name</th>
           <th>Gender</th>
           <th>Type</th>
+          <th>Note</th>
         </tr>
       </thead>
       <tbody>

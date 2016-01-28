@@ -162,7 +162,8 @@ class DashboardController extends Controller
        'clientCode' => 'required',
        'name' => 'required',
        'gender' => 'required|in:' . implode(',', config('steve.gender')),
-       'type' => 'required|in:' . implode(',', config('steve.client_type'))
+       'type' => 'required|in:' . implode(',', config('steve.client_type')),
+       'note' => 'required'
      ];
      $this->validate($request, $rules);
 
@@ -180,7 +181,8 @@ class DashboardController extends Controller
        'clientCode' => 'required',
        'name' => 'required',
        'gender' => 'required|in:' . implode(',', config('steve.gender')),
-       'type' => 'required|in:' . implode(',', config('steve.client_type'))
+       'type' => 'required|in:' . implode(',', config('steve.client_type')),
+       'note' => 'required'
      ];
      $this->validate($request, $rules);
 
@@ -193,6 +195,7 @@ class DashboardController extends Controller
        $row->name = $params['name'];
        $row->gender = $params['gender'];
        $row->type = $params['type'];
+       $row->note = $params['note'];
 
        // Save it
        $row->save();

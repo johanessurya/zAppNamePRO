@@ -13,7 +13,7 @@ class Client extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'clientCode', 'name', 'gender', 'type'
+        'user_id', 'clientCode', 'name', 'gender', 'type', 'note'
     ];
 
     protected $primaryKey = 'id';
