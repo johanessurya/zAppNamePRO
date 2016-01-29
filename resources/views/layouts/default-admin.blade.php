@@ -198,10 +198,10 @@
         <div class="tab-content">
           <!-- Layout option tab content -->
           <div class="tab-pane active" id="control-sidebar-theme-demo-options-tab">
-            <h3 class="control-sidebar-heading">Layout Options</h3>
+            <h3 class="control-sidebar-heading">Calendar Layout Options</h3>
             <form action="/dashboard/layoutsettings" method="post">
               <div class="form-group">
-                <label class="control-sidebar-subheading">Dt</label>
+                <label class="control-sidebar-subheading">Time Resolution</label>
                 <select class="form-control" name="dt">
                   @foreach (config('steve.dt') as $key=>$val)
                     <option value="{{ $val }}">{{ $val }}</option>
@@ -209,7 +209,7 @@
                 </select>
               </div>
               <div class="form-group">
-                <label class="control-sidebar-subheading">Day Start Time</label>
+                <label class="control-sidebar-subheading">Work Starts</label>
                 <select class="form-control" name="dayStartTime">
                   @foreach (config('steve.time_list') as $key=>$val)
                     <option value="{{ $key }}">{{ $val }}</option>
@@ -217,7 +217,7 @@
                 </select>
               </div>
               <div class="form-group">
-                <label class="control-sidebar-subheading">Day End Time</label>
+                <label class="control-sidebar-subheading">Work Ends</label>
                 <select class="form-control" name="dayEndTime">
                   @foreach (config('steve.time_list') as $key=>$val)
                     <option value="{{ $key }}">{{ $val }}</option>
@@ -225,7 +225,7 @@
                 </select>
               </div>
               <div class="form-group">
-                <label class="control-sidebar-subheading">Calendar Start Time</label>
+                <label class="control-sidebar-subheading">Calendar Starts</label>
                 <select class="form-control" name="calendarStartTime">
                   @foreach (config('steve.time_list') as $key=>$val)
                     <option value="{{ $key }}">{{ $val }}</option>
@@ -233,7 +233,7 @@
                 </select>
               </div>
               <div class="form-group">
-                <label class="control-sidebar-subheading">Calendar End Time</label>
+                <label class="control-sidebar-subheading">Calendar Ends</label>
                 <select class="form-control" name="calendarEndTime">
                   @foreach (config('steve.time_list') as $key=>$val)
                     <option value="{{ $key }}">{{ $val }}</option>

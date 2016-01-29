@@ -89,7 +89,7 @@
 
 				defaultView: 'agendaWeek', // basicWeek or basicDay or agendaWeek
 				aspectRatio: 1.35, // will make day boxes bigger
-				weekends: true, // show (true) the weekend or not (false)
+				weekends: false, // show (true) the weekend or not (false)
 				weekNumbers: false, // show week numbers (true) or not (false)
 				weekNumberCalculation: 'iso',
 
@@ -109,12 +109,13 @@
 
 				weekMode: 'fixed', // 'fixed', 'liquid', 'variable'
 
-				allDaySlot: true, // true, false
+				allDaySlot: false, // true, false
 				axisFormat: 'h(:mm)a',
 
 				slotDuration: '00:30:00',
-				minTime: '00:00:00',
-				maxTime: '24:00:00',
+				minTime: '07:00:00',
+				maxTime: '20:00:00',
+				slotDuration: '00:30:00', // Get from DT setting
 
 				slotEventOverlap: true,
 
