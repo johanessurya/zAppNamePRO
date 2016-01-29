@@ -55,6 +55,10 @@
 
             <div class="row">
               <div class="col-lg-4">
+                <label for="inputAllDay">All Day</label>
+                <input type="checkbox" id="inputAllDay" name="allDay" />
+              </div>
+              <div class="col-lg-4">
                 <label for="inputRepeat">Repeat</label>
                 <select class="form-control" id="inputRepeat" name="repeat_type">
                   <option value="" selected="selected">No</option>
@@ -71,10 +75,6 @@
                     <option value="{{ $i }}">{{ $i }}</option>
                   @endfor;
                 </select>
-              </div>
-              <div class="col-lg-4">
-                <label for="inputAllDay">All Day</label>
-                <input class="pull-right" type="checkbox" id="inputAllDay" name="allDay" />
               </div>
             </div>
           </div>
