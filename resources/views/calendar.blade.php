@@ -36,7 +36,7 @@
               <select class="form-control" id="inputTopic" name="subCategoryID">
               </select>
             </div>
-            <div class="form-group hide">
+            <div class="form-group" style="display: none">
               <label for="inputSubTopic">Sub Topic</label>
               <select class="form-control" id="inputSubTopic" name="subSubCategoryID">
               </select>

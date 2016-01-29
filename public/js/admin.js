@@ -79,6 +79,7 @@ $(function () {
       "order": [[ 2, "asc" ]]
   } );
 
+  // Load sub category option
   $('#inputCategory').change(function(){
     var _categoryId = $(this).val();
     console.log(this, _categoryId);
@@ -106,7 +107,41 @@ $(function () {
     });
   });
 
-  $('#inputSubCategory').change(function(){
+  $('#inputTopic').change(function(){
+    var _categoryId = $(this).val();
+    console.log(this, _categoryId);
+
+    $.get('/api/v1/subsubcategory/get/' + _categoryId).success(function(_res) {
+      var _el = '<option value=":value">:innerHTML</option>';
+      var _temp = null;
+      var _show = false;
+
+      _temp = _el.replace(':value', '');
+      _temp = _temp.replace(':innerHTML', '');
+
+      // Remove all option
+      var _select = $('#inputSubTopic')
+      _select.html('');
+
+      // Start add with blank option
+      _select.append(_temp);
+
+      for(i in _res) {
+        _show = true;
+        _temp = _el.replace(':value', _res[i].id);
+        _temp = _temp.replace(':innerHTML', _res[i].title);
+
+        _select.append(_temp);
+      }
+
+      if(_show) {
+        console.log('show');
+        $('#inputSubTopic').parent().show();
+      }else{
+        console.log('hide');
+        $('#inputSubTopic').parent().hide();
+      }
+    });
     console.log('Sub Category changed');
   });
 });

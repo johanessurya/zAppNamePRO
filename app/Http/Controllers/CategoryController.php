@@ -22,4 +22,10 @@ class CategoryController extends Controller
 
       return $rows;
     }
+
+    public function getSubSubCategory($categoryId) {
+      $rows = DB::table('subsubcategory')->where('category_id', $categoryId)->get();
+
+      return $rows;
+    }
 }

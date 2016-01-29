@@ -196,5 +196,8 @@ Route::group(['middleware' => ['web']], function () {
 
     // Get sub category list
     Route::get('/subcategory/get/{categoryId}', 'CategoryController@getSubCategory');
+
+    // Get sub category list
+    Route::get('/subsubcategory/get/{categoryId}', 'CategoryController@getSubSubCategory');
   });
 });
