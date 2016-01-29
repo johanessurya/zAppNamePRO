@@ -32,25 +32,22 @@ class CalendarController extends Controller
       ];
       $params = $request->all();
 
+      // Check all Day
+      $params['allDay'] = isset($params['allDay']) ? 1 : 0;
+
       $rules = [
         'category' => 'required',
         'subCategoryID' => 'required',
         'title' => 'required',
         'description' => 'required',
         'client' => 'required',
-        'allDay' => 'required'
+        'start' => 'required',
+        'end' => 'required'
       ];
       $validator = Validator::make($params, $rules);
 
       if(!$validator->fails()) {
         $return['success'] = 1;
-
-        // Set start, and field with user start, and
-        $dateTime = new DateTime();
-        $params['start'] = $dateTime->format(DATETIME_FORMAT);
-        $dateTime->modify('+1 hour');
-
-        $params['end'] = $dateTime->format(DATETIME_FORMAT);
 
         $test = Calendar::createEvent($params);
       }

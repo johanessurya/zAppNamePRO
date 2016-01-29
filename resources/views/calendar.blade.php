@@ -17,6 +17,8 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <form id="quicksave-form-body">
+          <input id="start" type="hidden" name="start">
+          <input id="end" type="hidden" name="end">
           <div class="modal-header remove-border-bottom">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <h4 class="modal-title"></h4>

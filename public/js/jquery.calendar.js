@@ -1,3 +1,10 @@
+$scope = {
+	calendar: {
+		DATETIME_FORMAT: 'MM/DD/YY HH:mm',
+		DATE_FORMAT: 'MM/DD/YY'
+	}
+};
+
 /*
  *	jQuery FullCalendar Extendable Plugin
  *	An Ajax (PHP - Mysql - jquery) script that extends the functionalities of the fullcalendar plugin
@@ -425,7 +432,7 @@
 
 				// Function to quickModal
 				calendar.quickModal = function(start, end, allDay)
-				{
+				{console.log(start.format('MM mm'), moment(start));
 					document.getElementById("quicksave-form-body").reset();
 
 					var start_factor = moment(start).format('YYYY-MM-DD');
@@ -444,6 +451,10 @@
 					$('#startTime').val(startTime_factor);
 					$('#endDate').val(end_factor);
 					$('#endTime').val(endTime_factor);
+
+					// My hidden fields
+					$('#start').val(moment(start).format($scope.calendar.DATETIME_FORMAT));
+					$('#end').val(moment(end).format($scope.calendar.DATETIME_FORMAT));
 
 					$('#details-body').hide();
 					$('#edit-form-body').hide();
