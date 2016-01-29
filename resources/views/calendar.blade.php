@@ -60,7 +60,7 @@
               </select>
             </div>
             <div class="form-group">
-              <label for="inputRepeatN">How Many Repeat?</label>
+              <label for="inputRepeatN">How many times?</label>
               <select class="form-control" id="inputRepeatN" name="repeatN">
                 <option value="1" selected="selected">1</option>
                 @for ($i = 2; $i <= 40; $i++)
