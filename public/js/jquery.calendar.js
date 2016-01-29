@@ -109,6 +109,7 @@
 
 				weekMode: 'fixed', // 'fixed', 'liquid', 'variable'
 
+				allDayText: 'all-day',
 				allDaySlot: true, // true, false
 				axisFormat: 'h(:mm)a',
 
