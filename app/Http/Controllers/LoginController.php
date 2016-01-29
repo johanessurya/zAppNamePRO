@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 use Mail;
 use Hash;
 use Auth;
+use Session;
+use DB;
+
+use App\Category;
 use App\User;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -27,6 +31,10 @@ class LoginController extends Controller
       );
       if(Auth::attempt($user)) {
         User::updateLogin(Auth::user()->id);
+
+        // Storing session
+        Session::put('category', $this->getCategoryTree());
+
         return redirect()->intended('/dashboard');
       } else {
         return redirect('/login')->with('message', 'Incorrect username and password');
@@ -101,5 +109,38 @@ class LoginController extends Controller
       Auth::logout();
 
       return redirect('/login')->with('message', 'Sign out successful');
+    }
+
+    private function getCategoryTree() {
+      $return = [
+        // Get all categories
+        'category' => Category::all()->toArray()
+      ];
+
+      // Get sub category
+      if(!empty($return['category'])) {
+        for($i = 0; $i < count($return['category']); $i++) {
+          $x = $return['category'][$i];
+          $subCategory = DB::table('subcategory')->where('category_id', $x['id'])->get();
+          $subCategory = json_decode(json_encode($subCategory), true);
+
+          if(!empty($subCategory)) {
+            $return['category'][$i]['subcategory'] = $subCategory;
+
+            for($j = 0; $j < count($return['category'][$i]['subcategory']); $j++) {
+              $x = $return['category'][$i]['subcategory'][$j];
+
+              $subsubCategory = DB::table('subsubcategory')->where('category_id', $x['id'])->get();
+              $subsubCategory = json_decode(json_encode($subsubCategory), true);
+
+              if(!empty($subsubCategory)) {
+                $return['category'][$i]['subcategory'][$j]['subsubcategory'] = $subsubCategory;
+              }
+            }
+          }
+        }
+      }
+
+      return $return;
     }
 }

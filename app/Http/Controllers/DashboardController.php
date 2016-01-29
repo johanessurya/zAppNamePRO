@@ -8,6 +8,9 @@ use DateTime;
 use Hash;
 use Session;
 use Auth;
+
+use App\Category;
+
 use App\User;
 use App\Client;
 use App\Company;
