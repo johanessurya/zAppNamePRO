@@ -39,6 +39,14 @@
               </select>
             </div>
             <div class="form-group">
+              <label for="inputSubTopic">Sub Topic</label>
+              <select class="form-control" id="inputSubTopic" name="subSubCategoryID">
+                @foreach($subCategories as $x)
+                  <option value="{{ $x['id'] }}">{{ $x['title'] }}</option>
+                @endforeach
+              </select>
+            </div>
+            <div class="form-group">
               <label for="inputTitle">Title</label>
               <input type="text" class="form-control" id="inputTitle" placeholder="Title" name="title">
             </div>
@@ -55,8 +63,8 @@
 
             <div class="row">
               <div class="col-lg-4">
-                <label for="inputAllDay">All Day</label>
-                <input type="checkbox" id="inputAllDay" name="allDay" />
+                  <label for="inputAllDay">All Day</label>
+                  <input class="display-block" type="checkbox" id="inputAllDay" name="allDay" />
               </div>
               <div class="col-lg-4">
                 <label for="inputRepeat">Repeat</label>

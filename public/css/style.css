@@ -1,3 +1,7 @@
 .remove-border-bottom {
   border-bottom-color:#ffffff;
 }
+
+.display-block {
+  display: block;
+}
