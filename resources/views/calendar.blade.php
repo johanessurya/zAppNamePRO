@@ -54,9 +54,9 @@
               <label for="inputRepeat">Repeat</label>
               <select class="form-control" id="inputRepeat" name="repeat_type">
                 <option value="" selected="selected">No</option>
-                <option value="day">Day</option>
-                <option value="week">Week</option>
-                <option value="month">Month</option>
+                <option value="day">Daily</option>
+                <option value="week">Weekly</option>
+                <option value="month">Monthly</option>
               </select>
             </div>
             <div class="form-group">
