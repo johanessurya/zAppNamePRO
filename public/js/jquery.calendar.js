@@ -109,7 +109,7 @@
 
 				weekMode: 'fixed', // 'fixed', 'liquid', 'variable'
 
-				allDaySlot: false, // true, false
+				allDaySlot: true, // true, false
 				axisFormat: 'h(:mm)a',
 
 				slotDuration: '00:30:00',
