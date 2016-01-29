@@ -48,12 +48,12 @@
             </div>
             <div class="form-group">
               <label for="inputNote">Note</label>
-              <input type="text" class="form-control" id="inputNote" placeholder="Note" name="note">
+              <input type="text" class="form-control" id="inputNote" placeholder="Note" name="description">
             </div>
             <div class="form-group">
               <label for="inputRepeat">Repeat</label>
               <select class="form-control" id="inputRepeat" name="repeat_type">
-                <option selected="selected">No</option>
+                <option value="" selected="selected">No</option>
                 <option value="day">Day</option>
                 <option value="week">Week</option>
                 <option value="month">Month</option>

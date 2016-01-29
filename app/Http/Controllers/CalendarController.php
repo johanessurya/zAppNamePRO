@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
+use Auth;
+use DateTime;
 use App\Calendar;
 use App\Category;
 use App\SubCategory;
@@ -38,17 +40,19 @@ class CalendarController extends Controller
         'title' => 'required',
         'description' => 'required',
         'client' => 'required',
-        'note' => 'required',
-        'color' => 'required',
-        'repeat_type' => 'required',
-        'allDay' => 'required',
-        'start' => 'required',
-        'end' => 'required'
+        'allDay' => 'required'
       ];
       $validator = Validator::make($params, $rules);
 
       if(!$validator->fails()) {
         $return['success'] = 1;
+
+        // Set start, and field with user start, and
+        $dateTime = new DateTime();
+        $params['start'] = $dateTime->format(DATETIME_FORMAT);
+        $dateTime->modify('+1 hour');
+
+        $params['end'] = $dateTime->format(DATETIME_FORMAT);
 
         $test = Calendar::createEvent($params);
       }
