@@ -6,12 +6,20 @@ use Illuminate\Http\Request;
 
 use DB;
 use Auth;
+use Session;
+use Response;
 use App\Category;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 class CategoryController extends Controller
 {
+    public function getTree() {
+        $category = Session::get('category');
+
+        return Response::json($category);
+    }
+
     /*
     Get category list
     - Show category with no company ID

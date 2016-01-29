@@ -114,7 +114,7 @@ class LoginController extends Controller
     private function getCategoryTree() {
       $return = [
         // Get all categories
-        'category' => Category::all()->toArray()
+        'category' => Category::getByUserId(Auth::user())->get()->toArray()
       ];
 
       // Get sub category

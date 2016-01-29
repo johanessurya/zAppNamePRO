@@ -197,6 +197,9 @@ Route::group(['middleware' => ['web']], function () {
     // Save an event
     Route::post('/calendar/save', 'CalendarController@save');
 
+    // Get category tree
+    Route::get('/category/get', 'CategoryController@getTree');
+
     // Get sub category list
     Route::get('/subcategory/get/{categoryId}', 'CategoryController@getSubCategory');
 

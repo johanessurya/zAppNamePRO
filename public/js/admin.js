@@ -1,7 +1,16 @@
 $global = {
-
 }
 $(function () {
+  // Load category tree
+  $.get('/api/v1/category/get').success(function(_res) {
+    $global.category = _res.category;
+
+    // Init category. Select first item.
+    $('#inputCategory').trigger('change');
+
+    console.log('Category => ', $global.category);
+  });
+
   // ======= PopUp Modal =========
   $('button[data-dismiss="modal"]').click(function() {
     closeModal('.modal');
@@ -84,72 +93,78 @@ $(function () {
     var _categoryId = $(this).val();
     console.log(this, _categoryId);
 
-    $.get('/api/v1/subcategory/get/' + _categoryId).success(function(_res) {
-      var _el = '<option value=":value">:innerHTML</option>';
-      var _temp = null;
+    var _index = $('#inputCategory').prop('selectedIndex');
+    var _res = $global.category[_index].subcategory;
+    var _el = '<option value=":value">:innerHTML</option>';
+    var _temp = null;
 
-      _temp = _el.replace(':value', '');
-      _temp = _temp.replace(':innerHTML', '');
+    _temp = _el.replace(':value', '');
+    _temp = _temp.replace(':innerHTML', '');
 
-      // Remove all option
-      var _select = $('#inputTopic')
-      _select.html('');
+    // Remove all option
+    var _select = $('#inputTopic')
+    _select.html('');
 
-      // Start add with blank option
-      // _select.append(_temp);
+    // Start add with blank option
+    // _select.append(_temp);
 
-      for(i in _res) {
-        _temp = _el.replace(':value', _res[i].id);
-        _temp = _temp.replace(':innerHTML', _res[i].title);
+    for(i in _res) {
+      _temp = _el.replace(':value', _res[i].id);
+      _temp = _temp.replace(':innerHTML', _res[i].title);
 
-        _select.append(_temp);
-      }
+      _select.append(_temp);
+    }
 
-      // Init category. Select first item.
-      $('#inputTopic').trigger('change');
-    });
+    // Init category. Select first item.
+    $('#inputTopic').trigger('change');
   });
 
   $('#inputTopic').change(function(){
     var _categoryId = $(this).val();
-    console.log(this, _categoryId);
 
-    $.get('/api/v1/subsubcategory/get/' + _categoryId).success(function(_res) {
-      var _el = '<option value=":value">:innerHTML</option>';
-      var _temp = null;
-      var _show = false;
+    var _index = $('#inputCategory').prop('selectedIndex');
+    var _index2 = $('#inputTopic').prop('selectedIndex');
 
-      _temp = _el.replace(':value', '');
-      _temp = _temp.replace(':innerHTML', '');
+    var _category = $global.category[_index].subcategory[_index2];
 
-      // Remove all option
-      var _select = $('#inputSubTopic')
-      _select.html('');
+    var _res = _category.subsubcategory;
 
-      // Start add with blank option
-      // _select.append(_temp);
+    console.log('category', _category, _res);
 
-      for(i in _res) {
-        _show = true;
-        _temp = _el.replace(':value', _res[i].id);
-        _temp = _temp.replace(':innerHTML', _res[i].title);
+    // console.log('input topic', _index, _index2, _res);
 
-        _select.append(_temp);
-      }
+    var _el = '<option value=":value">:innerHTML</option>';
+    var _temp = null;
+    var _show = false;
 
-      if(_show) {
-        console.log('show');
-        $('#inputSubTopic').parent().show();
-      }else{
-        console.log('hide');
-        $('#inputSubTopic').parent().hide();
-      }
-    });
+    _temp = _el.replace(':value', '');
+    _temp = _temp.replace(':innerHTML', '');
+
+    // Remove all option
+    var _select = $('#inputSubTopic')
+    _select.html('');
+
+    // Start add with blank option
+    // _select.append(_temp);
+
+    for(i in _res) {
+      _show = true;
+      _temp = _el.replace(':value', _res[i].id);
+      _temp = _temp.replace(':innerHTML', _res[i].title);
+
+      _select.append(_temp);
+    }
+
+    if(_show) {
+      console.log('show');
+      $('#inputSubTopic').parent().show();
+    }else{
+      console.log('hide');
+      $('#inputSubTopic').parent().hide();
+    }
+
     console.log('Sub Category changed');
   });
-
-  // Init category. Select first item.
-  $('#inputCategory').trigger('change');
 });
 
 function showModal(selector) {
