@@ -496,7 +496,7 @@
             // var _name = 'title';
             var _name = 'description';
 
-						if($('input[name=' + _name + ']').val().length == 0)
+						if($('textarea[name=' + _name + ']').val().length == 0)
 						{
 							alert(opt.emptyForm);
 						} else {

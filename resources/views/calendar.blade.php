@@ -50,27 +50,32 @@
               <label for="inputNote">Note</label>
               <textarea class="form-control" id="inputNote" rows="3" placeholder="Note" name="description"></textarea>
             </div>
-            <div class="form-group">
-              <label for="inputRepeat">Repeat</label>
-              <select class="form-control" id="inputRepeat" name="repeat_type">
-                <option value="" selected="selected">No</option>
-                <option value="day">Daily</option>
-                <option value="week">Weekly</option>
-                <option value="month">Monthly</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="inputRepeatN">How many times?</label>
-              <select class="form-control" id="inputRepeatN" name="repeatN">
-                <option value="1" selected="selected">1</option>
-                @for ($i = 2; $i <= 40; $i++)
-                  <option value="{{ $i }}">{{ $i }}</option>
-                @endfor;
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="inputAllDay">All Day</label>
-              <input class="pull-right" type="checkbox" id="inputAllDay" name="allDay" />
+
+            <hr width="80%">
+
+            <div class="row">
+              <div class="col-lg-4">
+                <label for="inputRepeat">Repeat</label>
+                <select class="form-control" id="inputRepeat" name="repeat_type">
+                  <option value="" selected="selected">No</option>
+                  <option value="day">Daily</option>
+                  <option value="week">Weekly</option>
+                  <option value="month">Monthly</option>
+                </select>
+              </div>
+              <div class="col-lg-4">
+                <label for="inputRepeatN">How many times?</label>
+                <select class="form-control" id="inputRepeatN" name="repeatN">
+                  <option value="1" selected="selected">1</option>
+                  @for ($i = 2; $i <= 40; $i++)
+                    <option value="{{ $i }}">{{ $i }}</option>
+                  @endfor;
+                </select>
+              </div>
+              <div class="col-lg-4">
+                <label for="inputAllDay">All Day</label>
+                <input class="pull-right" type="checkbox" id="inputAllDay" name="allDay" />
+              </div>
             </div>
           </div>
           <div class="modal-footer">
