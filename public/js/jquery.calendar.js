@@ -87,7 +87,7 @@
 
 				version: 'modal',
 
-				defaultView: 'month', // basicWeek or basicDay or agendaWeek
+				defaultView: 'agendaWeek', // basicWeek or basicDay or agendaWeek
 				aspectRatio: 1.35, // will make day boxes bigger
 				weekends: true, // show (true) the weekend or not (false)
 				weekNumbers: false, // show week numbers (true) or not (false)
