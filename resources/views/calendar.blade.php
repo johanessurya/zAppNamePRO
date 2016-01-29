@@ -19,7 +19,7 @@
         <form id="quicksave-form-body">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">Add Event</h4>
+            <h4 class="modal-title"></h4>
           </div>
           <div class="modal-body">
             <div class="form-group">
@@ -41,10 +41,6 @@
             <div class="form-group">
               <label for="inputTitle">Title</label>
               <input type="text" class="form-control" id="inputTitle" placeholder="Title" name="title">
-            </div>
-            <div class="form-group">
-              <label for="inputDescription">Description</label>
-              <input type="text" class="form-control" id="inputDescription" placeholder="Description" name="description">
             </div>
             <div class="form-group">
               <label for="inputClient">Client</label>
@@ -78,14 +74,6 @@
                 <option value="0" selected="selected">No</option>
                 <option value="1">Yes</option>
               </select>
-            </div>
-            <div class="form-group">
-              <label for="inputStartTime">Start Time</label>
-              <input type="text" class="form-control" id="inputStartTime" placeholder="Start Time" name="start" value="{{ date(DATETIME_FORMAT) }}">
-            </div>
-            <div class="form-group">
-              <label for="inputEndTime">End Time</label>
-              <input type="text" class="form-control" id="inputEndTime" placeholder="End Time" name="end" value="{{ date(DATETIME_FORMAT) }}">
             </div>
           </div>
           <div class="modal-footer">
