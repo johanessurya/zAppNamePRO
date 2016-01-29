@@ -9,3 +9,7 @@
   margin-right: auto;
   max-width: 600px;
 }
+
+.remove-border-bottom {
+  border-bottom-color:#ffffff;
+}
