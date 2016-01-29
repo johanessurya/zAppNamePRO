@@ -96,7 +96,7 @@ $(function () {
       _select.html('');
 
       // Start add with blank option
-      _select.append(_temp);
+      // _select.append(_temp);
 
       for(i in _res) {
         _temp = _el.replace(':value', _res[i].id);
@@ -104,6 +104,9 @@ $(function () {
 
         _select.append(_temp);
       }
+
+      // Init category. Select first item.
+      $('#inputTopic').trigger('change');
     });
   });
 
@@ -124,7 +127,7 @@ $(function () {
       _select.html('');
 
       // Start add with blank option
-      _select.append(_temp);
+      // _select.append(_temp);
 
       for(i in _res) {
         _show = true;
@@ -144,6 +147,9 @@ $(function () {
     });
     console.log('Sub Category changed');
   });
+
+  // Init category. Select first item.
+  $('#inputCategory').trigger('change');
 });
 
 function showModal(selector) {

@@ -27,7 +27,6 @@
             <div class="form-group">
               <label for="inputCategory">Category</label>
               <select class="form-control" id="inputCategory" name="category">
-                <option value="" selected="selected"></option>
                 @foreach($categories as $x)
                   <option value="{{ $x['id'] }}">{{ $x['title'] }}</option>
                 @endforeach

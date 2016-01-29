@@ -41,14 +41,14 @@ $scope = {
 
 				token: '',
 
-				ajaxJsonFetch: '/api/v1/calendar/event?'+token,
+				ajaxJsonFetch: '/api/v1/calendar/event',
 				ajaxUiUpdate: 'includes/cal_update.php?'+token,
-				ajaxEventQuickSave: '/api/v1/calendar/save?'+token,
+				ajaxEventQuickSave: '/api/v1/calendar/save',
 				ajaxEventDelete: 'includes/cal_delete.php?'+token,
 				ajaxEventEdit: 'includes/cal_edit_update.php?'+token,
 				ajaxEventExport: 'includes/cal_export.php?'+token,
 				ajaxRepeatCheck: 'includes/cal_check_rep_events.php?'+token,
-				ajaxRetrieveDescription: 'includes/cal_description.php?'+token,
+				ajaxRetrieveDescription: '/api/v1/calendar/event', // Get an event detail
 				ajaxImport: 'importer.php?'+token,
 
 				modalSelector: '#calendarModal',
@@ -347,7 +347,8 @@ $scope = {
 						success: function(json_enc)
 						{
 							 $('.loadingDiv').hide();
-							 var json = $.parseJSON(json_enc);
+							 // var json = $.parseJSON(json_enc);
+							 var json = json_enc;
 							 var dsc = json.description.replace('$null', '');
 							 var color = json.color.replace('$null', '');
 							 var cat = json.category.replace('$null', '');

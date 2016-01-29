@@ -26,6 +26,19 @@ class CalendarController extends Controller
       return view('calendar', $data);
     }
 
+    // Get an event
+    public function get(Request $request) {
+      $params = $request->all();
+      $event = Calendar::find($params['id']);
+      $event = $event->toArray();
+
+      $row = Category::find($event['categoryID']);
+
+      var_dump($event->toArray()); die('get');
+
+      return $event;
+    }
+
     public function save(Request $request) {
       $return = [
         'success' => 0

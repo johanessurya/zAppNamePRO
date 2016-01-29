@@ -191,6 +191,9 @@ Route::group(['middleware' => ['web']], function () {
     // Get event list
     Route::get('/calendar/event', 'CalendarController@apiEventList');
 
+    // Get an event
+    Route::post('/calendar/event', 'CalendarController@get');
+
     // Save an event
     Route::post('/calendar/save', 'CalendarController@save');
 
