@@ -48,7 +48,7 @@
             </div>
             <div class="form-group">
               <label for="inputNote">Note</label>
-              <input type="text" class="form-control" id="inputNote" placeholder="Note" name="description">
+              <textarea class="form-control" id="inputNote" rows="3" placeholder="Note" name="description"></textarea>
             </div>
             <div class="form-group">
               <label for="inputRepeat">Repeat</label>
