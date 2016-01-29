@@ -70,10 +70,7 @@
             </div>
             <div class="form-group">
               <label for="inputAllDay">All Day</label>
-              <select class="form-control" id="inputAllDay" name="allDay">
-                <option value="0" selected="selected">No</option>
-                <option value="1">Yes</option>
-              </select>
+              <input class="pull-right" type="checkbox" id="inputAllDay" name="allDay" />
             </div>
           </div>
           <div class="modal-footer">
