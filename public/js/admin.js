@@ -78,6 +78,37 @@ $(function () {
       }],
       "order": [[ 2, "asc" ]]
   } );
+
+  $('#inputCategory').change(function(){
+    var _categoryId = $(this).val();
+    console.log(this, _categoryId);
+
+    $.get('/api/v1/subcategory/get/' + _categoryId).success(function(_res) {
+      var _el = '<option value=":value">:innerHTML</option>';
+      var _temp = null;
+
+      _temp = _el.replace(':value', '');
+      _temp = _temp.replace(':innerHTML', '');
+
+      // Remove all option
+      var _select = $('#inputTopic')
+      _select.html('');
+
+      // Start add with blank option
+      _select.append(_temp);
+
+      for(i in _res) {
+        _temp = _el.replace(':value', _res[i].id);
+        _temp = _temp.replace(':innerHTML', _res[i].title);
+
+        _select.append(_temp);
+      }
+    });
+  });
+
+  $('#inputSubCategory').change(function(){
+    console.log('Sub Category changed');
+  });
 });
 
 function showModal(selector) {

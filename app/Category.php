@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use User;
+
 class Category extends Model
 {
   /**
@@ -19,4 +21,12 @@ class Category extends Model
   protected $table = 'category';
 
   public $timestamps = false;
+
+  public static function getByUserId($user) {
+    $return = self::orWhere('CompanyID', null)
+      ->orWhere('CompanyID', 0)
+      ->orWhere('CompanyID', $user->CompanyiD);
+
+    return $return;
+  }
 }

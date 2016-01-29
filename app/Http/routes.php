@@ -193,5 +193,8 @@ Route::group(['middleware' => ['web']], function () {
 
     // Save an event
     Route::post('/calendar/save', 'CalendarController@save');
+
+    // Get sub category list
+    Route::get('/subcategory/get/{categoryId}', 'CategoryController@getSubCategory');
   });
 });

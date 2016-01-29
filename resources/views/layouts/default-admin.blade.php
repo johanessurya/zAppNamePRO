@@ -347,7 +347,7 @@
                 <label class="control-sidebar-subheading">
                   Change Password
                 </label>
-                <input class="form-control input-sm" type="password" placeholder="Old Password" name="old_password">
+                <input class="form-control input-sm" type="password" placeholder="Current Password" name="old_password">
                 <input class="form-control input-sm" type="password" placeholder="New Password" name="password">
                 <input class="form-control input-sm" type="password" placeholder="Retype New Password" name="password_confirmation">
               </div><!-- /.form-group -->

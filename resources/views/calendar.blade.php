@@ -25,6 +25,7 @@
             <div class="form-group">
               <label for="inputCategory">Category</label>
               <select class="form-control" id="inputCategory" name="category">
+                <option value="" selected="selected"></option>
                 @foreach($categories as $x)
                   <option value="{{ $x['id'] }}">{{ $x['title'] }}</option>
                 @endforeach
@@ -33,17 +34,11 @@
             <div class="form-group">
               <label for="inputTopic">Topic</label>
               <select class="form-control" id="inputTopic" name="subCategoryID">
-                @foreach($subCategories as $x)
-                  <option value="{{ $x['id'] }}">{{ $x['title'] }}</option>
-                @endforeach
               </select>
             </div>
-            <div class="form-group">
+            <div class="form-group hide">
               <label for="inputSubTopic">Sub Topic</label>
               <select class="form-control" id="inputSubTopic" name="subSubCategoryID">
-                @foreach($subCategories as $x)
-                  <option value="{{ $x['id'] }}">{{ $x['title'] }}</option>
-                @endforeach
               </select>
             </div>
             <div class="form-group">

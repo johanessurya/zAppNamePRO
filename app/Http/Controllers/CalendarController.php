@@ -18,12 +18,10 @@ use App\Http\Controllers\Controller;
 class CalendarController extends Controller
 {
     public function index() {
-      $categories = Category::where('CompanyID', 0)->get();
-      $subCategories = SubCategory::all();
+      $categories = Category::getByUserId(Auth::user())->get();
 
       $data = [
         'categories' => $categories,
-        'subCategories' => $subCategories
       ];
       return view('calendar', $data);
     }
