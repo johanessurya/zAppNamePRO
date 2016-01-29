@@ -39,9 +39,9 @@
         <!-- Logo -->
         <a href="/dashboard" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
-          <span class="logo-mini"><img src="{{ asset('img/z-logo-50x50.png')}}" /></span>
+          <span class="logo-mini"><img src="{{ asset('img/z-logo-50x50.png')}}" height="30" width="30" /></span>
           <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg"><img src="{{ asset('img/z-logo-50x50.png')}}" /><b>Log</b>PRO</span>
+          <span class="logo-lg"><img src="{{ asset('img/z-logo-50x50.png')}}" height="30" width="30" /><b>Log</b>PRO</span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
