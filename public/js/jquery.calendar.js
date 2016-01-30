@@ -433,7 +433,7 @@ $scope = {
 
 				// Function to quickModal
 				calendar.quickModal = function(start, end, allDay)
-				{console.log(start.format('MM mm'), moment(start));
+				{
 					document.getElementById("quicksave-form-body").reset();
 
 					var start_factor = moment(start).format('YYYY-MM-DD');
@@ -456,6 +456,8 @@ $scope = {
 					// My hidden fields
 					$('#start').val(moment(start).format($scope.calendar.DATETIME_FORMAT));
 					$('#end').val(moment(end).format($scope.calendar.DATETIME_FORMAT));
+					console.log(start, end, allDay);
+					$('#allDay').prop('checked', allDay);
 
 					$('#details-body').hide();
 					$('#edit-form-body').hide();
@@ -507,7 +509,7 @@ $scope = {
 					// add action
 					$('#add-event').off().on('click', function(e) {
             // var _name = 'title';
-            var _name = 'description';
+            var _name = 'title';
 
 						if($('textarea[name=' + _name + ']').val().length == 0)
 						{

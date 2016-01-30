@@ -58,7 +58,7 @@
             <hr width="80%">
 
             <div class="row">
-              <div class="col-lg-4">
+              <div class="col-lg-4 hide">
                   <label for="inputAllDay">All Day</label>
                   <input class="display-block" type="checkbox" id="inputAllDay" name="allDay" />
               </div>
