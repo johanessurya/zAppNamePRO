@@ -456,8 +456,9 @@ $scope = {
 					// My hidden fields
 					$('#start').val(moment(start).format($scope.calendar.DATETIME_FORMAT));
 					$('#end').val(moment(end).format($scope.calendar.DATETIME_FORMAT));
-					console.log(start, end, allDay);
-					$('#allDay').prop('checked', allDay);
+
+					var _allDay = allDay.target.className == 'fc-content-skeleton' ? true : false;
+					$('#inputAllDay').prop('checked', _allDay);
 
 					$('#details-body').hide();
 					$('#edit-form-body').hide();
@@ -511,7 +512,7 @@ $scope = {
             // var _name = 'title';
             var _name = 'title';
 
-						if($('textarea[name=' + _name + ']').val().length == 0)
+						if($('input[name=' + _name + ']').val().length == 0)
 						{
 							alert(opt.emptyForm);
 						} else {

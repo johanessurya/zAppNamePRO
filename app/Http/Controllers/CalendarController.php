@@ -49,7 +49,7 @@ class CalendarController extends Controller
       $params['allDay'] = isset($params['allDay']) ? 1 : 0;
 
       $rules = [
-        'category' => 'required',
+        'categoryID' => 'required',
         'subCategoryID' => 'required',
         'title' => 'required',
         'description' => 'required',
@@ -75,12 +75,13 @@ class CalendarController extends Controller
       foreach($rows as $x){
         $allDay = $x->allDay ? true : false;
         $repeatId = $x->repeat_id == null ? $x->id : $x->repeat_id;
+        $category = Category::find($x->categoryID);
 
         $return[] = [
           'id' => $repeatId, // I don't know why, but just follow it. See calendar.php in fullcal project demo
           'original_id' => $x->id,
           'allDay' => $allDay,
-          'color' => '#587ca3',
+          'color' => $category->color,
           'start' => MyModel::revDateTime($x->start),
           'end' => MyModel::revDateTime($x->end),
           'title' => $x->title

@@ -5,3 +5,7 @@
 .display-block {
   display: block;
 }
+
+.ui-widget-content{
+  z-index: 9999;
+}

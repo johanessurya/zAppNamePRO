@@ -11,6 +11,59 @@ $(function () {
     console.log('Category => ', $global.category);
   });
 
+  // Autocomplate Client
+  var availableTags = [
+      "ActionScript",
+      "AppleScript",
+      "Asp",
+      "BASIC",
+      "C",
+      "C++",
+      "Clojure",
+      "COBOL",
+      "ColdFusion",
+      "Erlang",
+      "Fortran",
+      "Groovy",
+      "Haskell",
+      "Java",
+      "JavaScript",
+      "Lisp",
+      "Perl",
+      "PHP",
+      "Python",
+      "Ruby",
+      "Scala",
+      "Scheme"
+    ];
+  $('#inputClient').autocomplete({
+    delay: 0,
+    source: availableTags,
+    change: function(event, ui) {
+      var $scope = {};
+      if(ui.item == null) {
+        console.log("Item doesn't exists");
+
+        // If item doesn't exists
+        $scope.confirm = confirm("Should I add this new client?");
+
+        if($scope.confirm == true) {
+          console.log('Ok pressed')
+          // Ok pressed
+          // Add hidden input clientID to this value
+        } else {
+          console.log('Cancel pressed');
+          // Cancel pressed
+          // Remove textbox
+        }
+      } else {
+        // if user selected an item
+        console.log('selected item');
+      }
+      console.log('on change', event, ui);
+    }
+  });
+
   // ======= PopUp Modal =========
   $('button[data-dismiss="modal"]').click(function() {
     closeModal('.modal');

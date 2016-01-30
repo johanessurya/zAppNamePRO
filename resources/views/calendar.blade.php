@@ -19,6 +19,7 @@
         <form id="quicksave-form-body">
           <input id="start" type="hidden" name="start">
           <input id="end" type="hidden" name="end">
+          <input type="hidden" name="clientID">
           <div class="modal-header remove-border-bottom">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <h4 class="modal-title"></h4>
@@ -26,9 +27,9 @@
           <div class="modal-body">
             <div class="form-group">
               <label for="inputCategory">Category</label>
-              <select class="form-control" id="inputCategory" name="category">
+              <select class="form-control" id="inputCategory" name="categoryID">
                 @foreach($categories as $x)
-                  <option value="{{ $x['id'] }}">{{ $x['title'] }}</option>
+                  <option value="{{ $x['id'] }}" style="color: {{ $x['color'] }}">{{ $x['title'] }}</option>
                 @endforeach
               </select>
             </div>
