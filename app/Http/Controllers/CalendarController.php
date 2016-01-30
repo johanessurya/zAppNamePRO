@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Auth;
 use DateTime;
 use App\Calendar;
+use App\Client;
 use App\Category;
 use App\SubCategory;
 use App\SubSubCategory;
@@ -89,5 +90,11 @@ class CalendarController extends Controller
       }
 
       return $return;
+    }
+
+    public function getClient() {
+      $rows = Client::all();
+
+      return $rows;
     }
 }

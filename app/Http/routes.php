@@ -205,5 +205,8 @@ Route::group(['middleware' => ['web']], function () {
 
     // Get sub category list
     Route::get('/subsubcategory/get/{categoryId}', 'CategoryController@getSubSubCategory');
+
+    // Get related client list
+    Route::get('/client/get', 'CalendarController@getClient');
   });
 });

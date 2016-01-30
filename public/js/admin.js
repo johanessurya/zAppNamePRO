@@ -1,6 +1,47 @@
-$global = {
+$global = {};
+$global.clientSource = [];
+
+// Defined function
+$global.clientAutocompleteInit = function() {
+  $('#inputClient').autocomplete({
+    delay: 0,
+    source: $global.clientSource,
+    change: function(event, ui) {
+      var $scope = {};
+      var _form = $global.createForm[0];
+
+      console.log('Client ID', $global.createForm.client);
+      if(ui.item == null) {
+        console.log("Item doesn't exists");
+
+        // If item doesn't exists
+        $scope.confirm = confirm("Should I add this new client?");
+
+        if($scope.confirm == true) {
+          console.log('Ok pressed')
+          // Ok pressed
+          // Add hidden input clientID value to null or blank
+          _form.clientID.value = '';
+        } else {
+          console.log('Cancel pressed');
+          // Cancel pressed
+          // Remove textbox
+          _form.client.value = '';
+        }
+      } else {
+        // if user selected an item
+        // Set clientID
+        _form.clientID.value = ui.item.value;
+        console.log('selected item');
+      }
+      console.log('on change', event, ui);
+    }
+  });
 }
+
 $(function () {
+  $global.createForm = $('#quicksave-form-body');
+
   // Load category tree
   $.get('/api/v1/category/get').success(function(_res) {
     $global.category = _res.category;
@@ -11,57 +52,20 @@ $(function () {
     console.log('Category => ', $global.category);
   });
 
-  // Autocomplate Client
-  var availableTags = [
-      "ActionScript",
-      "AppleScript",
-      "Asp",
-      "BASIC",
-      "C",
-      "C++",
-      "Clojure",
-      "COBOL",
-      "ColdFusion",
-      "Erlang",
-      "Fortran",
-      "Groovy",
-      "Haskell",
-      "Java",
-      "JavaScript",
-      "Lisp",
-      "Perl",
-      "PHP",
-      "Python",
-      "Ruby",
-      "Scala",
-      "Scheme"
-    ];
-  $('#inputClient').autocomplete({
-    delay: 0,
-    source: availableTags,
-    change: function(event, ui) {
-      var $scope = {};
-      if(ui.item == null) {
-        console.log("Item doesn't exists");
+  // Get related client
+  $.get('/api/v1/client/get').success(function(_res) {
+    var data = [];
 
-        // If item doesn't exists
-        $scope.confirm = confirm("Should I add this new client?");
-
-        if($scope.confirm == true) {
-          console.log('Ok pressed')
-          // Ok pressed
-          // Add hidden input clientID to this value
-        } else {
-          console.log('Cancel pressed');
-          // Cancel pressed
-          // Remove textbox
-        }
-      } else {
-        // if user selected an item
-        console.log('selected item');
-      }
-      console.log('on change', event, ui);
+    for(i in _res) {
+      data.push({
+        label: _res[i].name,
+        value: _res[i].id
+      });
     }
+
+    $global.clientSource = data;
+
+    $global.clientAutocompleteInit();
   });
 
   // ======= PopUp Modal =========
