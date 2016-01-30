@@ -53,8 +53,6 @@ class CalendarController extends Controller
         'categoryID' => 'required',
         'subCategoryID' => 'required',
         'title' => 'required',
-        'description' => 'required',
-        'client' => 'required',
         'start' => 'required',
         'end' => 'required'
       ];

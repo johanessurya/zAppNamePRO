@@ -31,7 +31,7 @@ $global.clientAutocompleteInit = function() {
       } else {
         // if user selected an item
         // Set clientID
-        _form.clientID.value = ui.item.value;
+        _form.clientID.value = ui.item.id;
         console.log('selected item');
       }
       console.log('on change', event, ui);
@@ -59,7 +59,8 @@ $(function () {
     for(i in _res) {
       data.push({
         label: _res[i].name,
-        value: _res[i].id
+        value: _res[i].name,
+        id: _res[i].id
       });
     }
 

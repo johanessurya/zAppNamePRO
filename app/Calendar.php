@@ -3,6 +3,7 @@
 namespace App;
 
 use DateTime;
+use Auth;
 use Illuminate\Database\Eloquent\Model;
 
 class Calendar extends MyModel
@@ -23,14 +24,43 @@ class Calendar extends MyModel
 
   public static function createEvent(array $attributes = array()) {
     // var_dump($attributes);
+
+    // Create an event
+    // This is parent event. All repeat event will get this id as their parent.
     $calendar = self::create($attributes);
     $calendar->repeat_id = $calendar->id;
     $calendar->save();
 
+    // Is clientID empty
+    if(empty($attributes['clientID'])) {
+      // Check client value
+      $client = Client::where('name', $attributes['client'])->first();
+
+      // If found get the client ID
+      if(!empty($client)) {
+        $attributes['clientID'] = $client->id;
+      } else {
+        // Insert it and get the id
+        $client = Client::create([
+          'user_id' => Auth::user()->id,
+          'clientCode' => $attributes['client'], // client name
+          'name' => $attributes['client'], // client name
+          'gender' => 'Male',
+          'type' => 'Startup',
+          'note' => null
+        ]);
+
+        // Get client id
+        $attributes['clientID'] = $client->id;
+      }
+    }
+
     // Is repeat event?
     // Fill with event if repeat
     $rows = [];
-    if($attributes['repeat_type'] && $attributes['repeatN'] > 0) {
+
+    // If repeatable event
+    if($attributes['repeat_type'] && $attributes['repeatN'] >= 1) {
       $temp = $attributes;
 
       $parentId = $calendar->id;
