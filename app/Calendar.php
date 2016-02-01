@@ -2,6 +2,7 @@
 
 namespace App;
 
+use DB;
 use DateTime;
 use Auth;
 use Illuminate\Database\Eloquent\Model;
@@ -23,8 +24,6 @@ class Calendar extends MyModel
   public $timestamps = false;
 
   public static function createEvent(array $attributes = array()) {
-    // var_dump($attributes);
-
     // Create an event
     // This is parent event. All repeat event will get this id as their parent.
     $calendar = self::create($attributes);
@@ -32,27 +31,47 @@ class Calendar extends MyModel
     $calendar->save();
 
     // Is clientID empty
-    if(empty($attributes['clientID'])) {
-      // Check client value
-      $client = Client::where('name', $attributes['client'])->first();
+    $clientsID = [];
+    if(!empty($attributes['clients'])) {
+      // Get ClientID list
+      foreach($attributes['clients'] as $x) {
+        // y for Client ID
+        $y = $x;
+        $tempX = $x;
 
-      // If found get the client ID
-      if(!empty($client)) {
-        $attributes['clientID'] = $client->id;
-      } else {
-        // Insert it and get the id
-        $client = Client::create([
-          'user_id' => Auth::user()->id,
-          'clientCode' => $attributes['client'], // client name
-          'name' => $attributes['client'], // client name
-          'gender' => 'Male',
-          'type' => 'Startup',
-          'note' => null
-        ]);
+        // Parse tempX to integer
+        settype($tempX, 'integer');
 
-        // Get client id
-        $attributes['clientID'] = $client->id;
+        // NOW tempX is integer
+        if($tempX == 0) {
+          // Not available then create new client
+
+          // A row of client
+          $row = Client::create([
+            'user_id' => Auth::user()->id,
+            'clientCode' => $x, // client name
+            'name' => $x, // client name
+            'gender' => 'Male',
+            'type' => 'Startup',
+            'note' => null
+          ]);
+
+          $y = $row->id;
+        }
+
+        $clientsID[] = $y;
       }
+
+      // Create calendar client to be inserted
+      $calClient = [];
+      foreach($clientsID as $y)
+        $calClient[] = [
+          'calendar_id' => $calendar->id,
+          'client_id' => $y
+        ];
+
+      // Insert clientID to calendar_client
+      DB::table('calendar_client')->insert($calClient);
     }
 
     // Is repeat event?
@@ -99,8 +118,20 @@ class Calendar extends MyModel
       }
 
       // Save other repeat event
-      foreach($rows as $x)
-        self::create($x);
+      foreach($rows as $x) {
+        $calendar = self::create($x);
+
+        // Create calendar client to be inserted
+        $calClient = [];
+        foreach($clientID as $y)
+          $calClient[] = [
+            'calendar_id' => $calendar->id,
+            'client_id' => $y
+          ];
+
+        // Insert clientID to calendar_client
+        DB::table('calendar_client')->insert($calClient);
+      }
     }
 
     return true;

@@ -1,44 +1,6 @@
 $global = {};
 $global.clientSource = [];
 
-// Defined function
-$global.clientAutocompleteInit = function() {
-  $('#inputClient').autocomplete({
-    delay: 0,
-    source: $global.clientSource,
-    change: function(event, ui) {
-      var $scope = {};
-      var _form = $global.createForm[0];
-
-      console.log('Client ID', $global.createForm.client);
-      if(ui.item == null) {
-        console.log("Item doesn't exists");
-
-        // If item doesn't exists
-        $scope.confirm = confirm("Should I add this new client?");
-
-        if($scope.confirm == true) {
-          console.log('Ok pressed')
-          // Ok pressed
-          // Add hidden input clientID value to null or blank
-          _form.clientID.value = '';
-        } else {
-          console.log('Cancel pressed');
-          // Cancel pressed
-          // Remove textbox
-          _form.client.value = '';
-        }
-      } else {
-        // if user selected an item
-        // Set clientID
-        _form.clientID.value = ui.item.id;
-        console.log('selected item');
-      }
-      console.log('on change', event, ui);
-    }
-  });
-}
-
 $(function () {
   $global.createForm = $('#quicksave-form-body');
 
@@ -49,24 +11,7 @@ $(function () {
     // Init category. Select first item.
     $('#inputCategory').trigger('change');
 
-    console.log('Category => ', $global.category);
-  });
-
-  // Get related client
-  $.get('/api/v1/client/get').success(function(_res) {
-    var data = [];
-
-    for(i in _res) {
-      data.push({
-        label: _res[i].name,
-        value: _res[i].name,
-        id: _res[i].id
-      });
-    }
-
-    $global.clientSource = data;
-
-    $global.clientAutocompleteInit();
+    // console.log('Category => ', $global.category);
   });
 
   // ======= PopUp Modal =========
@@ -149,7 +94,7 @@ $(function () {
   // Load sub category option
   $('#inputCategory').change(function(){
     var _categoryId = $(this).val();
-    console.log(this, _categoryId);
+    // console.log(this, _categoryId);
 
     var _index = $('#inputCategory').prop('selectedIndex');
     var _res = $global.category[_index].subcategory;
@@ -187,7 +132,7 @@ $(function () {
 
     var _res = _category.subsubcategory;
 
-    console.log('category', _category, _res);
+    // console.log('category', _category, _res);
 
     // console.log('input topic', _index, _index2, _res);
 
@@ -214,14 +159,14 @@ $(function () {
     }
 
     if(_show) {
-      console.log('show');
+      // console.log('show');
       $('#inputSubTopic').parent().show();
     }else{
-      console.log('hide');
+      // console.log('hide');
       $('#inputSubTopic').parent().hide();
     }
 
-    console.log('Sub Category changed');
+    // console.log('Sub Category changed');
   });
 
   // Testing using select2

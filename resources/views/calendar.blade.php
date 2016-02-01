@@ -49,10 +49,10 @@
             </div>
             <div class="form-group">
               <label for="inputClient">Client(s)</label>
-              <select class="form-control" id="inputClient" name="client" multiple="multipe" style="width: 100%">
-                <option value="Value 1">Value 1</option>
-                <option value="Value 2">Value 2</option>
-                <option value="Value 3">Value 3</option>
+              <select class="form-control" id="inputClient" name="clients[]" multiple="multipe" style="width: 100%">
+                @foreach($clients as $x)
+                  <option value="{{ $x['id'] }}">{{ $x['name'] }}</option>
+                @endforeach
               </select>
             </div>
             <div class="form-group">
