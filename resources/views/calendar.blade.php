@@ -29,7 +29,7 @@
               <label for="inputCategory">Category</label>
               <select class="form-control" id="inputCategory" name="categoryID">
                 @foreach($categories as $x)
-                  <option value="{{ $x['id'] }}" style="color: {{ $x['color'] }}">{{ $x['title'] }}</option>
+                  <option value="{{ $x['id'] }}">{{ $x['title'] }}</option>
                 @endforeach
               </select>
             </div>
