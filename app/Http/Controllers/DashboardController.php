@@ -184,12 +184,8 @@ class DashboardController extends Controller
 
      // Validation
      $rules = [
-       'user_id' => 'required|exists:users,id',
        'clientCode' => 'required',
-       'name' => 'required',
-       'gender' => 'required|in:' . implode(',', config('steve.gender')),
-       'type' => 'required|in:' . implode(',', config('steve.client_type')),
-       'note' => 'required'
+       'name' => 'required'
      ];
      $this->validate($request, $rules);
 
@@ -197,7 +193,6 @@ class DashboardController extends Controller
      $row = Client::find($params['id']);
      $message = 'Client not found!';
      if(!empty($row)) {
-       $row->user_id = $params['user_id'];
        $row->clientCode = $params['clientCode'];
        $row->name = $params['name'];
        $row->gender = $params['gender'];
