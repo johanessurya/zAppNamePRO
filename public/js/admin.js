@@ -173,6 +173,32 @@ $(function () {
   $('#inputClient').select2({
     tags: true
   });
+
+  // When selecting a client
+  $('#inputClient').change(function() {
+    var $scope = {};
+
+    // Get selected item;
+    $scope.value = $(this).val();
+    $scope.lastValue = $scope.value[$scope.value.length - 1];
+
+    // console.log($scope, parseInt($scope.lastValue));
+
+    if(isNaN(parseInt($scope.lastValue))) {
+      // Show confirm box
+      $scope.confirm = confirm("Should I add this new client?");
+
+      if($scope.confirm != true) {
+        // Cancel pressed
+
+        // Remove option with value = $scope.lastValue
+        $scope.test = $(this).find('option[value="' + $scope.lastValue + '"]').remove();
+
+        // Remove select2 tag
+        $(this).parent().find('span.select2 ul li[title="' + $scope.lastValue + '"]').remove();
+      }
+    }
+  });
 });
 
 function showModal(selector) {
