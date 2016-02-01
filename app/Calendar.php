@@ -123,7 +123,7 @@ class Calendar extends MyModel
 
         // Create calendar client to be inserted
         $calClient = [];
-        foreach($clientID as $y)
+        foreach($clientsID as $y)
           $calClient[] = [
             'calendar_id' => $calendar->id,
             'client_id' => $y
