@@ -28,6 +28,7 @@
             <label for="inputCompanyId" class="col-sm-2 control-label">Gender</label>
             <div class="col-sm-10">
               <select id="inputCompanyId" class="form-control" name="gender">
+                <option></option>
                 @foreach($gender as $x)
                   <option value="{{ $x }}" {{ old('gender') == $x ? 'selected="selected"' : '' }}>{{ $x }}</option>
                 @endforeach
@@ -38,6 +39,7 @@
             <label for="inputActive" class="col-sm-2 control-label">Type</label>
             <div class="col-sm-10">
               <select id="inputActive" class="form-control" name="type">
+                <option></option>
                 @foreach($type as $x)
                   <option value="{{ $x }}" {{ old('type') == $x ? 'selected="selected"' : '' }}>{{ $x }}</option>
                 @endforeach

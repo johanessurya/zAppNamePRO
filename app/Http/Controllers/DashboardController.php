@@ -163,9 +163,7 @@ class DashboardController extends Controller
      // Validation
      $rules = [
        'name' => 'required',
-       'gender' => 'required|in:' . implode(',', config('steve.gender')),
-       'type' => 'required|in:' . implode(',', config('steve.client_type')),
-       'note' => 'required'
+       'clientCode' => 'required'
      ];
      $this->validate($request, $rules);
 
