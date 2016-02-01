@@ -48,8 +48,12 @@
               <input type="text" class="form-control" id="inputTitle" placeholder="Title" name="title">
             </div>
             <div class="form-group">
-              <label for="inputClient">Client</label>
-              <input type="text" class="form-control" id="inputClient" placeholder="Client" name="client">
+              <label for="inputClient">Client(s)</label>
+              <select class="form-control" id="inputClient" name="client" multiple="multipe" style="width: 100%">
+                <option value="Value 1">Value 1</option>
+                <option value="Value 2">Value 2</option>
+                <option value="Value 3">Value 3</option>
+              </select>
             </div>
             <div class="form-group">
               <label for="inputNote">Note</label>

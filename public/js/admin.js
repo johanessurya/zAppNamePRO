@@ -223,6 +223,11 @@ $(function () {
 
     console.log('Sub Category changed');
   });
+
+  // Testing using select2
+  $('#inputClient').select2({
+    tags: true
+  });
 });
 
 function showModal(selector) {

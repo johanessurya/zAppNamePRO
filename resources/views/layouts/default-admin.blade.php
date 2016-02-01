@@ -7,8 +7,8 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-
+    <!-- Select2 -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/css/select2.min.css" rel="stylesheet" />
     <!-- Bootstrap 3.3.5 -->
     <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
     <!-- Font Awesome -->
@@ -368,8 +368,8 @@
 
     <!-- jQuery 2.1.4 -->
     <script src="{{ asset('plugins/jQuery/jQuery-2.1.4.min.js') }}"></script>
-    <!-- AutoComplate -->
-    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <!-- Select2 -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/js/select2.min.js"></script>
     <!-- Bootstrap 3.3.5 -->
     <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
     <!-- DataTables -->
