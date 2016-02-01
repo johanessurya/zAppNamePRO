@@ -31,11 +31,8 @@ class CalendarController extends Controller
     public function get(Request $request) {
       $params = $request->all();
       $event = Calendar::find($params['id']);
-      $event = $event->toArray();
 
-      $row = Category::find($event['categoryID']);
-
-      var_dump($event->toArray()); die('get');
+      $row = Category::find($event->categoryID);
 
       return $event;
     }
