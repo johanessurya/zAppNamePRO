@@ -1,5 +1,39 @@
 $global = {};
 $global.clientSource = [];
+$global.initEditEvent = function() {
+  $('#inputCategory2').trigger('change');
+};
+$global.editForm = $('#edit-form-body');
+$global.initClients = function(clients) {
+  var $scope = {};
+  $scope.clients = clients;
+  $scope.temp = false;
+
+  $('#inputClient2 option').each(function() {
+    // Remove selected attr
+    $(this).removeAttr('selected');
+
+    var _temp = null;
+    // Get option value
+    _temp = $(this).val();
+
+    // Check option value with client id
+    for(i in $scope.clients) {
+      if(_temp == $scope.clients[i].client_id) {
+        $scope.temp = true;
+        // Set option to selected
+        $(this).attr('selected','selected');
+      }
+    }
+    console.log(this, $scope.clients);
+  });
+
+  // Refresh select2
+  if($scope.temp)
+    $('#inputClient2').select2({tags:true});
+
+  console.log('Init clients');
+};
 
 $(function () {
   $global.createForm = $('#quicksave-form-body');
@@ -92,11 +126,13 @@ $(function () {
   } );
 
   // Load sub category option
-  $('#inputCategory').change(function(){
+  $('#inputCategory, #inputCategory2').change(function(){
+    // ID attribute
+    var _id = $(this).attr('id');
     var _categoryId = $(this).val();
     // console.log(this, _categoryId);
 
-    var _index = $('#inputCategory').prop('selectedIndex');
+    var _index = $('#' + _id).prop('selectedIndex');
     var _res = $global.category[_index].subcategory;
     var _el = '<option value=":value">:innerHTML</option>';
     var _temp = null;
@@ -104,8 +140,14 @@ $(function () {
     _temp = _el.replace(':value', '');
     _temp = _temp.replace(':innerHTML', '');
 
+    // Determine #inputTopic or #inputTopic2
+    var _id2 = 'inputTopic';
+    if(_id == 'inputCategory2')
+      _id2 = 'inputTopic2';
+
     // Remove all option
-    var _select = $('#inputTopic')
+    var _select = null;
+    _select = $('#' + _id2);
     _select.html('');
 
     // Start add with blank option
@@ -119,14 +161,24 @@ $(function () {
     }
 
     // Init category. Select first item.
-    $('#inputTopic').trigger('change');
+    $('#' + _id2).trigger('change');
   });
 
-  $('#inputTopic').change(function(){
+  $('#inputTopic, #inputTopic2').change(function(){
+    // ID attribute
+    var _idTopic = $(this).attr('id');
     var _categoryId = $(this).val();
 
-    var _index = $('#inputCategory').prop('selectedIndex');
-    var _index2 = $('#inputTopic').prop('selectedIndex');
+    var _idCategory = 'inputCategory';
+    var _idSubCategory = 'inputSubTopic';
+
+    if(_idTopic == 'inputTopic2'){
+      _idCategory = 'inputCategory2';
+      _idSubCategory = 'inputSubTopic2';
+    }
+
+    var _index = $('#' + _idCategory).prop('selectedIndex');
+    var _index2 = $('#' + _idTopic).prop('selectedIndex');
 
     var _category = $global.category[_index].subcategory[_index2];
 
@@ -144,7 +196,7 @@ $(function () {
     _temp = _temp.replace(':innerHTML', '');
 
     // Remove all option
-    var _select = $('#inputSubTopic')
+    var _select = $('#' + _idSubCategory)
     _select.html('');
 
     // Start add with blank option
@@ -160,10 +212,10 @@ $(function () {
 
     if(_show) {
       // console.log('show');
-      $('#inputSubTopic').parent().show();
+      $('#' + _idSubCategory).parent().show();
     }else{
       // console.log('hide');
-      $('#inputSubTopic').parent().hide();
+      $('#' + _idSubCategory).parent().hide();
     }
 
     // console.log('Sub Category changed');

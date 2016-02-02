@@ -39,10 +39,13 @@ class CalendarController extends Controller
       // Get the category
       $row = Category::find($event->categoryID);
 
+      $clients = DB::table('calendar_client')->where('calendar_id', $event->id)->get();
+
       // Convert to array
       $row = $row->toArray();
       $row['category'] = $row['title'];
       $row['description_editable'] = $row['description'];
+      $row['clients'] = $clients;
 
       return response()->json($row);
     }

@@ -372,6 +372,9 @@ $scope = {
 
 							 $('.modal-footer').show();
 							 $(opt.modalSelector).modal('show');
+
+							 // Init multiple client in select2
+							 $global.initClients(json_enc.clients);
 						}
 					  });
 
@@ -395,6 +398,9 @@ $scope = {
 
 						document.getElementById("edit-form-body").reset();
 
+						// Init category
+						$global.initEditEvent();
+
 						// Hide preview event
 						$('#cal-preview').hide();
 
@@ -410,12 +416,12 @@ $scope = {
 						$('#edit-form-body').show();
 						$(opt.modalSelector).modal('show');
 
-						$('#edit_title').val(title);
-						$('#edit_description').val(calendar.description_editable);
+						$('#edit_title, #inputTitle2').val(title);
+						$('#edit_description, #inputNote2').val(calendar.description_editable);
 
 						$("select#edit_categorie option").each(function() { this.selected = (this.text == calendar.category); });
 
-						$("#edit_color").spectrum("set", color);
+						// $("#edit_color").spectrum("set", color);
 						$('#startDate_edit').val(startDate);
 						$('input#startTime_edit').val(startTime);
 						$('#endDate_edit').val(endDate);

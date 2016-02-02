@@ -95,7 +95,7 @@
         </form>
 
         <!-- Show preview -->
-        <div id="cal-preview">
+        <div id="cal-preview" style="display:none;">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <h4 id="details-body-title" class="modal-title">Modal Default</h4>
@@ -118,8 +118,8 @@
 
           <div class="modal-body">
             <div class="form-group">
-              <label for="inputCategory">Category</label>
-              <select class="form-control" id="inputCategory" name="categoryID">
+              <label for="inputCategory2">Category</label>
+              <select class="form-control" id="inputCategory2" name="categoryID">
                 @foreach($categories as $x)
                   <option value="{{ $x['id'] }}">{{ $x['title'] }}</option>
                 @endforeach
@@ -159,24 +159,6 @@
                   <label for="inputAllDay2">All Day</label>
                   <input class="display-block" type="checkbox" id="inputAllDay2" name="allDay" />
               </div>
-              <div class="col-lg-4">
-                <label for="inputRepeat2">Repeat</label>
-                <select class="form-control" id="inputRepeat2" name="repeat_type">
-                  <option value="" selected="selected">No</option>
-                  <option value="day">Daily</option>
-                  <option value="week">Weekly</option>
-                  <option value="month">Monthly</option>
-                </select>
-              </div>
-              <div class="col-lg-4">
-                <label for="inputRepeatN2">How many times?</label>
-                <select class="form-control" id="inputRepeatN2" name="repeatN">
-                  <option value="1" selected="selected">1</option>
-                  @for ($i = 2; $i <= 40; $i++)
-                    <option value="{{ $i }}">{{ $i }}</option>
-                  @endfor;
-                </select>
-              </div>
             </div>
           </div>
 
@@ -189,7 +171,7 @@
   </div><!-- /.modal -->
 
   <!-- Confirm Modal -->
-  <div id="cal_prompt" class="modal">
+  <div id="cal_prompt" class="modal" style="display: none;">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -207,52 +189,6 @@
       </div>
     </div>
   </div>
-  <div id="user-new" class="modal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Add New User</h4>
-        </div>
-        <div class="modal-body">
-          <!-- general form elements -->
-          <div class="box box-primary">
-            <!-- form start -->
-            <form role="form">
-              <div class="box-body">
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Email address</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputPassword1">Password</label>
-                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputFile">File input</label>
-                  <input type="file" id="exampleInputFile">
-                  <p class="help-block">Example block-level help text here.</p>
-                </div>
-                <div class="checkbox">
-                  <label>
-                    <input type="checkbox"> Check me out
-                  </label>
-                </div>
-              </div><!-- /.box-body -->
-
-              <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </div>
-            </form>
-          </div><!-- /.box -->
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
 </div><!-- /.example-modal -->
 @endsection
 
