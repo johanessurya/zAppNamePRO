@@ -382,6 +382,7 @@ $scope = {
 					// Delete button
 					$('#delete-event').off().on('click', function(e)
 					{
+						$('#cal-preview').hide();
 						calendar.remove(calendar.id);
 						e.preventDefault();
 					 });
@@ -389,12 +390,14 @@ $scope = {
 					 // Export button
 					$('#export-event').off().on('click', function(e)
 					{
+						$('#cal-preview').hide();
 						calendar.exportIcal(calendar.id, calendar.title, calendar.description, ExpS, ExpE);
 						e.preventDefault();
 					 });
 
 					 // Edit Button
 					 $('#edit-event').off().on('click', function(e) {
+						 $('#cal-preview').hide();
 
 						document.getElementById("edit-form-body").reset();
 
@@ -429,6 +432,7 @@ $scope = {
 
 						// save action
 						$('#save-changes').off().on('click', function(e) {
+							$('#cal-preview').hide();
 							if($('#edit-form-body input[name=title]').val().length == 0)
 							{
 								alert(opt.emptyForm);
@@ -447,6 +451,7 @@ $scope = {
 				calendar.quickModal = function(start, end, allDay)
 				{
 					document.getElementById("quicksave-form-body").reset();
+					$('#inputRepeat').trigger('change');
 
 					var start_factor = moment(start).format('YYYY-MM-DD');
 					var startTime_factor = moment(start).format('HH:mm');
@@ -553,7 +558,8 @@ $scope = {
 						success: function(res)
 						{
 							$('.loadingDiv').hide();
-              console.log(res.success == 1, res);
+							$('#inputRepeat').trigger('change');
+							$('#cal-preview').hide();
 							if(res.success == 1)
 							{
 								$(opt.modalSelector).modal('hide');
