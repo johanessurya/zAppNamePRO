@@ -151,4 +151,67 @@ class CalendarController extends Controller
         }
       }
     }
+
+    // Update repeatitive event
+    public function update(Request $request) {
+      $params = $request->all();
+
+      if(isset($params['method'])) {
+        // IF repeatitive event
+        // Get list of ID
+        $rows = Calendar::where('repeat_id', $params['rep_id'])->get();
+
+        // Repeat each row
+        foreach($rows as $y) {
+          // Update a row
+          $row = Calendar::find($y->id);
+          $row->categoryID = $params['categoryID'];
+          $row->subCategoryID = $params['subCategoryID'];
+          $row->subSubCategoryID = $params['subSubCategoryID'];
+          $row->title = $params['title'];
+          $row->description = $params['description'];
+          $row->save();
+
+          // Delete all client associated with this calendar
+          $clients = DB::table('calendar_client')->where('calendar_id', $row->id)->delete();
+
+          // Add new client
+          $clients = [];
+          foreach($params['clients'] as $x) {
+            $clients[] = [
+              'calendar_id' => $row->id,
+              'client_id' => $x
+            ];
+          }
+
+          // Save all
+          DB::table('calendar_client')->insert($clients);
+        }
+      } else {
+        // Single event
+        // Just update a row
+        $row = Calendar::find($params['id']);
+        $row->categoryID = $params['categoryID'];
+        $row->subCategoryID = $params['subCategoryID'];
+        $row->subSubCategoryID = $params['subSubCategoryID'];
+        $row->title = $params['title'];
+        $row->description = $params['description'];
+        $row->save();
+
+        // Delete all client associated with this calendar
+        $clients = DB::table('calendar_client')->where('calendar_id', $row->id)->delete();
+
+        // Add new client
+        $clients = [];
+        foreach($params['clients'] as $x) {
+          $clients[] = [
+            'calendar_id' => $row->id,
+            'client_id' => $x
+          ];
+        }
+
+        // Save all
+        DB::table('calendar_client')->insert($clients);
+      }
+    }
 }

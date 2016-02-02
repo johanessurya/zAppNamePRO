@@ -45,7 +45,7 @@ $scope = {
 				ajaxUiUpdate: 'includes/cal_update.php?'+token,
 				ajaxEventQuickSave: '/api/v1/calendar/save',
 				ajaxEventDelete: '/api/v1/calendar/delete?'+token,
-				ajaxEventEdit: 'includes/cal_edit_update.php?'+token,
+				ajaxEventEdit: '/api/v1/calendar/update?'+token,
 				ajaxEventExport: 'includes/cal_export.php?'+token,
 				ajaxRepeatCheck: '/api/v1/calendar/checkrep?'+token,
 				ajaxRetrieveDescription: '/api/v1/calendar/event', // Get an event detail
@@ -429,7 +429,7 @@ $scope = {
 
 						// save action
 						$('#save-changes').off().on('click', function(e) {
-							if($('input[name=edit_title]').val().length == 0)
+							if($('#edit-form-body input[name=title]').val().length == 0)
 							{
 								alert(opt.emptyForm);
 							} else {
@@ -582,13 +582,19 @@ $scope = {
 						error: function() { $('.loadingDiv').hide(); alert(opt.ajaxError) },
 						success: function(response) {
 							$('.loadingDiv').hide();
-							if(response == 'REP_FOUND')
+							console.log(response.repeat);
+							if(response.repeat)
 							{
+								console.log('prompt user');
 								// prompt user
 								$(opt.modalSelector).modal('hide');
 
+								console.log(opt.modalSelector + ' ' + '.js-details-body-content');
 								$(opt.modalEditPromptSelector+" .modal-header").html('<h4>'+opt.eventText+calendar.title+'</h4>');
 								$(opt.modalEditPromptSelector+" .modal-body-custom").css('padding', '15px').html(opt.repetitiveEventActionText);
+
+								// Set description
+								$(opt.modalEditPromptSelector + ' ' + '.js-details-body-content').html(opt.repetitiveEventActionText);
 
 								$(opt.modalEditPromptSelector).modal('show');
 

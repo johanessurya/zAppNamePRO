@@ -170,7 +170,7 @@
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
 
-  <!-- Confirm Modal -->
+  <!-- Confirm Delete Modal -->
   <div id="cal_prompt" class="modal" style="display: none;">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -184,6 +184,26 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-option="remove-this">Delete this</button>
           <button type="button" class="btn btn-danger" data-option="remove-repetitives">Delete all</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirm Edit Modal -->
+  <div id="cal_edit_prompt_save" class="modal" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Modal Default</h4>
+        </div>
+        <div class="modal-body">
+          <p class="js-details-body-content">One fine body&hellip;</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-option="save-this">Save this</button>
+          <button type="button" class="btn btn-primary" data-option="save-repetitives">Save all</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
