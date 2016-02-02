@@ -200,9 +200,9 @@
           <p id="details-body-content">One fine body&hellip;</p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger">Delete this</button>
-          <button type="button" class="btn btn-danger">Delete all</button>
-          <button type="button" class="btn btn-primary">Close</button>
+          <button type="button" class="btn btn-danger" data-option="remove-this">Delete this</button>
+          <button type="button" class="btn btn-danger" data-option="remove-repetitives">Delete all</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
