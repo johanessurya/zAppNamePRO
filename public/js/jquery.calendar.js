@@ -412,7 +412,7 @@ $scope = {
 						$('#edit-event').hide();
 						$('#add-event').hide();
 						$('#save-changes').show();
-						$('#save-changes').css('width', '100%');
+						// $('#save-changes').css('width', '100%');
 
 						$('#quicksave-form-body').hide();
 						$('#details-body').hide();
