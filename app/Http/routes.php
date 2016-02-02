@@ -196,6 +196,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/calendar/save', 'CalendarController@save');
     // Check event repetition
     Route::post('/calendar/checkrep', 'CalendarController@checkRep');
+    // Delete an event. Could delete repeat event or non repeat event
+    Route::post('/calendar/delete', 'CalendarController@delete');
 
     // Get category tree
     Route::get('/category/get', 'CategoryController@getTree');

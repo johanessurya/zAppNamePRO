@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
+use DB;
 use Auth;
 use DateTime;
 use App\Calendar;
@@ -119,5 +120,32 @@ class CalendarController extends Controller
       }
 
       return response()->json($return);
+    }
+
+    // Delete repeat event or non repeat event
+    public function delete(Request $request) {
+      $params = $request->all();
+
+      // Delete an event
+      $event = Calendar::find($params['id']);
+      if(!empty($event)) {
+        $rows = DB::table('calendar_client')->where('calendar_id', $event->id)->get();
+        $event->delete();
+
+        // Check if param rep_id exist or not
+        if(isset($params['rep_id']) && !empty($params['rep_id'])) {
+          // Delete ALL associated with this event
+          // Delete event(calendar table)
+          $events = Calendar::where('repeat_id', $params['rep_id'])->get();
+
+          for($i = 0; $i < count($events); $i++) {
+            // Delete calendar_client list
+            DB::table('calendar_client')->where('calendar_id', $events[$i]->id);
+
+            // Delete event
+            $events[$i]->delete();
+          }
+        }
+      }
     }
 }

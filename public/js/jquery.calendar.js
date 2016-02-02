@@ -44,7 +44,7 @@ $scope = {
 				ajaxJsonFetch: '/api/v1/calendar/event',
 				ajaxUiUpdate: 'includes/cal_update.php?'+token,
 				ajaxEventQuickSave: '/api/v1/calendar/save',
-				ajaxEventDelete: 'includes/cal_delete.php?'+token,
+				ajaxEventDelete: '/api/v1/calendar/delete?'+token,
 				ajaxEventEdit: 'includes/cal_edit_update.php?'+token,
 				ajaxEventExport: 'includes/cal_export.php?'+token,
 				ajaxRepeatCheck: '/api/v1/calendar/checkrep?'+token,
