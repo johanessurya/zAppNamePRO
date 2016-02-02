@@ -106,7 +106,7 @@ class CalendarController extends Controller
       $return = [
         'repeat' => true
       ];
-      
+
       // Get parameters
       $params = $request->all();
 
@@ -114,7 +114,7 @@ class CalendarController extends Controller
       $event = Calendar::find($params['id']);
 
       // Check if repetition event or not
-      if($event->id == $event->repeat_id || $event->repeat_id == null) {
+      if(empty($event->repeat_type)) {
         $return['repeat'] = false;
       }
 
