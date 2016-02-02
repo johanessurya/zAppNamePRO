@@ -452,6 +452,7 @@ $scope = {
 				{
 					document.getElementById("quicksave-form-body").reset();
 					$('#inputRepeat').trigger('change');
+					$('#cal-preview').hide();
 					$('#inputClient option').removeAttr('selected');
 					$('#inputClient').select2({tags: true});
 

@@ -111,11 +111,6 @@
 
         <!-- Edit Form -->
         <form id="edit-form-body">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title js-details-body-title">Modal Default</h4>
-          </div>
-
           <div class="modal-body">
             <div class="form-group">
               <label for="inputCategory2">Category</label>
@@ -151,8 +146,6 @@
               <label for="inputNote2">Note</label>
               <textarea class="form-control" id="inputNote2" rows="3" placeholder="Note" name="description"></textarea>
             </div>
-
-            <hr width="80%">
 
             <div class="row">
               <div class="col-lg-4 hide">
