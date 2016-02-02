@@ -452,6 +452,8 @@ $scope = {
 				{
 					document.getElementById("quicksave-form-body").reset();
 					$('#inputRepeat').trigger('change');
+					$('#inputClient option').removeAttr('selected');
+					$('#inputClient').select2({tags: true});
 
 					var start_factor = moment(start).format('YYYY-MM-DD');
 					var startTime_factor = moment(start).format('HH:mm');
