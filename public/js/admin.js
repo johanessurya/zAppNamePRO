@@ -226,6 +226,15 @@ $(function () {
     tags: true
   });
 
+  // When set repeat to "yes", show how many times
+  $('#inputRepeat').change(function() {
+    if($(this).val() == '') {
+      $('#inputRepeatN').parent().hide();
+    } else {
+      $('#inputRepeatN').parent().show();
+    }
+  })
+
   // When selecting a client
   $('#inputClient').change(function() {
     var $scope = {};

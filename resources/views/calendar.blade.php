@@ -77,7 +77,7 @@
                   <option value="month">Monthly</option>
                 </select>
               </div>
-              <div class="col-lg-4">
+              <div class="col-lg-4" style="display: none;">
                 <label for="inputRepeatN">How many times?</label>
                 <select class="form-control" id="inputRepeatN" name="repeatN">
                   <option value="1" selected="selected">1</option>
