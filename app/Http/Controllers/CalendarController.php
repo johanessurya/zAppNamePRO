@@ -175,17 +175,19 @@ class CalendarController extends Controller
           // Delete all client associated with this calendar
           $clients = DB::table('calendar_client')->where('calendar_id', $row->id)->delete();
 
-          // Add new client
-          $clients = [];
-          foreach($params['clients'] as $x) {
-            $clients[] = [
-              'calendar_id' => $row->id,
-              'client_id' => $x
-            ];
-          }
+          if(isset($params['clients']) && is_array($params['clients'])){
+            // Add new client
+            $clients = [];
+            foreach($params['clients'] as $x) {
+              $clients[] = [
+                'calendar_id' => $row->id,
+                'client_id' => $x
+              ];
+            }
 
-          // Save all
-          DB::table('calendar_client')->insert($clients);
+            // Save all
+            DB::table('calendar_client')->insert($clients);
+          }
         }
       } else {
         // Single event
@@ -201,17 +203,19 @@ class CalendarController extends Controller
         // Delete all client associated with this calendar
         $clients = DB::table('calendar_client')->where('calendar_id', $row->id)->delete();
 
-        // Add new client
-        $clients = [];
-        foreach($params['clients'] as $x) {
-          $clients[] = [
-            'calendar_id' => $row->id,
-            'client_id' => $x
-          ];
-        }
+        if(isset($params['clients']) && is_array($params['clients'])){
+          // Add new client
+          $clients = [];
+          foreach($params['clients'] as $x) {
+            $clients[] = [
+              'calendar_id' => $row->id,
+              'client_id' => $x
+            ];
+          }
 
-        // Save all
-        DB::table('calendar_client')->insert($clients);
+          // Save all
+          DB::table('calendar_client')->insert($clients);
+        }
       }
     }
 }
