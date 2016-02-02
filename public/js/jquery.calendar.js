@@ -47,7 +47,7 @@ $scope = {
 				ajaxEventDelete: 'includes/cal_delete.php?'+token,
 				ajaxEventEdit: 'includes/cal_edit_update.php?'+token,
 				ajaxEventExport: 'includes/cal_export.php?'+token,
-				ajaxRepeatCheck: 'includes/cal_check_rep_events.php?'+token,
+				ajaxRepeatCheck: '/api/v1/calendar/checkrep?'+token,
 				ajaxRetrieveDescription: '/api/v1/calendar/event', // Get an event detail
 				ajaxImport: 'importer.php?'+token,
 
@@ -327,6 +327,9 @@ $scope = {
 					 $('#edit-form-body').hide();
 					 $('#details-body').show();
 
+					 // Custom ID: to show content more easy
+					 $('#cal-preview').show();
+
 					 calendar.title = title;
 					 calendar.id = id;
 					 calendar.rep_id = rep_id;
@@ -361,11 +364,11 @@ $scope = {
 							 $('#details-body-title').html(title);
 							 $('#details-body-content').html(dsc);
 
-							$('#export-event').show();
-							$('#delete-event').show();
-							$('#edit-event').show();
-							$('#save-changes').hide();
-							$('#add-event').hide();
+								$('#export-event').show();
+								$('#delete-event').show();
+								$('#edit-event').show();
+								$('#save-changes').hide();
+								$('#add-event').hide();
 
 							 $('.modal-footer').show();
 							 $(opt.modalSelector).modal('show');
@@ -391,6 +394,9 @@ $scope = {
 					 $('#edit-event').off().on('click', function(e) {
 
 						document.getElementById("edit-form-body").reset();
+
+						// Hide preview event
+						$('#cal-preview').hide();
 
 						$('#export-event').hide();
 						$('#delete-event').hide();
@@ -659,7 +665,7 @@ $scope = {
 						success: function(response)
 						{
 							$('.loadingDiv').hide();
-							if(response == 'REP_FOUND')
+							if(response.repeat) // true if repeat otherwise false
 							{
 								// prompt user
 								$(opt.modalSelector).modal('hide');

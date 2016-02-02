@@ -32,11 +32,18 @@ class CalendarController extends Controller
     // Get an event
     public function get(Request $request) {
       $params = $request->all();
+      // Get event
       $event = Calendar::find($params['id']);
 
+      // Get the category
       $row = Category::find($event->categoryID);
 
-      return $event;
+      // Convert to array
+      $row = $row->toArray();
+      $row['category'] = $row['title'];
+      $row['description_editable'] = $row['description'];
+
+      return response()->json($row);
     }
 
     public function save(Request $request) {
@@ -93,5 +100,24 @@ class CalendarController extends Controller
       $rows = Client::all();
 
       return $rows;
+    }
+
+    public function checkRep(Request $request) {
+      $return = [
+        'repeat' => true
+      ];
+      
+      // Get parameters
+      $params = $request->all();
+
+      // Get an event
+      $event = Calendar::find($params['id']);
+
+      // Check if repetition event or not
+      if($event->id == $event->repeat_id || $event->repeat_id == null) {
+        $return['repeat'] = false;
+      }
+
+      return response()->json($return);
     }
 }

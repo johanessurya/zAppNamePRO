@@ -170,7 +170,7 @@ $(function () {
   });
 
   // Testing using select2
-  $('#inputClient').select2({
+  $('#inputClient, #inputClient2').select2({
     tags: true
   });
 

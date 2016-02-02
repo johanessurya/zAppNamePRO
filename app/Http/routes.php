@@ -190,19 +190,18 @@ Route::group(['middleware' => ['web']], function () {
 
     // Get event list
     Route::get('/calendar/event', 'CalendarController@apiEventList');
-
     // Get an event
     Route::post('/calendar/event', 'CalendarController@get');
-
     // Save an event
     Route::post('/calendar/save', 'CalendarController@save');
+    // Check event repetition
+    Route::post('/calendar/checkrep', 'CalendarController@checkRep');
 
     // Get category tree
     Route::get('/category/get', 'CategoryController@getTree');
 
     // Get sub category list
     Route::get('/subcategory/get/{categoryId}', 'CategoryController@getSubCategory');
-
     // Get sub category list
     Route::get('/subsubcategory/get/{categoryId}', 'CategoryController@getSubSubCategory');
 
