@@ -170,7 +170,11 @@ class CalendarController extends Controller
           $row = Calendar::find($y->id);
           $row->categoryID = $params['categoryID'];
           $row->subCategoryID = $params['subCategoryID'];
-          $row->subSubCategoryID = $params['subSubCategoryID'];
+
+          $row->subSubCategoryID = null;
+          if(isset($params['subSubCategoryID']))
+            $row->subSubCategoryID = $params['subSubCategoryID'];
+
           $row->title = $params['title'];
           $row->description = $params['description'];
           $row->save();
