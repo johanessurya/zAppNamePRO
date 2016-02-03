@@ -1,5 +1,7 @@
 $global = {};
 $global.clientSource = [];
+$global.user = {};
+
 $global.initEditEvent = function() {
   $('#inputCategory2').trigger('change');
 };
@@ -87,9 +89,9 @@ $(function () {
 
   // ======= Datatables =========
   // class prefix: "js-"" mean that class related to javascript method/function
-  $global.editEl = '<a href="/dashboard/user/:user_id" class="js-btn-edit btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>';
-  $global.deleteEl = '<a href="/dashboard/user/delete/:user_id" class="js-btn-delete btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a>';
-  $global.active = '<a href="/dashboard/user/active/:user_id" class="js-btn-delete btn btn-success"><span class="glyphicon glyphicon-ok"></span></a>';
+  $global.user.editEl = '<a href="/dashboard/user/:user_id" class="js-btn-edit btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>';
+  $global.user.deleteEl = '<a href="/dashboard/user/delete/:user_id" class="js-btn-delete btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a>';
+  $global.user.active = '<a href="/dashboard/user/active/:user_id" class="js-btn-delete btn btn-success"><span class="glyphicon glyphicon-ok"></span></a>';
 
   // Load user list
   $('#user-table').DataTable( {
@@ -97,18 +99,21 @@ $(function () {
       'columns': [
         {
           mRender: function (data, type, row) {
-            return $global.editEl.replace(':user_id', row.id);
+            var _temp = $global.user.editEl;
+            return _temp.replace(':user_id', row.id);
           }
         },
         {
           mRender: function (data, type, row) {
-              return $global.deleteEl.replace(':user_id', row.id);
-            }
+            var _temp = $global.user.deleteEl;
+            return _temp.replace(':user_id', row.id);
+          }
         },
         {
           mRender: function (data, type, row) {
-              return $global.active.replace(':user_id', row.id);
-            }
+            var _temp = $global.user.active;
+            return _temp.replace(':user_id', row.id);
+          }
         },
         {'data': 'username', 'searchable': true},
         {'data': 'active', 'searchable': true},
