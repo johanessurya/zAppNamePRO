@@ -46,6 +46,8 @@ class CalendarController extends Controller
       $row['category'] = $row['title'];
       $row['description_editable'] = $row['description'];
       $row['clients'] = $clients;
+      $row['subCategoryID'] = $event->subCategoryID;
+      $row['subSubCategoryID'] = $event->subSubCategoryID;
 
       return response()->json($row);
     }
@@ -195,7 +197,11 @@ class CalendarController extends Controller
         $row = Calendar::find($params['id']);
         $row->categoryID = $params['categoryID'];
         $row->subCategoryID = $params['subCategoryID'];
-        $row->subSubCategoryID = $params['subSubCategoryID'];
+
+        $row->subSubCategoryID = null;
+        if(isset($params['subSubCategoryID']))
+          $row->subSubCategoryID = $params['subSubCategoryID'];
+
         $row->title = $params['title'];
         $row->description = $params['description'];
         $row->save();

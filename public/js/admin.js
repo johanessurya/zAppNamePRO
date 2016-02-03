@@ -35,6 +35,38 @@ $global.initClients = function(clients) {
   console.log('Init clients');
 };
 
+/* categoryList is a json object that list category ID that selected
+Structure
+{
+  categoryID: json_enc.id,
+  subCategoryID: json_enc.subCategoryID,
+  subSubCategoryID: json_enc.subSubCategoryID
+}
+*/
+$global.initCategory = function(categoryList) {
+  console.log(categoryList);
+  var _temp = $('#inputCategory2');
+  // Trigger change for category
+  _temp.trigger('change');
+  // Set value
+  _temp.val(categoryList.categoryID);
+
+  _temp = $('inputSubTopic');
+  // Trigger change for category
+  _temp.trigger('change');
+  console.log(_temp.val());
+  // Set value
+  _temp.val(categoryList.subCategoryID);
+
+  if(categoryList.subSubCategoryID != null) {
+    _temp = $('inputSubTopic2');
+    // Trigger change for category
+    _temp.trigger('change');
+    // Set value
+    _temp.val(categoryList.subSubCategoryID);
+  }
+}
+
 $(function () {
   $global.createForm = $('#quicksave-form-body');
 

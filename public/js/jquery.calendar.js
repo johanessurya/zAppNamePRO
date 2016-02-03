@@ -350,6 +350,7 @@ $scope = {
 						success: function(json_enc)
 						{
 							 $('.loadingDiv').hide();
+							 console.log('testing', json_enc);
 							 // var json = $.parseJSON(json_enc);
 							 var json = json_enc;
 							 var dsc = json.description.replace('$null', '');
@@ -375,6 +376,11 @@ $scope = {
 
 							 // Init multiple client in select2
 							 $global.initClients(json_enc.clients);
+							 $global.initCategory({
+								 categoryID: json_enc.id,
+								 subCategoryID: json_enc.subCategoryID,
+								 subSubCategoryID: json_enc.subSubCategoryID
+							 });
 						}
 					  });
 

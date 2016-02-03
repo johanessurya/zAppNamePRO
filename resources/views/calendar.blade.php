@@ -111,6 +111,10 @@
 
         <!-- Edit Form -->
         <form id="edit-form-body">
+          <div class="modal-header remove-border-bottom">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title"></h4>
+          </div>
           <div class="modal-body">
             <div class="form-group">
               <label for="inputCategory2">Category</label>
