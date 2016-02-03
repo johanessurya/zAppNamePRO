@@ -347,7 +347,7 @@ $global.calendar = {
 						success: function(json_enc)
 						{
 							 $('.loadingDiv').hide();
-							 console.log('testing', json_enc);
+							 // console.log('testing', json_enc);
 							 // var json = $.parseJSON(json_enc);
 							 var json = json_enc;
 							 var dsc = json.description.replace('$null', '');
@@ -456,6 +456,14 @@ $global.calendar = {
 				calendar.quickModal = function(start, end, allDay)
 				{
 					document.getElementById("quicksave-form-body").reset();
+					// console.log('allday', allDay);
+
+					var _temp = $(allDay.toElement);
+					if(_temp.closest('.fc-day-grid').length != 0) {
+						// Check all day
+						$('#inputAllDay').prop('checked', true);
+					}
+
 					$('#inputCategory').trigger('change');
 					$('#inputRepeat').trigger('change');
 					$('#cal-preview').hide();
@@ -482,9 +490,6 @@ $global.calendar = {
 					// My hidden fields
 					$('#start').val(moment(start).format($global.calendar.DATETIME_FORMAT));
 					$('#end').val(moment(end).format($global.calendar.DATETIME_FORMAT));
-
-					var _allDay = allDay.target.className == 'fc-content-skeleton' ? true : false;
-					$('#inputAllDay').prop('checked', _allDay);
 
 					$('#details-body').hide();
 					$('#edit-form-body').hide();
@@ -597,14 +602,14 @@ $global.calendar = {
 						error: function() { $('.loadingDiv').hide(); alert(opt.ajaxError) },
 						success: function(response) {
 							$('.loadingDiv').hide();
-							console.log(response.repeat);
+							// console.log(response.repeat);
 							if(response.repeat)
 							{
-								console.log('prompt user');
+								// console.log('prompt user');
 								// prompt user
 								$(opt.modalSelector).modal('hide');
 
-								console.log(opt.modalSelector + ' ' + '.js-details-body-content');
+								// console.log(opt.modalSelector + ' ' + '.js-details-body-content');
 								$(opt.modalEditPromptSelector+" .modal-header").html('<h4>'+opt.eventText+calendar.title+'</h4>');
 								$(opt.modalEditPromptSelector+" .modal-body-custom").css('padding', '15px').html(opt.repetitiveEventActionText);
 
