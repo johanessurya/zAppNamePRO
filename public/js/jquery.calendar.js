@@ -456,6 +456,7 @@ $global.calendar = {
 				calendar.quickModal = function(start, end, allDay)
 				{
 					document.getElementById("quicksave-form-body").reset();
+					$('#inputCategory').trigger('change');
 					$('#inputRepeat').trigger('change');
 					$('#cal-preview').hide();
 					$('#inputClient option').removeAttr('selected');
