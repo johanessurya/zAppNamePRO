@@ -273,6 +273,8 @@ class CalendarController extends Controller
           $end->modify($interval);
         }
 
+        $x->allDay = $params['allDay'] == 'true' ? 1 : 0;
+
         $rows[$i] = $x;
       }
 
