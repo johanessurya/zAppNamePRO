@@ -213,9 +213,27 @@ class CalendarController extends Controller
           // Add new client
           $clients = [];
           foreach($params['clients'] as $x) {
+            $clientID = $x;
+            $temp = $clientID;
+
+            // Check if this client has inserted
+            if($temp == 0) {
+              // This mean this client haven't created
+              $newClient = [
+                'user_id' => Auth::user()->id,
+                'clientCode' => $clientID,
+                'name' => $clientID,
+                'gender' => 'Male',
+                'type' => 'Startup'
+              ];
+
+              $newClient = Client::create($newClient);
+              $clientID = $newClient->id;
+            }
+
             $clients[] = [
               'calendar_id' => $row->id,
-              'client_id' => $x
+              'client_id' => $clientID
             ];
           }
 

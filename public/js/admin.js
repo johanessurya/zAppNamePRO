@@ -25,8 +25,9 @@ $global.initClients = function(clients) {
     }
 
     var _clientIDList = [];
-    for(i in clients)
-      _clientIDList.push(clients[i].client_id);
+    console.log('scope', $scope);
+    for(i in $scope.clients)
+      _clientIDList.push($scope.clients[i].client_id);
 
     $global.misc.refreshSelectClient(_li);
     $global.misc.setSelectedOptions('#inputClient2', _clientIDList);
