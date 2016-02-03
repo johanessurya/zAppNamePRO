@@ -49,6 +49,10 @@ class MyModel extends Model
     if(!empty($value) && $value != '0000-00-00 00:00:00') {
       $dateTime = DateTime::createFromFormat('Y-m-d H:i:s', $value);
 
+      if(is_bool($dateTime)) {
+        var_dump($dateTime, $value); die;
+      }
+
       $return = $dateTime->format(DATETIME_FORMAT);
     }
 
@@ -65,5 +69,28 @@ class MyModel extends Model
     }
 
     return $return;
+  }
+
+  public static function getInterval($repeat_type) {
+    $modify = null;
+
+    switch($repeat_type) {
+      case 'day':
+        $n = 1*(0+1);
+        $modify = '+' . $n . ' day';
+        break;
+
+      case 'week':
+        $n = 7*(0+1);
+        $modify = '+' . $n . ' day';
+        break;
+
+      case 'month':
+        $n = 1*(0+1);
+        $modify = '+' . $n . ' month';
+        break;
+    }
+
+    return $modify;
   }
 }

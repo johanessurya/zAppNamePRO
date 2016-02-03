@@ -247,4 +247,37 @@ class CalendarController extends Controller
         }
       }
     }
+
+    public function updateDropDrag(Request $request) {
+      $params = $request->all();
+
+      $params['start'] = MyModel::dateTime($params['start']);
+      $params['end'] = MyModel::dateTime($params['end']);
+
+      $rows = Calendar::orWhere('id', $params['id'])->orWhere('repeat_id', $params['id'])->orderBy('id', 'asc')->get();
+
+      $start = DateTime::createFromFormat(DATETIME_FORMAT, $params['start']);
+      $end = DateTime::createFromFormat(DATETIME_FORMAT, $params['end']);
+
+      $interval = null;
+      for($i = 0; $i < count($rows); $i++) {
+        $x = $rows[$i];
+
+        // Update their date
+        $x->start = $start->format(DATETIME_FORMAT);
+        $x->end = $end->format(DATETIME_FORMAT);
+
+        $interval = MyModel::getInterval($x->repeat_type);
+        if(!empty($interval)) {
+          $start->modify($interval);
+          $end->modify($interval);
+        }
+
+        $rows[$i] = $x;
+      }
+
+      // Save
+      foreach($rows as $x)
+        $x->save();
+    }
 }

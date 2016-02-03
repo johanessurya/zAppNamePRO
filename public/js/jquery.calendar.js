@@ -39,7 +39,7 @@ $global.calendar = {
 				token: '',
 
 				ajaxJsonFetch: '/api/v1/calendar/event',
-				ajaxUiUpdate: 'includes/cal_update.php?'+token,
+				ajaxUiUpdate: '/api/v1/calendar/event/update?'+token,
 				ajaxEventQuickSave: '/api/v1/calendar/save',
 				ajaxEventDelete: '/api/v1/calendar/delete?'+token,
 				ajaxEventEdit: '/api/v1/calendar/update?'+token,
@@ -246,8 +246,8 @@ $global.calendar = {
 							EaD = event.allDay;
 						}
 
-						var theEvent = 'start=' + ed_startDate + ' ' + ed_startTime +
-									   '&end=' + Eend +
+						var theEvent = 'start=' + ed_startDate + ' ' + ed_startTime + ':00' +
+									   '&end=' + Eend + ':00' +
 									   '&id=' + event.id +
 									   '&allDay=' + EaD +
 									   '&original_id=' + event.original_id;
@@ -275,8 +275,8 @@ $global.calendar = {
 							EaD = event.allDay;
 						}
 
-						var theEvent = 'start=' + er_startDate + ' ' + er_startTime +
-									   '&end=' + Eend +
+						var theEvent = 'start=' + er_startDate + ' ' + er_startTime + ':00' +
+									   '&end=' + Eend + ':00' +
 									   '&id=' + event.id +
 									   '&allDay=' + EaD +
 									   '&original_id=' + event.original_id;
