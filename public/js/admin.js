@@ -46,27 +46,46 @@ Structure
 }
 */
 $global.initCategory = function(categoryList) {
-  console.log(categoryList);
-  var _temp = $('#inputCategory2');
-  // Trigger change for category
-  _temp.trigger('change');
-  // Set value
-  _temp.val(categoryList.categoryID);
+  // console.log('CategoryList: ', categoryList);
+  // console.log('Category Tree: ', $global.category);
 
-  _temp = $('inputSubTopic');
-  // Trigger change for category
-  _temp.trigger('change');
-  console.log(_temp.val());
-  // Set value
-  _temp.val(categoryList.subCategoryID);
+  var _cat = $global.category;
+  var _li = null;
+  var _val = null;
 
-  if(categoryList.subSubCategoryID != null) {
-    _temp = $('inputSubTopic2');
-    // Trigger change for category
-    _temp.trigger('change');
-    // Set value
-    _temp.val(categoryList.subSubCategoryID);
+  // Category didn't need to be filled with any category
+  // Just select it with correct value
+  _val = categoryList.categoryID;
+  $global.misc.setSelectedOptions('#inputCategory2', [_val]);
+  // Trigger change
+  $('#inputCategory2').trigger('change');
+
+  // Set for topic(sub category)
+  for(i in _cat) {
+    if(_cat[i].id == _val) {
+      _cat = _cat[i].subcategory;
+      break;
+    }
   }
+
+  // Now _cat is fill with sub category associated with category
+  console.log('Sub Category: ', _cat);
+  // Generate correct _li
+  _li = [];
+  for(i in _cat) {
+    _li.push({
+      label: _cat[i].title,
+      value: _cat[i].id
+    });
+  }
+
+  _val = categoryList.subCategoryID;
+  // Generate option list
+  $global.misc.setOptionList('#inputTopic2', _li);
+  // Select correct option
+  $global.misc.setSelectedOptions('#inputTopic2', [_val]);
+  // Trigger change
+  $('#inputTopic2').trigger('change');
 }
 
 // ==== List of function (START) ====
