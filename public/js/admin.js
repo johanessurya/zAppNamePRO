@@ -329,7 +329,7 @@ $(function () {
   })
 
   // When selecting a client
-  $('#inputClient').change(function() {
+  $('#inputClient, #inputClient2').change(function() {
     var $scope = {};
 
     // Get selected item;
