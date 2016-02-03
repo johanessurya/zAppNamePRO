@@ -353,6 +353,10 @@ $(function () {
 
     // Get selected item;
     $scope.value = $(this).val();
+
+    if($scope.value == null)
+      return;
+
     $scope.lastValue = $scope.value[$scope.value.length - 1];
 
     // console.log($scope, parseInt($scope.lastValue));
