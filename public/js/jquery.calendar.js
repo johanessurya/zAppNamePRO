@@ -1,10 +1,7 @@
-$scope = {
-	calendar: {
+$global.calendar = {
 		DATETIME_FORMAT: 'MM/DD/YY HH:mm',
 		DATE_FORMAT: 'MM/DD/YY'
-	}
-};
-
+	};
 /*
  *	jQuery FullCalendar Extendable Plugin
  *	An Ajax (PHP - Mysql - jquery) script that extends the functionalities of the fullcalendar plugin
@@ -480,8 +477,8 @@ $scope = {
 					$('#endTime').val(endTime_factor);
 
 					// My hidden fields
-					$('#start').val(moment(start).format($scope.calendar.DATETIME_FORMAT));
-					$('#end').val(moment(end).format($scope.calendar.DATETIME_FORMAT));
+					$('#start').val(moment(start).format($global.calendar.DATETIME_FORMAT));
+					$('#end').val(moment(end).format($global.calendar.DATETIME_FORMAT));
 
 					var _allDay = allDay.target.className == 'fc-content-skeleton' ? true : false;
 					$('#inputAllDay').prop('checked', _allDay);
