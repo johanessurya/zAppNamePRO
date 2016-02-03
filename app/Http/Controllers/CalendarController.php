@@ -72,7 +72,7 @@ class CalendarController extends Controller
 
       if(!$validator->fails()) {
         $return['success'] = 1;
-
+        $params['user_id'] = Auth::user()->id;
         $test = Calendar::createEvent($params);
       }
 
@@ -81,7 +81,7 @@ class CalendarController extends Controller
 
     public function apiEventList() {
       $return = [];
-      $rows = Calendar::all();
+      $rows = Calendar::where('user_id', Auth::user()->id)->get();
 
       foreach($rows as $x){
         $allDay = $x->allDay ? true : false;
