@@ -1,40 +1,39 @@
 $global = {};
 $global.clientSource = [];
 $global.user = {};
-
-$global.initEditEvent = function() {
-  $('#inputCategory2').trigger('change');
-};
+$global.misc = {};
 $global.editForm = $('#edit-form-body');
+
+// Called when description modal show
+$global.initEditEvent = function() {
+  console.log($('#inputCategory2')[0]);
+};
+
 $global.initClients = function(clients) {
   var $scope = {};
   $scope.clients = clients;
   $scope.temp = false;
 
-  $('#inputClient2 option').each(function() {
-    // Remove selected attr
-    $(this).removeAttr('selected');
+  $.get('/api/v1/client/get').done(function(resp){
+    var _li = [];
 
-    var _temp = null;
-    // Get option value
-    _temp = $(this).val();
-
-    // Check option value with client id
-    for(i in $scope.clients) {
-      if(_temp == $scope.clients[i].client_id) {
-        $scope.temp = true;
-        // Set option to selected
-        $(this).attr('selected','selected');
-      }
+    for(i in resp) {
+      _li.push({
+        label: resp[i].name,
+        value: resp[i].id
+      });
     }
-    console.log(this, $scope.clients);
-  });
 
-  // Refresh select2
-  if($scope.temp)
+    var _clientIDList = [];
+    for(i in clients)
+      _clientIDList.push(clients[i].client_id);
+
+    $global.misc.refreshSelectClient(_li);
+    $global.misc.setSelectedOptions('#inputClient2', _clientIDList);
+
+    // Refresh select2
     $('#inputClient2').select2({tags:true});
-
-  console.log('Init clients');
+  });
 };
 
 /* categoryList is a json object that list category ID that selected
@@ -68,6 +67,62 @@ $global.initCategory = function(categoryList) {
     _temp.val(categoryList.subSubCategoryID);
   }
 }
+
+// ==== List of function (START) ====
+
+/* Set an select element with list of options.
+@param _selector element selector. Called with jQuery. Example $(_selector)
+@param _li array of object. Structure:
+[
+  {
+    label: 'Place in innerHTML',
+    value: 'Place in <option value="{here}"'
+  }
+]
+*/
+$global.misc.setOptionList = function(_selector, _li) {
+  var $scope = {};
+  var _temp = null;
+
+  $scope.selector = _selector;
+  $scope.jquery = $(_selector);
+  $scope.option = '<option value=":value">:label</option>';
+
+  $scope.jquery.html('');
+  for(i in _li) {
+    _temp = $scope.option;
+    _temp = _temp.replace(':value', _li[i].value);
+    _temp = _temp.replace(':label', _li[i].label);
+    $scope.jquery.append(_temp);
+  }
+
+  return true;
+}
+
+/* Select multiple element with list of value.
+@param _selector element selector. Called with jQuery. Example $(_selector)
+@param _li array of string. Example: [1,2,3,'testing']
+*/
+$global.misc.setSelectedOptions = function(_selector, _li) {
+  $scope = {};
+  $scope.selector = _selector;
+  $scope.jquery = $(_selector);
+
+  // Clear all selected option
+  $scope.jquery.find('option').removeAttr('selected');
+  for(i in _li) {
+    $scope.jquery.find('option[value="' + _li[i] + '"]').attr('selected', 'selected');
+  }
+
+  return true;
+}
+
+// Refresh client list. Get ajax and regen opton list
+$global.misc.refreshSelectClient = function (_li) {
+  $global.misc.setOptionList('#inputClient2', _li);
+  $global.misc.setOptionList('#inputClient', _li);
+}
+// ==== List of function (END) ====
 
 $(function () {
   $global.createForm = $('#quicksave-form-body');
