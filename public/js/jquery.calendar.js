@@ -358,6 +358,7 @@ $global.calendar = {
 							 calendar.description = dsc.replace('&amp;', '&');
 							 calendar.category = cat.replace('&amp;', '&');
 							 calendar.color = color;
+							 calendar.note = json_enc.event.description;
 
 							 $('#details-body-title').html(title);
 							 $('#details-body-content').html(dsc);
@@ -423,7 +424,8 @@ $global.calendar = {
 						$(opt.modalSelector).modal('show');
 
 						$('#edit_title, #inputTitle2').val(title);
-						$('#edit_description, #inputNote2').val(calendar.description_editable);
+						$('#edit_description').val(calendar.description_editable);
+						$('#inputNote2').val(calendar.note);
 
 						$("select#edit_categorie option").each(function() { this.selected = (this.text == calendar.category); });
 

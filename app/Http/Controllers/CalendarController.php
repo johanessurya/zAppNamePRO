@@ -48,6 +48,7 @@ class CalendarController extends Controller
       $row['clients'] = $clients;
       $row['subCategoryID'] = $event->subCategoryID;
       $row['subSubCategoryID'] = $event->subSubCategoryID;
+      $row['event'] = $event;
 
       return response()->json($row);
     }
