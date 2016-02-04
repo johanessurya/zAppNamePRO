@@ -351,7 +351,11 @@
                   Change Password
                 </label>
                 <input class="form-control input-sm" type="password" placeholder="Current Password" name="old_password">
+              </div><!-- /.form-group -->
+              <div class="form-group">
                 <input class="form-control input-sm" type="password" placeholder="New Password" name="password">
+              </div><!-- /.form-group -->
+              <div class="form-group">
                 <input class="form-control input-sm" type="password" placeholder="Retype New Password" name="password_confirmation">
               </div><!-- /.form-group -->
               <div class="form-group">
