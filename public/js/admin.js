@@ -2,10 +2,44 @@ $global = {};
 $global.clientSource = [];
 $global.user = {};
 $global.misc = {};
-$global.editForm = $('#edit-form-body');
+$global.createForm = $('#edit-form-body');
+$global.editForm = $('#quicksave-form-body');
+
+/* Called when create event form pop up
+@params data json object that hold everything you need
+Data Structure
+{
+  start: date start
+  end: date end
+  allDay: mouse event of row time row clicked
+}
+*/
+$global.initCreateForm = function(data) {
+  var $scope = {};
+  var temp = moment(data.start);
+  $scope.week = ['First', 'Second', 'Third', 'Fourth', 'Last'];
+  $scope.month = 'Every :date of the Month';
+  $scope.month2 = ':week_order :day of every month';
+
+  // Get date
+  $scope.date = temp.format('Do');
+  $scope.month = $scope.month.replace(':date', $scope.date);
+
+  // Get day
+  $scope.day = temp.format('dddd');
+  $scope.weekOrder = $scope.week[Math.ceil(temp.date()/7) - 1];
+
+  $scope.month2 = $scope.month2.replace(':day', $scope.day);
+  $scope.month2 = $scope.month2.replace(':week_order', $scope.weekOrder);
+
+  // Update create form
+  $global.createForm.find('select option[value="month"]').html($scope.month);
+  $global.createForm.find('select option[value="month-2"]').html($scope.month2);
+}
 
 // Called when description modal show
-$global.initEditEvent = function() {
+// @params calendar json object that hold everything you need
+$global.initEditEvent = function(calendar) {
   console.log($('#inputCategory2')[0]);
 };
 

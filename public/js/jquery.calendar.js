@@ -407,7 +407,7 @@ $global.calendar = {
 						document.getElementById("edit-form-body").reset();
 
 						// Init category
-						$global.initEditEvent();
+						$global.initEditEvent(calendar);
 
 						// Hide preview event
 						$('#cal-preview').hide();
@@ -457,6 +457,11 @@ $global.calendar = {
 				calendar.quickModal = function(start, end, allDay)
 				{
 					document.getElementById("quicksave-form-body").reset();
+					$global.initCreateForm({
+						'start': start,
+						'end': end,
+						'allDay': allDay
+					})
 					// console.log('allday', allDay);
 
 					var _temp = $(allDay.toElement);

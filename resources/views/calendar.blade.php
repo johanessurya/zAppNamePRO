@@ -75,6 +75,7 @@
                   <option value="day">Daily</option>
                   <option value="week">Weekly</option>
                   <option value="month">Monthly</option>
+                  <option value="month-2">Monthly - 2</option>
                 </select>
               </div>
               <div class="col-lg-4" style="display: none;">
