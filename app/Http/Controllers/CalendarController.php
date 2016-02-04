@@ -95,11 +95,19 @@ class CalendarController extends Controller
           ->join('client', 'calendar_client.client_id', '=', 'client.id')->take(2)->get();
 
         $clientName = [];
+
         foreach($clients as $y) {
           $clientName[] = $y->name;
         }
 
-        $title = $category->title . ' | ' . $subCategory->title . ' [' . implode(', ', $clientName) . '] - ' . $x->title;
+        if(!empty($clientName)) {
+          $clientName = '[' . implode(', ', $clientName) . ']';
+        } else {
+          $clientName = null;
+        }
+
+
+        $title = $category->title . ' | ' . $subCategory->title . ' ' . $clientName . ' - ' . $x->title;
 
         $return[] = [
           'id' => $repeatId, // I don't know why, but just follow it. See calendar.php in fullcal project demo

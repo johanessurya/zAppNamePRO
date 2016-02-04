@@ -26,6 +26,13 @@ class Calendar extends MyModel
   public static function createEvent(array $attributes = array()) {
     // Create an event
     // This is parent event. All repeat event will get this id as their parent.
+
+    // Correction repeat type
+    $repeatType = $attributes['repeat_type'];
+    if($repeatType == 'month-2') {
+      $attributes['repeat_type'] = 'month';
+    }
+
     $calendar = self::create($attributes);
     $calendar->repeat_id = $calendar->id;
     $calendar->save();
@@ -90,7 +97,7 @@ class Calendar extends MyModel
         // Change repeat_id
         unset($temp['id']);
 
-        switch($calendar->repeat_type) {
+        switch($repeatType) {
           case 'day':
             $n = 1*(0+1);
             $modify = '+' . $n . ' day';
@@ -104,6 +111,15 @@ class Calendar extends MyModel
           case 'month':
             $n = 1*(0+1);
             $modify = '+' . $n . ' month';
+            break;
+
+          case 'month-2':
+            // second sun of February 2016
+            $modify = ':weekOrder :day of :month :year';
+
+            var_dump($dateTime_start->format(config('steve.mysql_datetime_format')));
+
+            die('month-2: TEST');
             break;
         }
 
