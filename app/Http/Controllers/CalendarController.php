@@ -88,6 +88,18 @@ class CalendarController extends Controller
         $allDay = $x->allDay ? true : false;
         $repeatId = $x->repeat_id == null ? $x->id : $x->repeat_id;
         $category = Category::find($x->categoryID);
+        $subCategory = DB::table('subcategory')->where('id', $x->subCategoryID)->first();
+
+        $clients = DB::table('calendar_client')
+          ->where('calendar_id', $x->id)
+          ->join('client', 'calendar_client.client_id', '=', 'client.id')->take(2)->get();
+
+        $clientName = [];
+        foreach($clients as $y) {
+          $clientName[] = $y->name;
+        }
+
+        $title = $category->title . ' | ' . $subCategory->title . ' [' . implode(', ', $clientName) . '] - ' . $x->title;
 
         $return[] = [
           'id' => $repeatId, // I don't know why, but just follow it. See calendar.php in fullcal project demo
@@ -96,7 +108,7 @@ class CalendarController extends Controller
           'color' => $category->color,
           'start' => MyModel::revDateTime($x->start),
           'end' => MyModel::revDateTime($x->end),
-          'title' => $x->title
+          'title' => $title
         ];
       }
 
