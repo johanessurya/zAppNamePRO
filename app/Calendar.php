@@ -29,9 +29,6 @@ class Calendar extends MyModel
 
     // Correction repeat type
     $repeatType = $attributes['repeat_type'];
-    if($repeatType == 'month-2') {
-      $attributes['repeat_type'] = 'month';
-    }
 
     $calendar = self::create($attributes);
     $calendar->repeat_id = $calendar->id;
@@ -97,31 +94,7 @@ class Calendar extends MyModel
         // Change repeat_id
         unset($temp['id']);
 
-        switch($repeatType) {
-          case 'day':
-            $n = 1*(0+1);
-            $modify = '+' . $n . ' day';
-            break;
-
-          case 'week':
-            $n = 7*(0+1);
-            $modify = '+' . $n . ' day';
-            break;
-
-          case 'month':
-            $n = 1*(0+1);
-            $modify = '+' . $n . ' month';
-            break;
-
-          case 'month-2':
-            // second sun of February 2016
-            $modify = ':weekOrder :day of :month :year';
-
-            var_dump($dateTime_start->format(config('steve.mysql_datetime_format')));
-
-            die('month-2: TEST');
-            break;
-        }
+        $modify = self::getInterval($repeatType, $dateTime_start);
 
         $dateTime_start->modify($modify);
         $dateTime_end->modify($modify);

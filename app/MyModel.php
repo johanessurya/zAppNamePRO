@@ -71,7 +71,7 @@ class MyModel extends Model
     return $return;
   }
 
-  public static function getInterval($repeat_type) {
+  public static function getInterval($repeat_type, DateTime $dateTime = null) {
     $modify = null;
 
     switch($repeat_type) {
@@ -89,8 +89,45 @@ class MyModel extends Model
         $n = 1*(0+1);
         $modify = '+' . $n . ' month';
         break;
+
+      case 'month-2':
+        $tempWeekOrder = ['first', 'second', 'third', 'fourth', 'last'];
+
+        // second sun of February 2016
+        $day = $dateTime->format('D');
+        $month = self::getNextMonth($dateTime->getTimestamp())->format('F');
+        $year = $dateTime->format('Y');
+        $weekOrder = self::weekOfMonth($dateTime->getTimestamp()) - 1;
+        $modify = ':weekOrder :day of :month :year';
+
+        $modify = str_replace(':weekOrder', $tempWeekOrder[$weekOrder], $modify);
+        $modify = str_replace(':day', $day, $modify);
+        $modify = str_replace(':month', $month, $modify);
+        $modify = str_replace(':year', $year, $modify);
+        break;
     }
 
     return $modify;
+  }
+
+  private static function weekOfMonth($timestamp) {
+    //Get the first day of the month.
+    $firstOfMonth = strtotime(date("Y-m-01", $timestamp));
+    //Apply above formula.
+    return intval(date("W", $timestamp)) - intval(date("W", $firstOfMonth)) + 1;
+  }
+
+  private static function getNextMonth($timestamp) {
+    $now = new DateTime();
+    $now->setTimestamp($timestamp);
+    $year = $now->format('Y');
+    $month = $now->format('n') + 1;
+    if($month > 12)
+      $month = 1;
+
+    $day = 1;
+    $now->setDate($year, $month, $day);
+
+    return $now;
   }
 }

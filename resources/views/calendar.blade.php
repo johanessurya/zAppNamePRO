@@ -68,7 +68,7 @@
                   <label for="inputAllDay">All Day</label>
                   <input class="display-block" type="checkbox" id="inputAllDay" name="allDay" />
               </div>
-              <div class="col-lg-4">
+              <div class="col-lg-8">
                 <label for="inputRepeat">Repeat</label>
                 <select class="form-control" id="inputRepeat" name="repeat_type">
                   <option value="" selected="selected">No</option>

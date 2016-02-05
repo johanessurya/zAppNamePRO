@@ -135,8 +135,14 @@ class RegisterController extends Controller
       $x = $datetime->format(config('steve.mysql_datetime_format'));
       // $datetime->modify('last weeks of next month');
       // $datetime->modify('next month');
-      $datetime->modify('second sun of February 2016');
+      $datetime->modify('second Mon of March 2016');
       $y = $datetime->format(config('steve.mysql_datetime_format'));
       var_dump($x, $y);
+
+      $date1 = new DateTime('2016-01-31 11:39:49');
+      $date2 = DateTime::createFromFormat(DATETIME_FORMAT, $date1->format(DATETIME_FORMAT));
+      $date2->modify('+1 month');
+
+      var_dump($date1, $date2);
     }
 }

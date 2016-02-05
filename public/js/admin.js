@@ -1,3 +1,4 @@
+var $global = {};
 $global = {};
 $global.clientSource = [];
 $global.user = {};
@@ -35,7 +36,7 @@ $global.initCreateForm = function(data) {
   // Update create form
   $global.createForm.find('select option[value="month"]').html($scope.month);
   $global.createForm.find('select option[value="month-2"]').html($scope.month2);
-}
+};
 
 // Called when description modal show
 // @params calendar json object that hold everything you need
@@ -50,6 +51,7 @@ $global.initClients = function(clients) {
 
   $.get('/api/v1/client/get').done(function(resp){
     var _li = [];
+    var i = null;
 
     for(i in resp) {
       _li.push({
@@ -86,6 +88,7 @@ $global.initCategory = function(categoryList) {
   var _cat = $global.category;
   var _li = null;
   var _val = null;
+  var i = null;
 
   // Category didn't need to be filled with any category
   // Just select it with correct value
@@ -120,7 +123,7 @@ $global.initCategory = function(categoryList) {
   $global.misc.setSelectedOptions('#inputTopic2', [_val]);
   // Trigger change
   $('#inputTopic2').trigger('change');
-}
+};
 
 // ==== List of function (START) ====
 
@@ -143,7 +146,7 @@ $global.misc.setOptionList = function(_selector, _li) {
   $scope.option = '<option value=":value">:label</option>';
 
   $scope.jquery.html('');
-  for(i in _li) {
+  for(var i in _li) {
     _temp = $scope.option;
     _temp = _temp.replace(':value', _li[i].value);
     _temp = _temp.replace(':label', _li[i].label);
@@ -151,7 +154,7 @@ $global.misc.setOptionList = function(_selector, _li) {
   }
 
   return true;
-}
+};
 
 /* Select multiple element with list of value.
 @param _selector element selector. Called with jQuery. Example $(_selector)
@@ -164,18 +167,18 @@ $global.misc.setSelectedOptions = function(_selector, _li) {
 
   // Clear all selected option
   $scope.jquery.find('option').removeAttr('selected');
-  for(i in _li) {
+  for(var i in _li) {
     $scope.jquery.find('option[value="' + _li[i] + '"]').attr('selected', 'selected');
   }
 
   return true;
-}
+};
 
 // Refresh client list. Get ajax and regen opton list
 $global.misc.refreshSelectClient = function (_li) {
   $global.misc.setOptionList('#inputClient2', _li);
   $global.misc.setOptionList('#inputClient', _li);
-}
+};
 // ==== List of function (END) ====
 
 $(function () {
@@ -299,7 +302,7 @@ $(function () {
     // Start add with blank option
     // _select.append(_temp);
 
-    for(i in _res) {
+    for(var i in _res) {
       _temp = _el.replace(':value', _res[i].id);
       _temp = _temp.replace(':innerHTML', _res[i].title);
 
@@ -342,13 +345,13 @@ $(function () {
     _temp = _temp.replace(':innerHTML', '');
 
     // Remove all option
-    var _select = $('#' + _idSubCategory)
+    var _select = $('#' + _idSubCategory);
     _select.html('');
 
     // Start add with blank option
     // _select.append(_temp);
 
-    for(i in _res) {
+    for(var i in _res) {
       _show = true;
       _temp = _el.replace(':value', _res[i].id);
       _temp = _temp.replace(':innerHTML', _res[i].title);
@@ -374,12 +377,12 @@ $(function () {
 
   // When set repeat to "yes", show how many times
   $('#inputRepeat').change(function() {
-    if($(this).val() == '') {
+    if($(this).val() === '') {
       $('#inputRepeatN').parent().hide();
     } else {
       $('#inputRepeatN').parent().show();
     }
-  })
+  });
 
   // When selecting a client
   $('#inputClient, #inputClient2').change(function() {
@@ -388,7 +391,7 @@ $(function () {
     // Get selected item;
     $scope.value = $(this).val();
 
-    if($scope.value == null)
+    if($scope.value === null)
       return;
 
     $scope.lastValue = $scope.value[$scope.value.length - 1];
@@ -399,7 +402,7 @@ $(function () {
       // Show confirm box
       $scope.confirm = confirm("Should I add this new client?");
 
-      if($scope.confirm != true) {
+      if($scope.confirm !== true) {
         // Cancel pressed
 
         // Remove option with value = $scope.lastValue
