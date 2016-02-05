@@ -287,7 +287,7 @@ class CalendarController extends Controller
         $x->start = $start->format(DATETIME_FORMAT);
         $x->end = $end->format(DATETIME_FORMAT);
 
-        $interval = MyModel::getInterval($x->repeat_type);
+        $interval = MyModel::getInterval($x->repeat_type, $start);
         if(!empty($interval)) {
           $start->modify($interval);
           $end->modify($interval);
