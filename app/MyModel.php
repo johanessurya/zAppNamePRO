@@ -98,12 +98,11 @@ class MyModel extends Model
         $month = self::getNextMonth($dateTime->getTimestamp())->format('F');
         $year = $dateTime->format('Y');
         $weekOrder = self::weekOfMonth($dateTime->getTimestamp()) - 1;
-        $modify = ':weekOrder :day of :month :year';
+        // first Thursday of next month
+        $modify = ':weekOrder :day of next month';
 
         $modify = str_replace(':weekOrder', $tempWeekOrder[$weekOrder], $modify);
         $modify = str_replace(':day', $day, $modify);
-        $modify = str_replace(':month', $month, $modify);
-        $modify = str_replace(':year', $year, $modify);
         break;
     }
 

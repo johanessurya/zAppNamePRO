@@ -101,7 +101,7 @@ class Calendar extends MyModel
 
         // Skip sunday or saturday
         $dayname = $dateTime_start->format('l');
-        if($dayname == 'Saturday'){
+        if($dayname == 'Saturday') {
           $dateTime_start->modify($modify);
           $dateTime_end->modify($modify);
         }
