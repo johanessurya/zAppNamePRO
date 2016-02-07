@@ -99,6 +99,18 @@ class Calendar extends MyModel
         $dateTime_start->modify($modify);
         $dateTime_end->modify($modify);
 
+        // Skip sunday or saturday
+        $dayname = $dateTime_start->format('l');
+        if($dayname == 'Saturday'){
+          $dateTime_start->modify($modify);
+          $dateTime_end->modify($modify);
+        }
+        $dayname = $dateTime_start->format('l');
+        if($dayname == 'Sunday') {
+          $dateTime_start->modify($modify);
+          $dateTime_end->modify($modify);
+        }
+
         $temp['start'] = $dateTime_start->format(DATETIME_FORMAT);
         $temp['end'] = $dateTime_end->format(DATETIME_FORMAT);
         $temp['repeat_id'] = $parentId;
