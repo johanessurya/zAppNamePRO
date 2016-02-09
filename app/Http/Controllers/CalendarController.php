@@ -270,7 +270,6 @@ class CalendarController extends Controller
 
     public function updateDropDrag(Request $request) {
       $params = $request->all();
-
       $params['start'] = MyModel::dateTime($params['start']);
       $params['end'] = MyModel::dateTime($params['end']);
 
@@ -278,22 +277,43 @@ class CalendarController extends Controller
 
       $start = DateTime::createFromFormat(DATETIME_FORMAT, $params['start']);
       $end = DateTime::createFromFormat(DATETIME_FORMAT, $params['end']);
+      $temp_start = null;
+      $temp_end = null;
 
       $interval = null;
-      for($i = 0; $i < count($rows); $i++) {
+
+      // Insert first row
+      $x = $rows[0];
+      $x->start = $start->format(DATETIME_FORMAT);
+      $x->end = $end->format(DATETIME_FORMAT);
+      $rows[0] = $x;
+
+      for($i = 1; $i < count($rows); $i++) {
         $x = $rows[$i];
+
+        $interval = MyModel::getInterval($x->repeat_type, $start);
+
+        $start->modify($interval);
+        $end->modify($interval);
+
+        $repeatType = $x->repeat_type;
+        if($repeatType == 'month') {
+          // Save old date time to temp variable before shift to next day
+          $temp_start = DateTime::createFromFormat(DATETIME_FORMAT, $start->format(DATETIME_FORMAT));
+          $temp_end = DateTime::createFromFormat(DATETIME_FORMAT, $end->format(DATETIME_FORMAT));
+        }
+
+        // Shift weekend date
+        Calendar::shiftWeekendDate($x->repeat_type, $interval, $start, $end);
 
         // Update their date
         $x->start = $start->format(DATETIME_FORMAT);
         $x->end = $end->format(DATETIME_FORMAT);
 
-        $interval = MyModel::getInterval($x->repeat_type, $start);
-        if(!empty($interval)) {
-          $start->modify($interval);
-          $end->modify($interval);
-
-          // Shift weekend date
-          Calendar::shiftWeekendDate($x->repeat_type, $interval, $start, $end);
+        if($repeatType == 'month') {
+          // After save datetime with modify on it. Back to old before shiftWeekendDate
+          $start = $temp_start;
+          $end = $temp_end;
         }
 
         $x->allDay = $params['allDay'] == 'true' ? 1 : 0;
