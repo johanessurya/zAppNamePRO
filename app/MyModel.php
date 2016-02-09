@@ -97,8 +97,7 @@ class MyModel extends Model
         $day = $dateTime->format('D');
         $month = self::getNextMonth($dateTime->getTimestamp())->format('F');
         $year = $dateTime->format('Y');
-        $weekOrder = self::weekOfMonth($dateTime->getTimestamp()) - 1;
-        // first Thursday of next month
+        $weekOrder = ceil((int)$dateTime->format('j') / 7) - 1;
         $modify = ':weekOrder :day of next month';
 
         $modify = str_replace(':weekOrder', $tempWeekOrder[$weekOrder], $modify);
