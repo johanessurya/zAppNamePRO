@@ -90,6 +90,8 @@ class Calendar extends MyModel
 
       $dateTime_start = DateTime::createFromFormat(DATETIME_FORMAT, $calendar->start);
       $dateTime_end = DateTime::createFromFormat(DATETIME_FORMAT, $calendar->end);
+      $temp_start = null;
+      $temp_end = null;
       for($i = 0; $i < $attributes['repeatN']; $i++) {
         // Change repeat_id
         unset($temp['id']);
@@ -99,11 +101,23 @@ class Calendar extends MyModel
         $dateTime_start->modify($modify);
         $dateTime_end->modify($modify);
 
+        if($repeatType == 'month') {
+          // Save old date time to temp variable before shift to next day
+          $temp_start = DateTime::createFromFormat(DATETIME_FORMAT, $dateTime_start->format(DATETIME_FORMAT));
+          $temp_end = DateTime::createFromFormat(DATETIME_FORMAT, $dateTime_end->format(DATETIME_FORMAT));
+        }
+
         self::shiftWeekendDate($repeatType, $modify, $dateTime_start, $dateTime_end);
 
         $temp['start'] = $dateTime_start->format(DATETIME_FORMAT);
         $temp['end'] = $dateTime_end->format(DATETIME_FORMAT);
         $temp['repeat_id'] = $parentId;
+
+        if($repeatType == 'month') {
+          // After save datetime with modify on it. Back to old before shiftWeekendDate
+          $dateTime_start = $temp_start;
+          $dateTime_end = $temp_end;
+        }
 
         $rows[] = $temp;
       }
