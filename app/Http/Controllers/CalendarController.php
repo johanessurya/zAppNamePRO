@@ -107,7 +107,7 @@ class CalendarController extends Controller
         }
 
 
-        $title = $category->title . ' | ' . $subCategory->title . ' ' . $clientName . ' - ' . $x->title;
+        $title = $category->abbrev . ' | ' . $subCategory->title . ' ' . $clientName . ' - ' . $x->title;
 
         $return[] = [
           'id' => $repeatId, // I don't know why, but just follow it. See calendar.php in fullcal project demo
@@ -155,7 +155,7 @@ class CalendarController extends Controller
       // Delete an event
       $event = Calendar::find($params['id']);
       if(!empty($event)) {
-        $rows = DB::table('calendar_client')->where('calendar_id', $event->id)->get();
+        $rows = DB::table('calendar_client')->where('calendar_id', $event->id)->delete();
         $event->delete();
 
         // Check if param rep_id exist or not
@@ -166,7 +166,7 @@ class CalendarController extends Controller
 
           for($i = 0; $i < count($events); $i++) {
             // Delete calendar_client list
-            DB::table('calendar_client')->where('calendar_id', $events[$i]->id);
+            DB::table('calendar_client')->where('calendar_id', $events[$i]->id)->delete();
 
             // Delete event
             $events[$i]->delete();
