@@ -291,6 +291,9 @@ class CalendarController extends Controller
         if(!empty($interval)) {
           $start->modify($interval);
           $end->modify($interval);
+
+          // Shift weekend date
+          Calendar::shiftWeekendDate($x->repeat_type, $interval, $start, $end);
         }
 
         $x->allDay = $params['allDay'] == 'true' ? 1 : 0;

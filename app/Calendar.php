@@ -99,17 +99,7 @@ class Calendar extends MyModel
         $dateTime_start->modify($modify);
         $dateTime_end->modify($modify);
 
-        // Skip sunday or saturday
-        $dayname = $dateTime_start->format('l');
-        if($dayname == 'Saturday') {
-          $dateTime_start->modify($modify);
-          $dateTime_end->modify($modify);
-        }
-        $dayname = $dateTime_start->format('l');
-        if($dayname == 'Sunday') {
-          $dateTime_start->modify($modify);
-          $dateTime_end->modify($modify);
-        }
+        self::shiftWeekendDate($repeatType, $modify, $dateTime_start, $dateTime_end);
 
         $temp['start'] = $dateTime_start->format(DATETIME_FORMAT);
         $temp['end'] = $dateTime_end->format(DATETIME_FORMAT);
@@ -136,6 +126,36 @@ class Calendar extends MyModel
     }
 
     return true;
+  }
+
+  public static function shiftWeekendDate($repeatType, $modify, $dateTime_start, $dateTime_end) {
+    // Shift day if weekend
+    if($repeatType == 'month' || $repeatType == 'month-2') {
+      $modify = '+1 day';
+      // Skip sunday or saturday
+      $dayname = $dateTime_start->format('l');
+      if($dayname == 'Saturday') {
+        $dateTime_start->modify($modify);
+        $dateTime_end->modify($modify);
+      }
+      $dayname = $dateTime_start->format('l');
+      if($dayname == 'Sunday') {
+        $dateTime_start->modify($modify);
+        $dateTime_end->modify($modify);
+      }
+    } else {
+      // Skip sunday or saturday
+      $dayname = $dateTime_start->format('l');
+      if($dayname == 'Saturday') {
+        $dateTime_start->modify($modify);
+        $dateTime_end->modify($modify);
+      }
+      $dayname = $dateTime_start->format('l');
+      if($dayname == 'Sunday') {
+        $dateTime_start->modify($modify);
+        $dateTime_end->modify($modify);
+      }
+    }
   }
 
   // ====== Accessor =======
