@@ -95,11 +95,11 @@ class Calendar extends MyModel
 
       $temp_start = null;
       $temp_end = null;
+
+      $modify = self::getInterval($repeatType, $dateTime_start);
       for($i = 0; $i < $attributes['repeatN']; $i++) {
         // Change repeat_id
         unset($temp['id']);
-
-        $modify = self::getInterval($repeatType, $dateTime_start);
 
         $dateTime_start->modify($modify);
 
