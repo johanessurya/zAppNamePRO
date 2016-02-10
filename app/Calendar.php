@@ -90,6 +90,9 @@ class Calendar extends MyModel
 
       $dateTime_start = DateTime::createFromFormat(DATETIME_FORMAT, $calendar->start);
       $dateTime_end = DateTime::createFromFormat(DATETIME_FORMAT, $calendar->end);
+
+      $interval = $dateTime_start->diff($dateTime_end);
+
       $temp_start = null;
       $temp_end = null;
       for($i = 0; $i < $attributes['repeatN']; $i++) {
@@ -99,7 +102,16 @@ class Calendar extends MyModel
         $modify = self::getInterval($repeatType, $dateTime_start);
 
         $dateTime_start->modify($modify);
-        $dateTime_end->modify($modify);
+
+        // Fix bug for end of month. It would cause error
+        // Clone date time
+        $temp_start = DateTime::createFromFormat(DATETIME_FORMAT, $dateTime_start->format(DATETIME_FORMAT));
+
+        // Add by +1 day
+        $temp_start->modify($interval->format('%R%a days')); // make day dynamic by substract end date and start date
+
+        // Replace with
+        $dateTime_end = $temp_start;
 
         if($repeatType == 'month') {
           // Save old date time to temp variable before shift to next day
