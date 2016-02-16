@@ -218,5 +218,8 @@ Route::group(['middleware' => ['web']], function () {
 
     // Get related client list
     Route::get('/client/get', 'CalendarController@getClient');
+
+    // Get log
+    Route::get('/logs/activity', 'LogController@getActivity');
   });
 });

@@ -523,14 +523,6 @@ $(function () {
   }
   );
 
-  // Init pie chart
-  $global.initPieChart();
-
-  // Init CKEditor
-  $global.initCKEditor();
-
-  // Hanlde all event and action
-  $global.dateTimePicker();
 }); // End of onReadyDocument
 
 function showModal(selector) {

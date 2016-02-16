@@ -2,6 +2,11 @@
 
 @section('title-h1', 'User List')
 
+@push('scripts')
+  <!-- fullCalendar 2.2.5 -->
+  <script src="{{ asset('js/admin-logs.js') }}"></script>
+@endpush
+
 @section('popup-modal')
 <div class="example-modal">
   <div id="user-edit" class="modal">
