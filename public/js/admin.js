@@ -208,6 +208,13 @@ $global.initCKEditor = function() {
   $(".textarea").wysihtml5();
 };
 
+$global.dateTimePicker = function() {
+  $('#daterange-btn').on('apply.daterangepicker', function(ev, picker) {
+    console.log(picker.startDate.format('YYYY-MM-DD'));
+    console.log(picker.endDate.format('YYYY-MM-DD'));
+  });
+}
+
 // ==== List of function (START) ====
 
 /* Set an select element with list of options.
@@ -522,6 +529,8 @@ $(function () {
   // Init CKEditor
   $global.initCKEditor();
 
+  // Hanlde all event and action
+  $global.dateTimePicker();
 }); // End of onReadyDocument
 
 function showModal(selector) {
