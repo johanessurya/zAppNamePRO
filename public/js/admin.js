@@ -6,6 +6,12 @@ $global.misc = {};
 $global.createForm = $('#edit-form-body');
 $global.editForm = $('#quicksave-form-body');
 
+// Flag for activity tables
+$global.activityFirstTime = true;
+
+// Handle activity dataTables
+$global.activityTable = null;
+
 /* Called when create event form pop up
 @params data json object that hold everything you need
 Data Structure
@@ -217,16 +223,21 @@ $global.dateTimePicker = function() {
 }
 
 $global.reloadActivityTable = function(start, end) {
-    $('#activity-table').DataTable( {
-        'ajax': '/api/v1/logs/activity',
-        'columns': [
-          {'data': 'date', 'searchable': true},
-          {'data': 'start', 'searchable': true},
-          {'data': 'end', 'searchable': true},
-          {'data': 'description', 'searchable': true},
-          {'data': 'note', 'searchable': true},
-        ],
-    } );
+    if($global.activityFirstTime)
+      $global.activityTable = $('#activity-table').DataTable( {
+          'ajax': '/api/v1/logs/activity',
+          'columns': [
+            {'data': 'date', 'searchable': true},
+            {'data': 'start', 'searchable': true},
+            {'data': 'end', 'searchable': true},
+            {'data': 'description', 'searchable': true},
+            {'data': 'note', 'searchable': true},
+          ],
+      } );
+    else
+      $global.activityTable.ajax.reload();
+
+    $global.activityFirstTime = false;
 }
 
 // ==== List of function (START) ====
