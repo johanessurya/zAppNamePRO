@@ -22,6 +22,8 @@ return [
   // Dt list
   'dt' => [5,10,15, 20, 25, 30, 35, 45, 50, 55, 60],
 
-  'mysql_datetime_format' => 'Y-m-d H:i:s'
+  'mysql_datetime_format' => 'Y-m-d H:i:s',
+
+  'time_format' => 'H:i:s'
 ]
 ?>

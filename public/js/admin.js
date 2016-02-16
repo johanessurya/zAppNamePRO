@@ -212,7 +212,21 @@ $global.dateTimePicker = function() {
   $('#daterange-btn').on('apply.daterangepicker', function(ev, picker) {
     console.log(picker.startDate.format('YYYY-MM-DD'));
     console.log(picker.endDate.format('YYYY-MM-DD'));
+    $global.reloadActivityTable();
   });
+}
+
+$global.reloadActivityTable = function(start, end) {
+    $('#activity-table').DataTable( {
+        'ajax': '/api/v1/logs/activity',
+        'columns': [
+          {'data': 'date', 'searchable': true},
+          {'data': 'start', 'searchable': true},
+          {'data': 'end', 'searchable': true},
+          {'data': 'description', 'searchable': true},
+          {'data': 'note', 'searchable': true},
+        ],
+    } );
 }
 
 // ==== List of function (START) ====
@@ -362,17 +376,6 @@ $(function () {
         orderable: false
       }],
       "order": [[ 2, "asc" ]]
-  } );
-
-  $('#activity-table').DataTable( {
-      'ajax': '/api/v1/logs/activity',
-      'columns': [
-        {'data': 'date', 'searchable': true},
-        {'data': 'start', 'searchable': true},
-        {'data': 'end', 'searchable': true},
-        {'data': 'description', 'searchable': true},
-        {'data': 'note', 'searchable': true},
-      ],
   } );
 
   // Load sub category option
