@@ -139,6 +139,11 @@ Route::group(['middleware' => ['web']], function () {
   // Calendar
   Route::get('/dashboard/calendar', 'CalendarController@index');
 
+  // Activity Log
+  Route::get('/dashboard/activity', function () {
+    return view('dashboard.activitylog');
+  });
+
   // ==== API Route ====
   // Prefix : /api/v1/
   Route::group(['prefix' => '/api/v1/'], function () {

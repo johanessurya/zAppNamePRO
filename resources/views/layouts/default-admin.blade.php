@@ -108,7 +108,7 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="pages/forms/general.html"><i class="fa  fa-check"></i> Activity Log</a></li>
+                <li><a href="dashboard/activity"><i class="fa  fa-check"></i> Activity Log</a></li>
                 <li><a href="pages/forms/advanced.html"><i class="fa fa-truck "></i> Topic Delivery Log</a></li>
                 <li><a href="pages/forms/editors.html"><i class="fa fa-graduation-cap"></i> Client Service Log</a></li>
                 <li><a href="pages/forms/editors.html"><i class="fa fa-calculator"></i> Topic Statistics</a></li>
