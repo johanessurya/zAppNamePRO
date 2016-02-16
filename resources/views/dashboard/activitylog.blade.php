@@ -83,11 +83,20 @@
           <a href="#" class="btn btn-default">PDF</a>
           <a href="#" class="btn btn-default">Print</a>
         </div>
+
+        <!-- Date and time range -->
+        <div class="form-group pull-right">
+          <div class="input-group">
+            <button class="btn btn-default pull-right" id="daterange-btn">
+              <i class="fa fa-calendar"></i> Date range picker
+              <i class="fa fa-caret-down"></i>
+            </button>
+          </div>
+        </div><!-- /.form group -->
       </div><!-- /.box-body -->
-      <div class="box-footer clearfix">
-        <a href="javascript::;" class="btn btn-sm btn-info btn-flat pull-left">Place New Order</a>
-        <a href="javascript::;" class="btn btn-sm btn-default btn-flat pull-right">View All Orders</a>
-      </div><!-- /.box-footer -->
+      <div class="box-body pad table-responsive">
+        <p class="pull-right">Activity Log: <strong>January 1, 2016 - January 30, 2016</strong></p>
+      </div>
     </div><!-- /.box -->
   </div><!-- /.col -->
 </div>
