@@ -364,6 +364,17 @@ $(function () {
       "order": [[ 2, "asc" ]]
   } );
 
+  $('#activity-table').DataTable( {
+      'ajax': '/api/v1/logs/activity',
+      'columns': [
+        {'data': 'date', 'searchable': true},
+        {'data': 'start', 'searchable': true},
+        {'data': 'end', 'searchable': true},
+        {'data': 'description', 'searchable': true},
+        {'data': 'note', 'searchable': true},
+      ],
+  } );
+
   // Load sub category option
   $('#inputCategory, #inputCategory2').change(function(){
     // ID attribute

@@ -166,7 +166,7 @@
       </div><!-- /.box-header -->
       <div class="box-body">
         <div class="table-responsive">
-          <table class="table no-margin">
+          <table id="activity-table" class="table no-margin">
             <thead>
               <tr>
                 <th>Date</th>
