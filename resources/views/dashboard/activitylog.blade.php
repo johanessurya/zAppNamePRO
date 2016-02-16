@@ -143,11 +143,11 @@
             <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
           </div>
         </div><!-- /.box-header -->
-        <div class="box-body no-padding">
+        <div class="box-body pad">
+          <form>
+            <textarea id="editor1" name="editor1" rows="10" cols="80">This is my textarea to be replaced with CKEditor.</textarea>
+          </form>
         </div><!-- /.box-body -->
-        <div class="box-footer text-center">
-          <a href="javascript::" class="uppercase">View All Users</a>
-        </div><!-- /.box-footer -->
       </div><!--/.box -->
     </div><!-- /.col -->
 </div>
