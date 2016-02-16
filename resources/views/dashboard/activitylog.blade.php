@@ -95,7 +95,7 @@
         </div><!-- /.form group -->
       </div><!-- /.box-body -->
       <div class="box-body pad table-responsive">
-        <p class="pull-right">Activity Log: <strong>January 1, 2016 - January 30, 2016</strong></p>
+        <p class="pull-right"><strong>23 activities were found during the time period: 8/5/15 – 1/19/16</strong></p>
       </div>
     </div><!-- /.box -->
   </div><!-- /.col -->

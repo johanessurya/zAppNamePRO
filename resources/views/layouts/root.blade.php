@@ -374,6 +374,8 @@
     <script src="../../plugins/daterangepicker/daterangepicker.js"></script>
     <!-- Bootstrap 3.3.5 -->
     <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
+    <!-- ChartJS 1.0.1 -->
+    <script src="{{ asset('plugins/chartjs/Chart.min.js') }}"></script>
     <!-- DataTables -->
     <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
