@@ -1,108 +1,33 @@
 @extends('layouts.default-admin')
 
-@section('title-h1', 'User List')
+@section('title-h1', 'Activity Log')
+@section('title-small', 'January 1, 2016 - January 30, 2016')
 
 @push('scripts')
   <!-- fullCalendar 2.2.5 -->
   <script src="{{ asset('js/admin-logs.js') }}"></script>
 @endpush
 
-@section('popup-modal')
-<div class="example-modal">
-  <div id="user-edit" class="modal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Modal Default</h4>
-        </div>
-        <div class="modal-body">
-          <p>One fine body&hellip;</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
-  <div id="user-new" class="modal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Add New User</h4>
-        </div>
-        <div class="modal-body">
-          <!-- general form elements -->
-          <div class="box box-primary">
-            <!-- form start -->
-            <form role="form">
-              <div class="box-body">
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Email address</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputPassword1">Password</label>
-                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputFile">File input</label>
-                  <input type="file" id="exampleInputFile">
-                  <p class="help-block">Example block-level help text here.</p>
-                </div>
-                <div class="checkbox">
-                  <label>
-                    <input type="checkbox"> Check me out
-                  </label>
-                </div>
-              </div><!-- /.box-body -->
-
-              <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </div>
-            </form>
-          </div><!-- /.box -->
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
-</div><!-- /.example-modal -->
-@endsection
-
 @section('content')
 <div class="row">
   <div class="col-md-12">
     <!-- TABLE: LATEST ORDERS -->
-    <div class="box box-info">
-      <div class="box-header with-border">
-        <h3 class="box-title">Activity Log: <strong>January 1, 2016 - January 30, 2016</strong></h3>
-      </div><!-- /.box-header -->
-      <div class="box-body pad table-responsive">
-        <div class="btn-group">
-          <a href="#" class="btn btn-default">PDF</a>
-          <a href="#" class="btn btn-default">Print</a>
-        </div>
-
-        <!-- Date and time range -->
-        <div class="form-group pull-right">
-          <div class="input-group">
-            <button class="btn btn-default pull-right" id="daterange-btn">
-              <i class="fa fa-calendar"></i> Date range picker
-              <i class="fa fa-caret-down"></i>
-            </button>
-          </div>
-        </div><!-- /.form group -->
-      </div><!-- /.box-body -->
-      <div class="box-body pad table-responsive">
-        <p class="pull-right"><strong>23 activities were found during the time period: 8/5/15 – 1/19/16</strong></p>
+    <div class="box-body pad table-responsive">
+      <div class="btn-group">
+        <a href="#" class="btn btn-default">PDF</a>
+        <a href="#" class="btn btn-default">Print</a>
       </div>
-    </div><!-- /.box -->
+
+      <!-- Date and time range -->
+      <div class="form-group pull-right">
+        <div class="input-group">
+          <button class="btn btn-default pull-right" id="daterange-btn">
+            <i class="fa fa-calendar"></i> Date range picker
+            <i class="fa fa-caret-down"></i>
+          </button>
+        </div>
+      </div><!-- /.form group -->
+    </div><!-- /.box-body -->
   </div><!-- /.col -->
 </div>
 
@@ -162,7 +87,7 @@
     <!-- TABLE: LATEST ORDERS -->
     <div class="box box-info">
       <div class="box-header with-border">
-        <h3 class="box-title">Activity Log: <strong>January 1, 2016 - January 30, 2016</strong></h3>
+        <p><strong>23 activities were found during the time period: 8/5/15 – 1/19/16</strong></p>
       </div><!-- /.box-header -->
       <div class="box-body">
         <div class="table-responsive">
