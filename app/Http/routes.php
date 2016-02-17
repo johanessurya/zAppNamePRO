@@ -220,6 +220,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/client/get', 'CalendarController@getClient');
 
     // Get log
-    Route::get('/logs/activity', 'LogController@getActivity');
+    Route::post('/logs/activity', 'LogController@getActivity');
   });
 });

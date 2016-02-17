@@ -6,15 +6,25 @@ use Illuminate\Http\Request;
 
 use DateTime;
 
+use App\MyModel;
 use App\Calendar;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 class LogController extends Controller
 {
-    public function getActivity() {
+    public function getActivity(Request $request) {
       $return = [];
-      $rows = Calendar::all();
+      $params = $request->all();
+
+      $start = DateTime::createFromFormat(DATETIME_FORMAT, $params['start']);
+      $end = DateTime::createFromFormat(DATETIME_FORMAT, $params['end']);
+      $start = $start->format(config('steve.mysql_datetime_format'));
+      $end = $end->format(config('steve.mysql_datetime_format'));
+
+      $rows = Calendar::where('start', '>=', $start)->where('end', '<=', $end)->get();
+
+      // var_dump($params, $rows); die('test');
 
       $start = null;
       $end = null;

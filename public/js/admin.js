@@ -6,6 +6,12 @@ $global.misc = {};
 $global.createForm = $('#edit-form-body');
 $global.editForm = $('#quicksave-form-body');
 
+// Get date time picker
+$global.dateTime = {
+  start: null,
+  end: null
+}
+
 // Flag for activity tables
 $global.activityFirstTime = true;
 
@@ -216,16 +222,39 @@ $global.initCKEditor = function() {
 
 $global.dateTimePicker = function() {
   $('#daterange-btn').on('apply.daterangepicker', function(ev, picker) {
-    console.log(picker.startDate.format('YYYY-MM-DD'));
-    console.log(picker.endDate.format('YYYY-MM-DD'));
+    $global.dateTime.start = picker.startDate.format($config.format.date) + ' 00:00';
+    $global.dateTime.end = picker.endDate.format($config.format.date) + ' 23:59';
+
     $global.reloadActivityTable();
   });
+}
+
+$global.getActivityLog = function() {
+  var _ajaxData = {};
+
+  _ajaxData = {
+    start: $global.dateTime.start,
+    end: $global.dateTime.end
+  };
+
+  return _ajaxData;
 }
 
 $global.reloadActivityTable = function(start, end) {
     if($global.activityFirstTime)
       $global.activityTable = $('#activity-table').DataTable( {
-          'ajax': '/api/v1/logs/activity',
+          'ajax': {
+            url: '/api/v1/logs/activity',
+            type: 'POST',
+            data: function(d) {
+              var _data = $global.getActivityLog();
+
+              d.start = _data.start;
+              d.end = _data.end;
+
+              console.log(d);
+            }
+          },
           'columns': [
             {'data': 'date', 'searchable': true},
             {'data': 'start', 'searchable': true},
@@ -234,8 +263,10 @@ $global.reloadActivityTable = function(start, end) {
             {'data': 'note', 'searchable': true},
           ],
       } );
-    else
+    else {
       $global.activityTable.ajax.reload();
+      console.log('ajax reloaded');
+    }
 
     $global.activityFirstTime = false;
 }
