@@ -219,7 +219,10 @@ Route::group(['middleware' => ['web']], function () {
     // Get related client list
     Route::get('/client/get', 'CalendarController@getClient');
 
-    // Get log
+    // Get activity log list
     Route::post('/logs/activity', 'LogController@getActivity');
+
+    // Get activity log chartjs data
+    Route::post('/logs/activity/piechart', 'LogController@getActivityPieChart');
   });
 });

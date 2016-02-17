@@ -23,6 +23,14 @@ class Calendar extends MyModel
 
   public $timestamps = false;
 
+  /**
+   * Get the category record associated with the calendar.
+   */
+  public function category()
+  {
+      return $this->hasOne('App\Category', 'id', 'categoryID');
+  }
+
   public static function createEvent(array $attributes = array()) {
     // Create an event
     // This is parent event. All repeat event will get this id as their parent.

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use DateTime;
 
+use DB;
 use App\MyModel;
 use App\Calendar;
 use App\Http\Requests;
@@ -42,5 +43,33 @@ class LogController extends Controller
       }
 
       return ['data' => $return];
+    }
+
+    public function getActivityPieChart(Request $request) {
+      $return = [];
+      $params = $request->all();
+
+      $start = DateTime::createFromFormat(DATETIME_FORMAT, $params['start']);
+      $end = DateTime::createFromFormat(DATETIME_FORMAT, $params['end']);
+      $start = $start->format(config('steve.mysql_datetime_format'));
+      $end = $end->format(config('steve.mysql_datetime_format'));
+
+      // $rows = Calendar::where('start', '>=', $start)->where('end', '<=', $end)->get();
+      $rows = Calendar::select('categoryID', DB::raw('COUNT(*) as total'))
+              ->where('start', '>=', $start)
+              ->where('end', '<=', $end)
+              ->groupBy('categoryID')
+              ->get();
+
+      foreach($rows as $x) {
+        $return[] = [
+          'value' => $x['total'],
+          'color' => $x->category->color,
+          'highlight' => $x->category->color,
+          'label' => $x->category->title,
+        ];
+      }
+
+      return $return;
     }
 }
