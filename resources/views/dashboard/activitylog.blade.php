@@ -1,7 +1,7 @@
 @extends('layouts.default-admin')
 
 @section('title-h1', 'Activity Log')
-@section('title-small', 'January 1, 2016 - January 30, 2016')
+@section('title-small', ' ')
 
 @push('scripts')
   <!-- fullCalendar 2.2.5 -->

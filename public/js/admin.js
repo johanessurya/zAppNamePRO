@@ -255,6 +255,10 @@ $global.dateTimePicker = function() {
     $global.dateTime.start = picker.startDate.format($config.format.date) + ' 00:00';
     $global.dateTime.end = picker.endDate.format($config.format.date) + ' 23:59';
 
+    // Change activity log date range
+    var dateRange = picker.startDate.format($config.format.fullDateTime) + ' - ' + picker.endDate.format($config.format.fullDateTime);
+    $('#title-small').html(dateRange);
+
     // Reload chart js
     $global.reloadPieChart();
 
