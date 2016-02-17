@@ -256,8 +256,25 @@ $global.dateTimePicker = function() {
     $global.dateTime.end = picker.endDate.format($config.format.date) + ' 23:59';
 
     // Change activity log date range
-    var dateRange = picker.startDate.format($config.format.fullDateTime) + ' - ' + picker.endDate.format($config.format.fullDateTime);
+    var dateRange;
+    dateRange = picker.startDate.format($config.format.fullDateTime) + ' - ' + picker.endDate.format($config.format.fullDateTime);
     $('#title-small').html(dateRange);
+
+    // Change date range above table
+    dateRange = picker.startDate.format($config.format.date) + ' - ' + picker.endDate.format($config.format.date);
+    $('#activity-date-range').html(dateRange);
+
+    // Count activity
+    $.ajax({
+      method: 'POST',
+      url: '/api/v1/logs/activity',
+      data: {
+        start: $global.dateTime.start,
+        end: $global.dateTime.end
+      }
+    }).done(function(data) {
+      $('#activity-count').html(data.data.length);
+    });
 
     // Reload chart js
     $global.reloadPieChart();
@@ -284,7 +301,7 @@ $global.reloadActivityTable = function(start, end) {
             {'data': 'end', 'searchable': true},
             {'data': 'description', 'searchable': true},
             {'data': 'note', 'searchable': true},
-          ],
+          ]
       } );
     else {
       $global.activityTable.ajax.reload();
