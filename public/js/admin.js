@@ -243,10 +243,13 @@ $global.reloadPieChart = function() {
 
 // Save comment every onBlur
 $global.saveCommentOnBlur = function() {
-  console.log('on blur ckeditor');
-  // $global.editor1.setData('<strong>Bold</strong>');
-
-  console.log($global.editor1.getData());
+  $.ajax({
+    method: 'POST',
+    url: '/api/v1/logs/setcomment/activity_log_comment',
+    data: {
+      value: $global.editor1.getData()
+    }
+  });
 }
 
 $global.initCKEditor = function() {

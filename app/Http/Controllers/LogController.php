@@ -78,4 +78,10 @@ class LogController extends Controller
 
       return response()->json($row);
     }
+
+    public function setComment(Request $request, $key_name) {
+      $params = $request->all();
+
+      DB::table('config')->where('key_name', $key_name)->update(['value' => $params['value']]);
+    }
 }

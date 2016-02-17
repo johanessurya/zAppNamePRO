@@ -225,6 +225,10 @@ Route::group(['middleware' => ['web']], function () {
     // Get activity log chartjs data
     Route::post('/logs/activity/piechart', 'LogController@getActivityPieChart');
 
+    // Get config by key_name
     Route::get('/logs/getcomment/{key_name}', 'LogController@getComment');
+
+    // Set Config by key_name
+    Route::post('/logs/setcomment/{key_name}', 'LogController@setComment');
   });
 });
