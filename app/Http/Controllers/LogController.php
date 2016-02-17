@@ -72,4 +72,10 @@ class LogController extends Controller
 
       return $return;
     }
+
+    public function getComment($key_name) {
+      $row = DB::table('config')->where('key_name', $key_name)->first();
+
+      return response()->json($row);
+    }
 }

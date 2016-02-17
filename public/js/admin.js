@@ -241,11 +241,36 @@ $global.reloadPieChart = function() {
     });
 };
 
+// Save comment every onBlur
+$global.saveCommentOnBlur = function() {
+  console.log('on blur ckeditor');
+  // $global.editor1.setData('<strong>Bold</strong>');
+
+  console.log($global.editor1.getData());
+}
+
 $global.initCKEditor = function() {
   CKEDITOR.config.customConfig = '/js/ckeditor-config.js';
   // Replace the <textarea id="editor1"> with a CKEditor
   // instance, using default configuration.
   CKEDITOR.replace('editor1');
+
+  // Attatch onBlur
+  $global.editor1 = CKEDITOR.instances.editor1;
+  $global.editor1.on('blur', $global.saveCommentOnBlur);
+
+  $.ajax({
+    method: 'GET',
+    url: '/api/v1/logs/getcomment/activity_log_comment'
+  }).done(function(data){
+    if(data.value.length > 0) {
+      var r = confirm('Do you want load last comment?');
+
+      if(r == true)
+        $global.editor1.setData(data.value);
+    }
+  });
+
   //bootstrap WYSIHTML5 - text editor
   $(".textarea").wysihtml5();
 };

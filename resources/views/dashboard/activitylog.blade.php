@@ -75,7 +75,7 @@
         </div><!-- /.box-header -->
         <div class="box-body pad">
           <form>
-            <textarea id="editor1" name="editor1" rows="10" cols="80">This is my textarea to be replaced with CKEditor.</textarea>
+            <textarea id="editor1" name="editor1" rows="10" cols="80"></textarea>
           </form>
         </div><!-- /.box-body -->
       </div><!--/.box -->
