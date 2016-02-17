@@ -49,8 +49,8 @@
               </div><!-- ./chart-responsive -->
             </div><!-- /.col -->
             <div class="col-md-4">
-              <ul class="chart-legend clearfix">
-                <li><i class="fa fa-circle-o text-red"></i> 50% - Chrome</li>
+              <ul id="pie-chart-legend" class="chart-legend clearfix">
+                <li><i class="fa fa-circle-o" style="color:#ff00ff !important;"></i> 50% - Chrome</li>
                 <li><i class="fa fa-circle-o text-green"></i> 22% - IE</li>
                 <li><i class="fa fa-circle-o text-yellow"></i> 12% - FireFox</li>
                 <li><i class="fa fa-circle-o text-aqua"></i> 5% - Safari</li>

@@ -137,6 +137,61 @@ $global.initCategory = function(categoryList) {
   $('#inputTopic2').trigger('change');
 };
 
+// To reload pie legend
+$global.reloadPieChartlegend = function(data) {
+  var _temp = null;
+  var _el = '<li><i class="fa fa-circle-o" style="color:%color% !important;"></i> %perc%% - %label%</li>';
+  // Store total
+  var _total = null;
+
+  // Store perc total
+  var _sumPerc = null;
+  var _perc = null;
+
+  // Array of list(color, perc, label)
+  var list = [];
+
+  // Count total
+  _total = 0;
+  for(var i = 0; i < data.length; i++) {
+    _total += parseInt(data[i].value);
+  }
+
+  _sumPerc = 0;
+  for(var i = 0; i < data.length; i++) {
+    if(i != data.length - 1) {
+      _perc = parseInt(data[i].value) / _total * 100;
+      _perc = Math.round(_perc);
+      _sumPerc += _perc;
+    } else {
+      _perc = 100 - _sumPerc;
+    }
+
+    list.push({
+      color: data[i].color,
+      perc: _perc,
+      label: data[i].label
+    });
+  }
+
+  // Fill legend
+  var _legend = $('#pie-chart-legend');
+
+  // Remove all legend
+  _legend.html('');
+
+  var _legendEl = '';
+  for(var i = 0; i < list.length; i++) {
+    _legendEl = _el;
+    _legendEl = _legendEl.replace('%color%', list[i].color);
+    _legendEl = _legendEl.replace('%perc%', list[i].perc);
+    _legendEl = _legendEl.replace('%label%', list[i].label);
+
+    _legend.append(_legendEl);
+  }
+}
+
+// To reload pie chart with correct data
 $global.reloadPieChart = function() {
     $.ajax({
       method: 'POST',
@@ -146,6 +201,8 @@ $global.reloadPieChart = function() {
         end: $global.dateTime.end
       }
     }).done(function(data) {
+      $global.reloadPieChartlegend(data);
+
       //-------------
       //- PIE CHART (Report)-
       //-------------
