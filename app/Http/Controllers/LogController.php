@@ -33,11 +33,27 @@ class LogController extends Controller
         $start = DateTime::createFromFormat(DATETIME_FORMAT, $x['start']);
         $end = DateTime::createFromFormat(DATETIME_FORMAT, $x['end']);
 
+        $clients = DB::table('calendar_client')
+          ->where('calendar_id', $x->id)
+          ->join('client', 'calendar_client.client_id', '=', 'client.id')->get();
+
+        $clientName = [];
+        for($i = 0; $i < count($clients); $i++)
+          $clientName[] = $clients[$i]->name;
+
+        if(!empty($clientName)) {
+          $clientName = '[' . implode(', ', $clientName) . ']';
+        } else {
+          $clientName = null;
+        }
+
+        $topic = $x->category['abbrev'] . ' | ' . $x->subCategory['title'] . ' ' . $clientName . ' - ' . $x['description'];
+
         $return[] = [
           'date' => $start->format(DATE_FORMAT),
           'start' => $start->format(config('steve.time_format')),
           'end' => $end->format(config('steve.time_format')),
-          'description' => $x['description'],
+          'description' => $topic,
           'note' => $x['note']
         ];
       }
