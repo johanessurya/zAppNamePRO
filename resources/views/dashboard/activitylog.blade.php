@@ -22,7 +22,8 @@
       <div class="form-group pull-right">
         <div class="input-group">
           <button class="btn btn-default pull-right" id="daterange-btn">
-            <i class="fa fa-calendar"></i> Date range picker
+            <i class="fa fa-calendar"></i>
+            <span>Date range picker</span>
             <i class="fa fa-caret-down"></i>
           </button>
         </div>

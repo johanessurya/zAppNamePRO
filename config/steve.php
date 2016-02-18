@@ -24,6 +24,6 @@ return [
 
   'mysql_datetime_format' => 'Y-m-d H:i:s',
 
-  'time_format' => 'H:i:s'
+  'time_format' => 'H:i'
 ]
 ?>

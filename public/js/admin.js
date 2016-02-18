@@ -283,6 +283,9 @@ $global.dateTimePicker = function() {
     $global.dateTime.start = picker.startDate.format($config.format.date) + ' 00:00';
     $global.dateTime.end = picker.endDate.format($config.format.date) + ' 23:59';
 
+    // Choosen label
+    $(this).find('span').html(picker.chosenLabel);
+
     // Change activity log date range
     var dateRange;
     dateRange = picker.startDate.format($config.format.fullDateTime) + ' - ' + picker.endDate.format($config.format.fullDateTime);
