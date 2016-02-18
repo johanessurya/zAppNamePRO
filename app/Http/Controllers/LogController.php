@@ -71,19 +71,33 @@ class LogController extends Controller
       $end = $end->format(config('steve.mysql_datetime_format'));
 
       // $rows = Calendar::where('start', '>=', $start)->where('end', '<=', $end)->get();
-      $rows = Calendar::select('categoryID', DB::raw('SUM(TIMESTAMPDIFF(HOUR, start, end)) as total'))
+      $rows = Calendar::select('categoryID', DB::raw('SUM(TIMESTAMPDIFF(minute, start, end)) as total'))
               ->where('start', '>=', $start)
               ->where('end', '<=', $end)
               ->groupBy('categoryID')
               ->get();
 
-      foreach($rows as $x) {
+      $total = 0;
+      foreach($rows as $x)
+        $total += $x['total'];
+
+      $total2 = 0;
+      for($i = 0; $i < count($rows); $i++) {
+        $x = $rows[$i];
+
+        if($i < count($rows) - 1)
+          $value = round($x['total'] / $total * 100);
+        else
+          $value = 100 - $total2;
+
         $return[] = [
-          'value' => $x['total'],
+          'value' => $value,
           'color' => $x->category->color,
           'highlight' => $x->category->color,
           'label' => $x->category->title,
         ];
+
+        $total2 += $value;
       }
 
       return $return;
