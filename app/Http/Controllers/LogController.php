@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use DateTime;
 
 use DB;
+
 use App\MyModel;
+use App\Category;
 use App\Calendar;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -82,8 +84,12 @@ class LogController extends Controller
         $total += $x['total'];
 
       $total2 = 0;
+      $categoryList = [];
       for($i = 0; $i < count($rows); $i++) {
         $x = $rows[$i];
+
+        // CategoryList
+        $categoryList[] = $x['categoryID'];
 
         if($i < count($rows) - 1)
           $value = round($x['total'] / $total * 100);
@@ -98,6 +104,18 @@ class LogController extends Controller
         ];
 
         $total2 += $value;
+      }
+
+      // Not in category
+      $rows = Category::whereNotIn('id', $categoryList)->get();
+
+      foreach($rows as $x) {
+        $return[] = [
+          'value' => 0,
+          'color' => $x->color,
+          'highlight' => $x->color,
+          'label' => $x->title,
+        ];
       }
 
       return $return;
