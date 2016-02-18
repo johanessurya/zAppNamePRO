@@ -71,7 +71,7 @@ class LogController extends Controller
       $end = $end->format(config('steve.mysql_datetime_format'));
 
       // $rows = Calendar::where('start', '>=', $start)->where('end', '<=', $end)->get();
-      $rows = Calendar::select('categoryID', DB::raw('COUNT(*) as total'))
+      $rows = Calendar::select('categoryID', DB::raw('SUM(TIMESTAMPDIFF(HOUR, start, end)) as total'))
               ->where('start', '>=', $start)
               ->where('end', '<=', $end)
               ->groupBy('categoryID')
