@@ -23,6 +23,19 @@ class Calendar extends MyModel
 
   public $timestamps = false;
 
+  public function save(array $options = array()) {
+    // Before save
+    $start = DateTime::createFromFormat(DATETIME_FORMAT, $this->start);
+    $end = DateTime::createFromFormat(DATETIME_FORMAT, $this->end);
+
+    $interval = ($end->getTimestamp() - $start->getTimestamp()) / 60; // Get second then convert to minutes
+
+    $this->duration = $interval;
+
+    parent::save($options);
+    // After save
+  }
+
   /**
    * Get the category record associated with the calendar.
    */

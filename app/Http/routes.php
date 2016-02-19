@@ -206,7 +206,7 @@ Route::group(['middleware' => ['web']], function () {
     // Update an event
     Route::post('/calendar/update', 'CalendarController@update');
     // Update an event by drop and drag
-    Route::post('calendar/event/update', 'CalendarController@updateDropDrag');
+    Route::post('/calendar/event/update', 'CalendarController@updateDropDrag');
 
     // Get category tree
     Route::get('/category/get', 'CategoryController@getTree');

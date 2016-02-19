@@ -270,6 +270,7 @@ class CalendarController extends Controller
 
     public function updateDropDrag(Request $request) {
       $params = $request->all();
+
       $params['start'] = MyModel::dateTime($params['start']);
       $params['end'] = MyModel::dateTime($params['end']);
 
@@ -286,6 +287,7 @@ class CalendarController extends Controller
       $x = $rows[0];
       $x->start = $start->format(DATETIME_FORMAT);
       $x->end = $end->format(DATETIME_FORMAT);
+      $x->allDay = $params['allDay'] == 'true' ? 1 : 0;
       $rows[0] = $x;
 
       for($i = 1; $i < count($rows); $i++) {
