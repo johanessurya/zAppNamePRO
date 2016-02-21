@@ -92,7 +92,7 @@ class LogController extends Controller
         $categoryList[] = $x['categoryID'];
 
         if($i < count($rows) - 1)
-          $value = round($x['total'] / $total * 100, 2);
+          $value = round($x['total'] / $total * 100, 1);
         else
           $value = 100 - $total2;
 
