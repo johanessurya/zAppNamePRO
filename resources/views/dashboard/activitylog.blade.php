@@ -88,7 +88,7 @@
     <!-- TABLE: LATEST ORDERS -->
     <div class="box box-info">
       <div class="box-header with-border">
-        <p><strong><span id="activity-count">23</span> activities were found during the time period: <span id="activity-date-range">8/5/15 – 1/19/16</span></strong></p>
+        <p><strong>Activities Found</strong></p>
       </div><!-- /.box-header -->
       <div class="box-body">
         <div class="table-responsive">
