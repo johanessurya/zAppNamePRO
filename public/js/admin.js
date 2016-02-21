@@ -140,6 +140,7 @@ $global.initCategory = function(categoryList) {
 // To reload pie legend
 $global.reloadPieChartlegend = function(data) {
   var _el = '<li><i class="fa fa-circle-o" style="color:%color% !important;"></i> %perc%% - %label%</li>';
+  var list = [];
   for(var i = 0; i < data.length; i++) {
     list.push({
       color: data[i].color,
