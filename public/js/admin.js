@@ -226,6 +226,21 @@ $global.saveCommentOnBlur = function() {
   });
 }
 
+$global.loadComment = function() {
+  $('#load-last-comment').click(function(e) {
+    e.preventDefault();
+
+    $.ajax({
+      method: 'GET',
+      url: '/api/v1/logs/getcomment/activity_log_comment'
+    }).done(function(data){
+      if(data.value.length > 0) {
+        $global.editor1.setData(data.value);
+      }
+    });
+  });
+}
+
 $global.initCKEditor = function() {
   CKEDITOR.config.customConfig = '/js/ckeditor-config.js';
   // Replace the <textarea id="editor1"> with a CKEditor
@@ -236,17 +251,8 @@ $global.initCKEditor = function() {
   $global.editor1 = CKEDITOR.instances.editor1;
   $global.editor1.on('blur', $global.saveCommentOnBlur);
 
-  $.ajax({
-    method: 'GET',
-    url: '/api/v1/logs/getcomment/activity_log_comment'
-  }).done(function(data){
-    if(data.value.length > 0) {
-      var r = confirm('Do you want load last comment?');
-
-      if(r == true)
-        $global.editor1.setData(data.value);
-    }
-  });
+  // Add event load comment
+  $global.loadComment();
 
   //bootstrap WYSIHTML5 - text editor
   $(".textarea").wysihtml5();

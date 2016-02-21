@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use DateTime;
 
 use DB;
+use Auth;
 
 use App\MyModel;
 use App\Category;
@@ -72,10 +73,12 @@ class LogController extends Controller
       $start = $start->format(config('steve.mysql_datetime_format'));
       $end = $end->format(config('steve.mysql_datetime_format'));
 
-      // $rows = Calendar::where('start', '>=', $start)->where('end', '<=', $end)->get();
+      // $rows = Category::where();
+
       $rows = Calendar::select('categoryID', DB::raw('SUM(TIMESTAMPDIFF(minute, start, end)) as total'))
               ->where('start', '>=', $start)
               ->where('end', '<=', $end)
+              ->where('user_id', Auth::user()->id)
               ->groupBy('categoryID')
               ->get();
 

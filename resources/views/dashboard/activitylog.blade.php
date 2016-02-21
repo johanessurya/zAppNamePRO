@@ -71,6 +71,7 @@
         <div class="box-header with-border">
           <h3 class="box-title">Comments</h3>
           <div class="box-tools pull-right">
+            <a id="load-last-comment" href="#" class="glyphicon glyphicon-floppy-open"></a>
             <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
           </div>
         </div><!-- /.box-header -->
