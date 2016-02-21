@@ -139,37 +139,11 @@ $global.initCategory = function(categoryList) {
 
 // To reload pie legend
 $global.reloadPieChartlegend = function(data) {
-  var _temp = null;
   var _el = '<li><i class="fa fa-circle-o" style="color:%color% !important;"></i> %perc%% - %label%</li>';
-  // Store total
-  var _total = null;
-
-  // Store perc total
-  var _sumPerc = null;
-  var _perc = null;
-
-  // Array of list(color, perc, label)
-  var list = [];
-
-  // Count total
-  _total = 0;
   for(var i = 0; i < data.length; i++) {
-    _total += parseInt(data[i].value);
-  }
-
-  _sumPerc = 0;
-  for(var i = 0; i < data.length; i++) {
-    if(i != data.length - 1) {
-      _perc = parseInt(data[i].value) / _total * 100;
-      _perc = Math.round(_perc);
-      _sumPerc += _perc;
-    } else {
-      _perc = 100 - _sumPerc;
-    }
-
     list.push({
       color: data[i].color,
-      perc: _perc,
+      perc: data[i].value,
       label: data[i].label
     });
   }
