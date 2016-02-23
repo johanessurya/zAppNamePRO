@@ -110,7 +110,10 @@ class LogController extends Controller
       }
 
       // Not in category
-      $rows = Category::whereNotIn('id', $categoryList)->get();
+      $rows = Category::select('category.*')
+              ->join('company', 'category.CompanyID', '=', 'company.companyID') // Join with company table
+              ->where('company.companyID', Auth::user()->CompanyID)
+              ->whereNotIn('id', $categoryList)->get();
 
       foreach($rows as $x) {
         $return[] = [
