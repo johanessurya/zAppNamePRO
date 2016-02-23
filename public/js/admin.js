@@ -220,6 +220,24 @@ $global.reloadPieChart = function() {
     });
 };
 
+// Save and get config
+$global.setConfig = function(_data) {
+  return $.ajax({
+    url: $global.api.setConfig,
+    method: 'POST',
+    data: _data
+  });
+};
+$global.getConfig = function(key_name) {
+  return $.ajax({
+    url: $global.api.getConfig,
+    method: 'GET',
+    data: {
+      'key_name': key_name
+    }
+  })
+}
+
 // Save comment every onBlur
 $global.saveCommentOnBlur = function() {
   $.ajax({
@@ -645,25 +663,31 @@ $(function () {
     }
   });
 
-  //Date range as a button
-  $('#daterange-btn').daterangepicker(
-      {
-        ranges: {
-          'Today': [moment(), moment()],
-          'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-          'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-          'This Month': [moment().startOf('month'), moment().endOf('month')],
-          'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-        },
-        startDate: moment().subtract(29, 'days'),
-        endDate: moment()
-      },
-  function (start, end) {
-    $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-  }
-  );
+  $global.getConfig('daterange').done(function(data) {
+    var $value = JSON.parse(data.value);
 
+    //Date range as a button
+    $('#daterange-btn').daterangepicker({
+          ranges: {
+            'Today': [moment(), moment()],
+            'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+            'This Month': [moment().startOf('month'), moment().endOf('month')],
+            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+          },
+          startDate: moment().subtract(29, 'days'),
+          endDate: moment()
+    });
+
+    $('div.ranges li').each(function(index, value) {
+      var html = $(value).html();
+
+      if(html == $value.value) {
+        $('div.ranges li:eq(' + index + ')').trigger('click');
+      }
+    });
+  });
 }); // End of onReadyDocument
 
 function showModal(selector) {
