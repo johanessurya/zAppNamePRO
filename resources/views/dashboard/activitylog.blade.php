@@ -51,12 +51,7 @@
             </div><!-- /.col -->
             <div class="col-md-4">
               <ul id="pie-chart-legend" class="chart-legend clearfix">
-                <li><i class="fa fa-circle-o" style="color:#ff00ff !important;"></i> 50% - Chrome</li>
-                <li><i class="fa fa-circle-o text-green"></i> 22% - IE</li>
-                <li><i class="fa fa-circle-o text-yellow"></i> 12% - FireFox</li>
-                <li><i class="fa fa-circle-o text-aqua"></i> 5% - Safari</li>
-                <li><i class="fa fa-circle-o text-light-blue"></i> 3% - Opera</li>
-                <li><i class="fa fa-circle-o text-gray"></i> 1% - Navigator</li>
+                <li class="hide"><i class="fa fa-circle-o" style="color:#ff00ff !important;"></i> 50% - Chrome</li>
               </ul>
             </div><!-- /.col -->
           </div><!-- /.row -->
@@ -71,7 +66,7 @@
         <div class="box-header with-border">
           <h3 class="box-title">Comments</h3>
           <div class="box-tools pull-right">
-            <a id="load-last-comment" href="#" class="glyphicon glyphicon-floppy-open"></a>
+            <button id="load-last-comment" class="btn btn-box-tool"><i class="fa fa-fw fa-refresh"></i></button>
             <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
           </div>
         </div><!-- /.box-header -->
