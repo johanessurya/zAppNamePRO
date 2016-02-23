@@ -226,9 +226,9 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/logs/activity/piechart', 'LogController@getActivityPieChart');
 
     // Get config by key_name
-    Route::get('/logs/getcomment/{key_name}', 'LogController@getComment');
+    Route::get('/logs/getconfig', 'LogController@getConfig');
 
     // Set Config by key_name
-    Route::post('/logs/setcomment/{key_name}', 'LogController@setComment');
+    Route::post('/logs/setconfig', 'LogController@setConfig');
   });
 });

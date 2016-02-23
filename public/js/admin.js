@@ -3,6 +3,10 @@ $global = {};
 $global.clientSource = [];
 $global.user = {};
 $global.misc = {};
+// api url list
+$global.api = {};
+$global.api.getConfig = '/api/v1/logs/getconfig';
+$global.api.setConfig = '/api/v1/logs/setconfig';
 $global.createForm = $('#edit-form-body');
 $global.editForm = $('#quicksave-form-body');
 
@@ -220,8 +224,9 @@ $global.reloadPieChart = function() {
 $global.saveCommentOnBlur = function() {
   $.ajax({
     method: 'POST',
-    url: '/api/v1/logs/setcomment/activity_log_comment',
+    url: '/api/v1/logs/setconfig',
     data: {
+      key_name: 'activity_log_comment',
       value: $global.editor1.getData()
     }
   });
@@ -233,7 +238,10 @@ $global.loadComment = function() {
 
     $.ajax({
       method: 'GET',
-      url: '/api/v1/logs/getcomment/activity_log_comment'
+      url: '/api/v1/logs/getconfig',
+      data: {
+        'key_name': 'activity_log_comment'
+      }
     }).done(function(data){
       if(data.value.length > 0) {
         $global.editor1.setData(data.value);
@@ -259,8 +267,29 @@ $global.initCKEditor = function() {
   $(".textarea").wysihtml5();
 };
 
+$global.saveDateTime = function(start, end) {
+  var x,y;
+
+  // Get timestamp
+  x = start.format('X');
+  y = end.format('X');
+
+  // Save it
+  $.ajax({
+    url: $global.api.saveConfig,
+    method: 'POST',
+    data: {
+      key: 'daterange',
+      start: x,
+      end: y
+    }
+  });
+}
+
 $global.dateTimePicker = function() {
   $('#daterange-btn').on('apply.daterangepicker', function(ev, picker) {
+    $global.saveDateTime(picker.startDate, picker.endDate);
+
     $global.dateTime.start = picker.startDate.format($config.format.date) + ' 00:00';
     $global.dateTime.end = picker.endDate.format($config.format.date) + ' 23:59';
 
