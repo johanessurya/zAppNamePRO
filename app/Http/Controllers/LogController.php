@@ -12,6 +12,7 @@ use Auth;
 use App\MyModel;
 use App\Category;
 use App\Calendar;
+use App\Config;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -140,6 +141,14 @@ class LogController extends Controller
       $params = $request->all();
       $key_name = $params['key_name'];
 
-      DB::table('config')->where('key_name', $key_name)->update(['value' => $params['value']]);
+      $row = Config::find($key_name);
+
+      if ($row === null) {
+           $row = new Config;
+           $row->key_name = $key_name;
+      }
+
+      $row->value = $params['value'];
+      $row->save();
     }
 }

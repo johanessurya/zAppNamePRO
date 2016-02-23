@@ -267,28 +267,33 @@ $global.initCKEditor = function() {
   $(".textarea").wysihtml5();
 };
 
-$global.saveDateTime = function(start, end) {
+$global.saveDateTime = function(picker) {
   var x,y;
 
   // Get timestamp
-  x = start.format('X');
-  y = end.format('X');
+  x = picker.startDate.format('X');
+  y = picker.endDate.format('X');
+
+  var _value = {
+    start: x,
+    end: y,
+    'value': picker.chosenLabel
+  };
 
   // Save it
   $.ajax({
-    url: $global.api.saveConfig,
+    url: $global.api.setConfig,
     method: 'POST',
     data: {
-      key: 'daterange',
-      start: x,
-      end: y
+      key_name: 'daterange',
+      value: JSON.stringify(_value)
     }
   });
 }
 
 $global.dateTimePicker = function() {
   $('#daterange-btn').on('apply.daterangepicker', function(ev, picker) {
-    $global.saveDateTime(picker.startDate, picker.endDate);
+    $global.saveDateTime(picker);
 
     $global.dateTime.start = picker.startDate.format($config.format.date) + ' 00:00';
     $global.dateTime.end = picker.endDate.format($config.format.date) + ' 23:59';
