@@ -9,6 +9,7 @@ use DateTime;
 use DB;
 use Auth;
 
+use App\User;
 use App\MyModel;
 use App\Category;
 use App\Calendar;
@@ -66,6 +67,8 @@ class LogController extends Controller
     }
 
     public function getActivityPieChart(Request $request) {
+      $user = User::find(Auth::user()->id);
+
       $return = [];
       $params = $request->all();
 
@@ -112,9 +115,9 @@ class LogController extends Controller
 
       // Not in category
       $rows = Category::select('category.*')
-              ->join('company', 'category.CompanyID', '=', 'company.companyID') // Join with company table
-              ->where('company.companyID', Auth::user()->CompanyID)
-              ->whereNotIn('id', $categoryList)->get();
+              ->where('CompanyID', $user->CompanyID)
+              ->whereNotIn('id', $categoryList)
+              ->get();
 
       foreach($rows as $x) {
         $return[] = [
