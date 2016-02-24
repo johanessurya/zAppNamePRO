@@ -664,7 +664,10 @@ $(function () {
   });
 
   $global.getConfig('daterange').done(function(data) {
-    var $value = JSON.parse(data.value);
+
+    var $value = null;
+    if(data.value != null)
+      $value = JSON.parse(data.value);
 
     //Date range as a button
     $('#daterange-btn').daterangepicker({
@@ -680,13 +683,15 @@ $(function () {
           endDate: moment()
     });
 
-    $('div.ranges li').each(function(index, value) {
-      var html = $(value).html();
+    if($value != null)
+      $('div.ranges li').each(function(index, value) {
+        var html = $(value).html();
 
-      if(html == $value.value) {
-        $('div.ranges li:eq(' + index + ')').trigger('click');
-      }
-    });
+        if(html == $value.value) {
+          $('div.ranges li:eq(' + index + ')').trigger('click');
+        }
+      });
+
   });
 }); // End of onReadyDocument
 
