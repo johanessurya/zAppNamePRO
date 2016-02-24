@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use DateTime;
+
 use Mail;
 use Hash;
 use Auth;
@@ -32,10 +34,21 @@ class LoginController extends Controller
       if(Auth::attempt($user)) {
         User::updateLogin(Auth::user()->id);
 
-        // Storing session
-        Session::put('category', $this->getCategoryTree());
+        $row = Auth::user();
+        $expires = DateTime::createFromFormat(DATE_FORMAT, $row->expires);
+        $now = new DateTime();
 
-        return redirect()->intended('/dashboard');
+        // If expired then logout
+        if($now > $expires){
+          Auth::logout();
+
+          return redirect('/login')->with('message', 'Your account reach expired date');
+        } else {
+          // Storing session
+          Session::put('category', $this->getCategoryTree());
+
+          return redirect()->intended('/dashboard');
+        }
       } else {
         return redirect('/login')->with('message', 'Incorrect username and password');
       }
