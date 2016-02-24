@@ -125,6 +125,18 @@ class LogController extends Controller
         ];
       }
 
+      $rows = Category::where('companyID', null)
+              ->whereNotIn('id', $categoryList)->get();
+
+      foreach($rows as $x) {
+        $return[] = [
+          'value' => 0,
+          'color' => $x->color,
+          'highlight' => $x->color,
+          'label' => $x->title,
+        ];
+      }
+
       return $return;
     }
 
