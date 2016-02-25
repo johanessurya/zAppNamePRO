@@ -144,6 +144,11 @@ Route::group(['middleware' => ['web']], function () {
     return view('dashboard.activitylog');
   });
 
+  // Topic Delivery Log
+  Route::get('/dashboard/topicdelivery', function () {
+    return view('dashboard.topicdeliverylog');
+  });
+
   // ==== API Route ====
   // Prefix : /api/v1/
   Route::group(['prefix' => '/api/v1/'], function () {
