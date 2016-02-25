@@ -80,9 +80,9 @@
 </div>
 
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-xs-12">
     <!-- TABLE: LATEST ORDERS -->
-    <div class="box box-info">
+    <div class="box">
       <div class="box-header with-border">
         <p><strong>Activities Found</strong></p>
       </div><!-- /.box-header -->
