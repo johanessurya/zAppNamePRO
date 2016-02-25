@@ -19,7 +19,7 @@
       </div>
 
       <!-- Date and time range -->
-      <div class="col-md-4 form-group pull-right">
+      <div class="col-md-5 form-group pull-right">
         <div class="col-lg-6">
           <div class="input-group">
             <select class="form-control pull-right">
