@@ -87,21 +87,19 @@
         <p><strong>Activities Found</strong></p>
       </div><!-- /.box-header -->
       <div class="box-body">
-        <div class="table-responsive">
-          <table id="activity-table" class="table no-margin">
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Start</th>
-                <th>End</th>
-                <th>Topic/description</th>
-                <th>Notes</th>
-              </tr>
-            </thead>
-            <tbody>
-            </tbody>
-          </table>
-        </div><!-- /.table-responsive -->
+        <table id="activity-table" class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Start</th>
+              <th>End</th>
+              <th>Topic/description</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
       </div><!-- /.box-body -->
     </div><!-- /.box -->
   </div><!-- /.col -->
