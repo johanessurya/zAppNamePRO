@@ -13,6 +13,7 @@ use Session;
 use DB;
 
 use App\Category;
+use App\SubCategory;
 use App\Config;
 use App\User;
 use App\Http\Requests;
@@ -48,6 +49,7 @@ class LoginController extends Controller
           // Storing session
           $categoryTree = $this->getCategoryTree();
           Session::put('category', $categoryTree);
+          Session::put('subcategory', $this->getSubCategory());
 
           return redirect()->intended('/dashboard');
         }
@@ -164,6 +166,25 @@ class LoginController extends Controller
             }
           }
         }
+      }
+
+      return $return;
+    }
+
+    private function getSubCategory() {
+      $return = [];
+
+      $rows = SubCategory::all();
+
+      foreach($rows as $x) {
+        $category = Category::find($x->category_id);
+
+        $title = $category->title . ' | ' . $x->title;
+
+        $return[] = [
+          'id' => $x->id,
+          'title' => $title
+        ];
       }
 
       return $return;

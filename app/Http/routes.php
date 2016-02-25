@@ -146,7 +146,7 @@ Route::group(['middleware' => ['web']], function () {
 
   // Topic Delivery Log
   Route::get('/dashboard/topicdelivery', function () {
-    return view('dashboard.topicdeliverylog');
+    return view('dashboard.topicdeliverylog')->with('subCategory', Session::get('subcategory'));
   });
 
   // ==== API Route ====

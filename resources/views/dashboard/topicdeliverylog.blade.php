@@ -19,15 +19,14 @@
       </div>
 
       <!-- Date and time range -->
-      <div class="form-group pull-right">
+      <div class="col-md-4 form-group pull-right">
         <div class="col-lg-6">
           <div class="input-group">
             <select class="form-control pull-right">
-              <option>option 1</option>
-              <option>option 2</option>
-              <option>option 3</option>
-              <option>option 4</option>
-              <option>option 5</option>
+              <option></option>
+              <?php foreach($subCategory as $x): ?>
+              <option value="<?php echo $x['id']; ?>"><?php echo $x['title']; ?></option>
+              <?php endforeach; ?>
             </select>
           </div>
         </div>
