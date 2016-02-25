@@ -45,7 +45,8 @@ class LoginController extends Controller
           return redirect('/login')->with('message', 'Your account reach expired date');
         } else {
           // Storing session
-          Session::put('category', $this->getCategoryTree());
+          $categoryTree = $this->getCategoryTree();
+          Session::put('category', $categoryTree);
 
           return redirect()->intended('/dashboard');
         }
@@ -127,7 +128,7 @@ class LoginController extends Controller
     private function getCategoryTree() {
       $return = [
         // Get all categories
-        'category' => Category::getByUserId(Auth::user())->get()->toArray()
+        'category' => Category::getByUserId(Auth::user()->id)->get()->toArray()
       ];
 
       // Get sub category

@@ -10,6 +10,7 @@ use DateTime;
 use Mail;
 use App\User;
 use App\Company;
+use App\Category;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -131,18 +132,8 @@ class RegisterController extends Controller
     }
 
     public function test2() {
-      $datetime = new DateTime('2016-01-31 11:39:49');
-      $x = $datetime->format(config('steve.mysql_datetime_format'));
-      // $datetime->modify('last weeks of next month');
-      // $datetime->modify('next month');
-      $datetime->modify('second Mon of March 2016');
-      $y = $datetime->format(config('steve.mysql_datetime_format'));
-      var_dump($x, $y);
+      $categoryRoot = Category::getByUserId(9)->get()->toArray();
 
-      $date1 = new DateTime('2016-01-31 11:39:49');
-      $date2 = DateTime::createFromFormat(DATETIME_FORMAT, $date1->format(DATETIME_FORMAT));
-      $date2->modify('+1 month');
-
-      var_dump($date1, $date2);
+      var_dump($categoryRoot); die;
     }
 }

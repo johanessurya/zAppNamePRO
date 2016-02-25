@@ -20,10 +20,12 @@ class Category extends Model
 
   public $timestamps = false;
 
-  public static function getByUserId($user) {
+  public static function getByUserId($userId) {
+    $user = User::find($userId);
+
     $return = self::orWhere('CompanyID', null)
       ->orWhere('CompanyID', 0)
-      ->orWhere('CompanyID', $user->CompanyiD);
+      ->orWhere('CompanyID', $user->CompanyID);
 
     return $return;
   }

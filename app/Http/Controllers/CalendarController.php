@@ -20,7 +20,7 @@ use App\Http\Controllers\Controller;
 class CalendarController extends Controller
 {
     public function index() {
-      $categories = Category::getByUserId(Auth::user())->get();
+      $categories = Category::getByUserId(Auth::user()->id)->get();
       $clients = Client::where('user_id', Auth::user()->id)->get();
 
       $data = [
