@@ -13,6 +13,7 @@ use Session;
 use DB;
 
 use App\Category;
+use App\Config;
 use App\User;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -120,9 +121,19 @@ class LoginController extends Controller
     }
 
     public function logout() {
+      // Reset all
+      $this->resetSetting();
+
       Auth::logout();
 
       return redirect('/login')->with('message', 'Sign out successful');
+    }
+
+    // Reset all setting that doesn't need
+    private function resetSetting() {
+      $config = Config::where('key_name', 'daterange')->first();
+      $config->value = null;
+      $config->save();
     }
 
     private function getCategoryTree() {
