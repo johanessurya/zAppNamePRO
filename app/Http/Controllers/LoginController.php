@@ -174,16 +174,29 @@ class LoginController extends Controller
     private function getSubCategory() {
       $return = [];
 
-      $rows = SubCategory::all();
-
+      // Generate all category
+      $rows = Category::all();
       foreach($rows as $x) {
-        $category = Category::find($x->category_id);
-
-        $title = $category->title . ' | ' . $x->title;
+        $title = $x->abbrev;
 
         $return[] = [
           'id' => $x->id,
-          'title' => $title
+          'title' => $title,
+          'value' => 'c=' . $x->id
+        ];
+      }
+
+      // Generate all subcategory
+      $rows = SubCategory::all();
+      foreach($rows as $x) {
+        $category = Category::find($x->category_id);
+
+        $title = $category->abbrev . ' | ' . $x->title;
+
+        $return[] = [
+          'id' => $x->id,
+          'title' => $title,
+          'value' => 'sc=' . $x->id
         ];
       }
 

@@ -25,7 +25,7 @@
             <select class="form-control pull-right">
               <option></option>
               <?php foreach($subCategory as $x): ?>
-              <option value="<?php echo $x['id']; ?>"><?php echo $x['title']; ?></option>
+              <option value="<?php echo $x['value']; ?>"><?php echo $x['title']; ?></option>
               <?php endforeach; ?>
             </select>
           </div>
