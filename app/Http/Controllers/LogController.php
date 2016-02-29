@@ -12,6 +12,7 @@ use Auth;
 use App\User;
 use App\MyModel;
 use App\Category;
+use App\SubCategory;
 use App\Calendar;
 use App\Config;
 use App\Http\Requests;
@@ -70,11 +71,110 @@ class LogController extends Controller
       $return = [];
       $params = $request->all();
 
-      if(isset($params['type']) && $params['type'] == 'activity')
-        $return = $this->getActivityReport($params);
+      if(isset($params['type'])){
+        if($params['type'] == 'activity')
+          $return = $this->getActivityReport($params);
+        elseif($params['type'] == 'topic' && !empty($params['value']))
+          $return = $this->getTopicReport($params);
+      }
+      return $return;
+    }
+
+    private function getTopicReport($params) {
+      $return = [];
+      $grayColor = '#777777';
+      $user = User::find(Auth::user()->id);
+
+      $start = DateTime::createFromFormat(DATETIME_FORMAT, $params['start']);
+      $end = DateTime::createFromFormat(DATETIME_FORMAT, $params['end']);
+      $start = $start->format(config('steve.mysql_datetime_format'));
+      $end = $end->format(config('steve.mysql_datetime_format'));
+
+      $query = Calendar::select('categoryID', 'subCategoryID', DB::raw('SUM(TIMESTAMPDIFF(minute, start, end)) as total'))
+              ->where('start', '>=', $start)
+              ->where('end', '<=', $end)
+              ->where('user_id', Auth::user()->id);
+
+      $filter = null;
+      if(!empty($params['value']))
+        $filter = explode('=', $params['value']);
+
+      // Filter by category id or sub category id
+      switch($filter[0]) {
+        // Category
+        case 'c':
+          $rows = $query->groupBy('categoryID', 'subCategoryID')->get();
+
+          // Find total
+          $total = 0;
+          foreach($rows as $x)
+            $total += $x['total'];
+
+          // $total2 to keep track sum of all row to match 100% by substract
+          // with $total
+          $total2 = 0;
+
+          // Sub Category List to query other sub category that don't have any
+          // Assocated event
+          $categoryList = [];
+          $other = [
+            'value' => 0,
+            'color' => $grayColor,
+            'highlight' => $grayColor,
+            'label' => 'Other',
+          ];
+          for($i = 0; $i < count($rows); $i++) {
+            $x = $rows[$i];
+
+            // CategoryList
+            $categoryList[] = $x['categoryID'];
+
+            // Get % of each sub category
+            if($i < count($rows) - 1)
+              $value = round($x['total'] / $total * 100, 1);
+            else
+              // If this the last, just substract with $total2 with 100(mean 100%)
+              $value = 100 - $total2;
+
+            if($x['categoryID'] == $filter[1]) {
+              $return[] = [
+                'value' => $value,
+                'color' => $x->subCategory->color,
+                'highlight' => $x->subCategory->color,
+                'label' => $x->subCategory->title,
+              ];
+            } else {
+              $other['value'] += $value;
+            }
+
+            $total2 += $value;
+          }
+
+          $rows = SubCategory::where('category_id', $filter[1])
+                  ->whereNotIn('id', $categoryList)->get();
+
+          foreach($rows as $x) {
+            $return[] = [
+              'value' => 0,
+              'color' => $x->color,
+              'highlight' => $x->color,
+              'label' => $x->title,
+            ];
+          }
+
+          if($other['value'] != 0)
+            $return[] = $other;
+
+          break;
+        // Sub category
+        case 'sc':
+
+          break;
+      }
 
       return $return;
     }
+
 
     private function getActivityReport($params) {
       $return = [];
@@ -147,7 +247,7 @@ class LogController extends Controller
         ];
       }
 
-        return $return;
+      return $return;
     }
 
     public function getConfig(Request $request) {

@@ -40,12 +40,12 @@ class Calendar extends MyModel
    * Get the category record associated with the calendar.
    */
   public function category() {
-      return $this->hasOne('App\Category', 'id', 'categoryID');
+    return $this->hasOne('App\Category', 'id', 'categoryID');
   }
 
   // Get a row of sub category
   public function subCategory() {
-    return $this->hasOne('App\Category', 'id', 'subCategoryID');
+    return $this->hasOne('App\SubCategory', 'id', 'subCategoryID');
   }
 
   public static function createEvent(array $attributes = array()) {

@@ -22,7 +22,7 @@
       <div class="col-md-5 form-group pull-right">
         <div class="col-lg-6">
           <div class="input-group">
-            <select class="form-control pull-right">
+            <select id="report-value" class="form-control pull-right">
               <option></option>
               <?php foreach($subCategory as $x): ?>
               <option value="<?php echo $x['value']; ?>"><?php echo $x['title']; ?></option>
@@ -32,7 +32,7 @@
         </div>
         <div class="col-lg-6">
           <div class="input-group">
-            <button class="btn btn-default pull-right" id="daterange-btn">
+            <button class="btn btn-default pull-right" id="daterange-btn" data-type="topic">
               <i class="fa fa-calendar"></i>
               <span>Please select a date</span>
               <i class="fa fa-caret-down"></i>

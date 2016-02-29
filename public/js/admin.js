@@ -178,7 +178,8 @@ $global.reloadPieChart = function() {
       data: {
         start: $global.dateTime.start,
         end: $global.dateTime.end,
-        type: $('#daterange-btn').attr('data-type')
+        type: $('#daterange-btn').attr('data-type'),
+        value: $('#report-value').val()
       }
     }).done(function(data) {
       $global.reloadPieChartlegend(data);
@@ -346,6 +347,13 @@ $global.dateTimePicker = function() {
 
     // Reload activity data table
     $global.reloadActivityTable();
+  });
+}
+
+$global.reportInit = function() {
+  $('#report-value').change(function () {
+    // Reload chart js
+    $global.reloadPieChart();
   });
 }
 

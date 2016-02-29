@@ -7,4 +7,6 @@ $(document).ready(function() {
 
   // Hanlde all event and action
   $global.dateTimePicker();
+
+  $global.reportInit();
 });

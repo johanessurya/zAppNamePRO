@@ -18,6 +18,9 @@
         <a href="#" class="btn btn-default">Print</a>
       </div>
 
+      <select id="report-value" class="hide">
+      </select>
+
       <!-- Date and time range -->
       <div class="form-group pull-right">
         <div class="input-group">
