@@ -114,7 +114,7 @@
               <ul class="treeview-menu">
                 <li><a href="/dashboard/activity"><i class="fa  fa-check"></i> Activity Log</a></li>
                 <li><a href="/dashboard/topicdelivery"><i class="fa fa-truck "></i> Topic Delivery Log</a></li>
-                <li><a href="pages/forms/editors.html"><i class="fa fa-graduation-cap"></i> Client Service Log</a></li>
+                <li><a href="/dashboard/clientservice"><i class="fa fa-graduation-cap"></i> Client Service Log</a></li>
                 <li><a href="pages/forms/editors.html"><i class="fa fa-calculator"></i> Topic Statistics</a></li>
                 <li><a href="pages/forms/editors.html"><i class="fa  fa-pie-chart"></i> Use-Of-Time Analysis</a></li>
               </ul>

@@ -149,6 +149,9 @@ Route::group(['middleware' => ['web']], function () {
     return view('dashboard.topicdeliverylog')->with('subCategory', Session::get('subcategory'));
   });
 
+  // Client service log
+  Route::get('/dashboard/clientservice', 'LogController@clientService');
+
   // ==== API Route ====
   // Prefix : /api/v1/
   Route::group(['prefix' => '/api/v1/'], function () {

@@ -15,12 +15,18 @@ use App\Category;
 use App\SubCategory;
 use App\SubSubCategory;
 use App\Calendar;
+use App\Client;
 use App\Config;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 class LogController extends Controller
 {
+    public function clientService() {
+      $rows = Client::where('user_id', Auth::user()->id)->get();
+      return view('dashboard.clientservicelog')->with('clients', $rows);
+    }
+
     public function getReport(Request $request) {
       $return = [];
       $params = $request->all();
