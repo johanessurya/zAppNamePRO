@@ -21,7 +21,7 @@
       <!-- Date and time range -->
       <div class="form-group pull-right">
         <div class="input-group">
-          <button class="btn btn-default pull-right" id="daterange-btn">
+          <button class="btn btn-default pull-right" id="daterange-btn" data-type="activity">
             <i class="fa fa-calendar"></i>
             <span>Please select a date</span>
             <i class="fa fa-caret-down"></i>

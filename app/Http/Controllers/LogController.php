@@ -70,7 +70,8 @@ class LogController extends Controller
       $return = [];
       $params = $request->all();
 
-      $return = $this->getActivityReport($params);
+      if(isset($params['type']) && $params['type'] == 'activity')
+        $return = $this->getActivityReport($params);
 
       return $return;
     }

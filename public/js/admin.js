@@ -177,7 +177,8 @@ $global.reloadPieChart = function() {
       url: '/api/v1/logs/activity/piechart',
       data: {
         start: $global.dateTime.start,
-        end: $global.dateTime.end
+        end: $global.dateTime.end,
+        type: $('#daterange-btn').attr('data-type')
       }
     }).done(function(data) {
       $global.reloadPieChartlegend(data);
