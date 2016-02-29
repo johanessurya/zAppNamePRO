@@ -21,7 +21,7 @@ use App\Http\Controllers\Controller;
 
 class LogController extends Controller
 {
-    public function getActivity(Request $request) {
+    public function getReport(Request $request) {
       $return = [];
       $params = $request->all();
 
@@ -30,9 +30,23 @@ class LogController extends Controller
       $start = $start->format(config('steve.mysql_datetime_format'));
       $end = $end->format(config('steve.mysql_datetime_format'));
 
-      $rows = Calendar::where('start', '>=', $start)->where('end', '<=', $end)->get();
+      $query = Calendar::where('start', '>=', $start)->where('end', '<=', $end);
 
-      // var_dump($params, $rows); die('test');
+      $rows = [];
+      if($params['type'] == 'activity') {
+        $rows = $query->get();
+      } elseif($params['type'] == 'topic' && !empty($params['value'])) {
+        $filter = explode('=', $params['value']);
+
+        switch($filter[0]) {
+          case 'c':
+            $rows = $query->where('categoryID', $filter[1])->get();
+            break;
+          case 'sc':
+            $rows = $query->where('subCategoryID', $filter[1])->get();
+            break;
+        }
+      }
 
       $start = null;
       $end = null;

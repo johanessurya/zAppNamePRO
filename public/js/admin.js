@@ -7,6 +7,7 @@ $global.misc = {};
 $global.api = {};
 $global.api.getConfig = '/api/v1/logs/getconfig';
 $global.api.setConfig = '/api/v1/logs/setconfig';
+$global.api.getReport = '/api/v1/logs/report';
 $global.createForm = $('#edit-form-body');
 $global.editForm = $('#quicksave-form-body');
 
@@ -333,10 +334,12 @@ $global.dateTimePicker = function() {
     // Count activity
     $.ajax({
       method: 'POST',
-      url: '/api/v1/logs/activity',
+      url: $global.api.getReport,
       data: {
         start: $global.dateTime.start,
-        end: $global.dateTime.end
+        end: $global.dateTime.end,
+        type: $('#daterange-btn').attr('data-type'),
+        value: $('#report-value').val()
       }
     }).done(function(data) {
       $('#activity-count').html(data.data.length);
@@ -354,6 +357,9 @@ $global.reportInit = function() {
   $('#report-value').change(function () {
     // Reload chart js
     $global.reloadPieChart();
+
+    // Reload data tables too
+    $global.reloadActivityTable();
   });
 }
 
@@ -361,11 +367,13 @@ $global.reloadActivityTable = function(start, end) {
     if($global.activityFirstTime)
       $global.activityTable = $('#activity-table').DataTable( {
           'ajax': {
-            url: '/api/v1/logs/activity',
+            url: $global.api.getReport,
             type: 'POST',
             data: function(d) {
               d.start = $global.dateTime.start;
               d.end = $global.dateTime.end;
+              d.type = $('#daterange-btn').attr('data-type');
+              d.value = $('#report-value').val();
             }
           },
           'columns': [

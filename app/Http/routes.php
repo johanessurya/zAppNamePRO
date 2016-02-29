@@ -225,7 +225,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/client/get', 'CalendarController@getClient');
 
     // Get activity log list
-    Route::post('/logs/activity', 'LogController@getActivity');
+    Route::post('/logs/report', 'LogController@getReport');
 
     // Get activity log chartjs data
     Route::post('/logs/activity/piechart', 'LogController@getActivityPieChart');
