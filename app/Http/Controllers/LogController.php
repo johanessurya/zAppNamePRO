@@ -13,6 +13,7 @@ use App\User;
 use App\MyModel;
 use App\Category;
 use App\SubCategory;
+use App\SubSubCategory;
 use App\Calendar;
 use App\Config;
 use App\Http\Requests;
@@ -168,6 +169,67 @@ class LogController extends Controller
           break;
         // Sub category
         case 'sc':
+          $rows = $query->groupBy('subCategoryID', 'subSubCategoryID')->get();
+
+          // Find total
+          $total = 0;
+          foreach($rows as $x)
+            $total += $x['total'];
+
+          // $total2 to keep track sum of all row to match 100% by substract
+          // with $total
+          $total2 = 0;
+
+          // Sub Category List to query other sub category that don't have any
+          // Assocated event
+          $categoryList = [];
+          $other = [
+            'value' => 0,
+            'color' => $grayColor,
+            'highlight' => $grayColor,
+            'label' => 'Other',
+          ];
+          for($i = 0; $i < count($rows); $i++) {
+            $x = $rows[$i];
+
+            // CategoryList
+            $categoryList[] = $x['subCategoryID'];
+
+            // Get % of each sub category
+            if($i < count($rows) - 1)
+              $value = round($x['total'] / $total * 100, 1);
+            else
+              // If this the last, just substract with $total2 with 100(mean 100%)
+              $value = 100 - $total2;
+
+            if($x['subCategoryID'] == $filter[1]) {
+              $return[] = [
+                'value' => $value,
+                'color' => $x->subCategory->color,
+                'highlight' => $x->subCategory->color,
+                'label' => $x->subCategory->title,
+              ];
+            } else {
+              $other['value'] += $value;
+            }
+
+            $total2 += $value;
+          }
+
+          $rows = SubSubCategory::where('category_id', $filter[1])
+                  ->whereNotIn('id', $categoryList)->get();
+
+          foreach($rows as $x) {
+            $return[] = [
+              'value' => 0,
+              'color' => $x->color,
+              'highlight' => $x->color,
+              'label' => $x->title,
+            ];
+          }
+
+          if($other['value'] != 0)
+            $return[] = $other;
 
           break;
       }
