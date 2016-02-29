@@ -67,17 +67,23 @@ class LogController extends Controller
     }
 
     public function getActivityPieChart(Request $request) {
-      $user = User::find(Auth::user()->id);
-
       $return = [];
       $params = $request->all();
+
+      $return = $this->getActivityReport($params);
+
+      return $return;
+    }
+
+    private function getActivityReport($params) {
+      $return = [];
+
+      $user = User::find(Auth::user()->id);
 
       $start = DateTime::createFromFormat(DATETIME_FORMAT, $params['start']);
       $end = DateTime::createFromFormat(DATETIME_FORMAT, $params['end']);
       $start = $start->format(config('steve.mysql_datetime_format'));
       $end = $end->format(config('steve.mysql_datetime_format'));
-
-      // $rows = Category::where();
 
       $rows = Calendar::select('categoryID', DB::raw('SUM(TIMESTAMPDIFF(minute, start, end)) as total'))
               ->where('start', '>=', $start)
@@ -140,7 +146,7 @@ class LogController extends Controller
         ];
       }
 
-      return $return;
+        return $return;
     }
 
     public function getConfig(Request $request) {
