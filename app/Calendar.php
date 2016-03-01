@@ -48,6 +48,11 @@ class Calendar extends MyModel
     return $this->hasOne('App\SubCategory', 'id', 'subCategoryID');
   }
 
+  // Get a row of sub category
+  public function client() {
+    return $this->hasMany('App\CalendarClient', 'calendar_id', 'id');
+  }
+
   public static function createEvent(array $attributes = array()) {
     // Create an event
     // This is parent event. All repeat event will get this id as their parent.

@@ -52,7 +52,7 @@ class LogController extends Controller
             $rows = $query->where('subCategoryID', $filter[1])->get();
             break;
         }
-      } elseif($params['type'] == 'client-service') {
+      } elseif($params['type'] == 'client-service' && !empty($params['value'])) {
         // Client ID
         $filter = $params['value'];
         $rows = DB::table('calendar_client')
@@ -119,6 +119,10 @@ class LogController extends Controller
     private function getClientService($params) {
       $return = [];
 
+      if(empty($params['value']))
+        return $return;
+
+      $grayColor = config('steve.gray_color');
       $user = User::find(Auth::user()->id);
 
       $start = DateTime::createFromFormat(DATETIME_FORMAT, $params['start']);
@@ -126,79 +130,58 @@ class LogController extends Controller
       $start = $start->format(config('steve.mysql_datetime_format'));
       $end = $end->format(config('steve.mysql_datetime_format'));
 
-      // Client ID
-      $filter = $params['value'];
-      $rows = DB::table('calendar_client')
-              ->where('client_id', $filter)
-              ->select('calendar_id')
-              ->get();
-
-      $calendarList = [];
-      foreach($rows as $x)
-        $calendarList[] = $x->calendar_id;
-
       // Get calendar associated with client id
-      $rows = Calendar::select('categoryID', DB::raw('SUM(TIMESTAMPDIFF(minute, start, end)) as total'))
+      $rows = Calendar::select('id', DB::raw('SUM(TIMESTAMPDIFF(minute, start, end)) as total'))
               ->where('start', '>=', $start)
               ->where('end', '<=', $end)
               ->where('user_id', Auth::user()->id)
-              ->whereIn('id', $calendarList)
-              ->groupBy('categoryID')
+              ->groupBy('id')
               ->get();
+
+      $clientRow = Client::find($params['value']);
 
       $total = 0;
       foreach($rows as $x)
         $total += $x['total'];
 
       $total2 = 0;
-      $categoryList = [];
+      $client = [
+        'value' => 0,
+        'color' => '#ff00ff',
+        'highlight' => '#ff00ff',
+        'label' => $clientRow->name,
+      ];
+
+      $other = [
+        'value' => 0,
+        'color' => $grayColor,
+        'highlight' => $grayColor,
+        'label' => 'Other',
+      ];
+
       for($i = 0; $i < count($rows); $i++) {
         $x = $rows[$i];
-
-        // CategoryList
-        $categoryList[] = $x['categoryID'];
 
         if($i < count($rows) - 1)
           $value = round($x['total'] / $total * 100, 1);
         else
-          $value = 100 - $total2;
+          $value = round(100 - $total2, 1);
 
-        $return[] = [
-          'value' => $value,
-          'color' => $x->category->color,
-          'highlight' => $x->category->color,
-          'label' => $x->category->title,
-        ];
+        $temp = $x->client()->where('client_id', $params['value'])->first();
+
+        if(!empty($temp)) {
+          // Add client
+          $client['value'] += $value;
+        } else {
+          // Add other
+          $other['value'] += $value;
+        }
 
         $total2 += $value;
       }
 
-      // Not in category
-      $rows = Category::select('category.*')
-              ->where('CompanyID', $user->CompanyID)
-              ->whereNotIn('id', $categoryList)
-              ->get();
-
-      foreach($rows as $x) {
-        $return[] = [
-          'value' => 0,
-          'color' => $x->color,
-          'highlight' => $x->color,
-          'label' => $x->title,
-        ];
-      }
-
-      $rows = Category::where('companyID', null)
-              ->whereNotIn('id', $categoryList)->get();
-
-      foreach($rows as $x) {
-        $return[] = [
-          'value' => 0,
-          'color' => $x->color,
-          'highlight' => $x->color,
-          'label' => $x->title,
-        ];
-      }
+      $return[0] = $client;
+      $return[1] = $other;
 
       return $return;
     }

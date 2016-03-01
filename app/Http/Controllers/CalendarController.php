@@ -27,6 +27,7 @@ class CalendarController extends Controller
         'categories' => $categories,
         'clients' => $clients
       ];
+
       return view('calendar', $data);
     }
 
@@ -124,7 +125,7 @@ class CalendarController extends Controller
     }
 
     public function getClient() {
-      $rows = Client::all();
+      $rows = Client::where('user_id', Auth::user()->id)->get();
 
       return $rows;
     }
