@@ -1,6 +1,6 @@
 $(document).ready(function() {
   // Init pie chart
-  // $global.initPieChart();
+  $global.initPieChart();
 
   // Init CKEditor
   $global.initCKEditor();
