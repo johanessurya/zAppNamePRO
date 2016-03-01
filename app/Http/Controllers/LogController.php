@@ -110,7 +110,96 @@ class LogController extends Controller
           $return = $this->getActivityReport($params);
         elseif($params['type'] == 'topic' && !empty($params['value']))
           $return = $this->getTopicReport($params);
+        elseif($params['type'] == 'client-service')
+          $return = $this->getClientService($params);
       }
+      return $return;
+    }
+
+    private function getClientService($params) {
+      $return = [];
+
+      $user = User::find(Auth::user()->id);
+
+      $start = DateTime::createFromFormat(DATETIME_FORMAT, $params['start']);
+      $end = DateTime::createFromFormat(DATETIME_FORMAT, $params['end']);
+      $start = $start->format(config('steve.mysql_datetime_format'));
+      $end = $end->format(config('steve.mysql_datetime_format'));
+
+      // Client ID
+      $filter = $params['value'];
+      $rows = DB::table('calendar_client')
+              ->where('client_id', $filter)
+              ->select('calendar_id')
+              ->get();
+
+      $calendarList = [];
+      foreach($rows as $x)
+        $calendarList[] = $x->calendar_id;
+
+      // Get calendar associated with client id
+      $rows = Calendar::select('categoryID', DB::raw('SUM(TIMESTAMPDIFF(minute, start, end)) as total'))
+              ->where('start', '>=', $start)
+              ->where('end', '<=', $end)
+              ->where('user_id', Auth::user()->id)
+              ->whereIn('id', $calendarList)
+              ->groupBy('categoryID')
+              ->get();
+
+      $total = 0;
+      foreach($rows as $x)
+        $total += $x['total'];
+
+      $total2 = 0;
+      $categoryList = [];
+      for($i = 0; $i < count($rows); $i++) {
+        $x = $rows[$i];
+
+        // CategoryList
+        $categoryList[] = $x['categoryID'];
+
+        if($i < count($rows) - 1)
+          $value = round($x['total'] / $total * 100, 1);
+        else
+          $value = 100 - $total2;
+
+        $return[] = [
+          'value' => $value,
+          'color' => $x->category->color,
+          'highlight' => $x->category->color,
+          'label' => $x->category->title,
+        ];
+
+        $total2 += $value;
+      }
+
+      // Not in category
+      $rows = Category::select('category.*')
+              ->where('CompanyID', $user->CompanyID)
+              ->whereNotIn('id', $categoryList)
+              ->get();
+
+      foreach($rows as $x) {
+        $return[] = [
+          'value' => 0,
+          'color' => $x->color,
+          'highlight' => $x->color,
+          'label' => $x->title,
+        ];
+      }
+
+      $rows = Category::where('companyID', null)
+              ->whereNotIn('id', $categoryList)->get();
+
+      foreach($rows as $x) {
+        $return[] = [
+          'value' => 0,
+          'color' => $x->color,
+          'highlight' => $x->color,
+          'label' => $x->title,
+        ];
+      }
+
       return $return;
     }
 

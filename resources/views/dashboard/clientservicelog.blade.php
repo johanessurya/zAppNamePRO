@@ -23,7 +23,7 @@
         <div class="col-lg-6">
           <div class="input-group">
             <select id="report-value" class="form-control pull-right">
-              <option></option>
+              <option>Select a client</option>
               <?php foreach($clients as $x): ?>
               <option value="<?php echo $x->id; ?>"><?php echo $x->name; ?></option>
               <?php endforeach; ?>
