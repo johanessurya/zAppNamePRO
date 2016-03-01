@@ -1,4 +1,7 @@
 $(document).ready(function() {
+  // Auto open tab
+  $('#tabs-log').trigger('click');
+
   // Init pie chart
   $global.initPieChart();
 

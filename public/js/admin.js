@@ -3,11 +3,20 @@ $global = {};
 $global.clientSource = [];
 $global.user = {};
 $global.misc = {};
+
+$global.const = {};
+$global.const.ACTIVITY = 0;
+$global.const.TOPIC_DELIVERY = 1;
+$global.const.CLIENT_SERVICE = 2;
+$global.const.TOPIC_STAT = 3;
+$global.const.USE_OF_TIME = 4;
+
 // api url list
 $global.api = {};
 $global.api.getConfig = '/api/v1/logs/getconfig';
 $global.api.setConfig = '/api/v1/logs/setconfig';
 $global.api.getReport = '/api/v1/logs/report';
+
 $global.createForm = $('#edit-form-body');
 $global.editForm = $('#quicksave-form-body');
 

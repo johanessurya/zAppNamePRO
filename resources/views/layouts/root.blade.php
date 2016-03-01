@@ -107,7 +107,7 @@
                </a>
             </li>
             <li class="treeview">
-              <a href="#">
+              <a id="tabs-log" href="#">
                 <i class="fa fa-edit"></i> <span>Logs</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
