@@ -23,7 +23,7 @@
         <div class="col-lg-6">
           <div class="input-group">
             <select id="report-value" class="form-control pull-right">
-              <option></option>
+              <option>Please select a Topic</option>
               <?php foreach($subCategory as $x): ?>
               <option value="<?php echo $x['value']; ?>"><?php echo $x['title']; ?></option>
               <?php endforeach; ?>

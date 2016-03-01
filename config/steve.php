@@ -24,6 +24,8 @@ return [
 
   'mysql_datetime_format' => 'Y-m-d H:i:s',
 
-  'time_format' => 'H:i'
+  'time_format' => 'H:i',
+
+  'gray_color' => '#f0f0f0'
 ]
 ?>

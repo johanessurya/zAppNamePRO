@@ -103,7 +103,7 @@ class LogController extends Controller
 
     private function getTopicReport($params) {
       $return = [];
-      $grayColor = '#777777';
+      $grayColor = config('steve.gray_color');
       $user = User::find(Auth::user()->id);
 
       $start = DateTime::createFromFormat(DATETIME_FORMAT, $params['start']);
