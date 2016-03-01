@@ -1,6 +1,6 @@
 @extends('layouts.default-admin')
 
-@section('title-h1', 'Topic Delivery Log')
+@section('title-h1', 'Client Service Log')
 @section('title-small', ' ')
 
 @push('scripts')

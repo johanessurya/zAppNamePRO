@@ -52,13 +52,26 @@ class LogController extends Controller
             $rows = $query->where('subCategoryID', $filter[1])->get();
             break;
         }
+      } elseif($params['type'] == 'client-service') {
+        // Client ID
+        $filter = $params['value'];
+        $rows = DB::table('calendar_client')
+                ->where('client_id', $filter)
+                ->select('calendar_id')
+                ->get();
+
+        $calendarList = [];
+        foreach($rows as $x)
+          $calendarList[] = $x->calendar_id;
+
+        $rows = $query->whereIn('id', $calendarList)->get();
       }
 
       $start = null;
       $end = null;
       foreach($rows as $x) {
-        $start = DateTime::createFromFormat(DATETIME_FORMAT, $x['start']);
-        $end = DateTime::createFromFormat(DATETIME_FORMAT, $x['end']);
+        $start = DateTime::createFromFormat(DATETIME_FORMAT, $x->start);
+        $end = DateTime::createFromFormat(DATETIME_FORMAT, $x->end);
 
         $clients = DB::table('calendar_client')
           ->where('calendar_id', $x->id)
