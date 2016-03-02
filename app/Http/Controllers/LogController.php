@@ -22,6 +22,10 @@ use App\Http\Controllers\Controller;
 
 class LogController extends Controller
 {
+    public function topicStat() {
+      return view('dashboard.topicstat')->with('test', []);
+    }
+
     public function clientService() {
       $rows = Client::where('user_id', Auth::user()->id)->get();
       return view('dashboard.clientservicelog')->with('clients', $rows);

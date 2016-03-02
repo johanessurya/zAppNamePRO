@@ -24,9 +24,9 @@
           <div class="input-group">
             <select id="report-value" class="form-control pull-right">
               <option value="0">Select a client</option>
-              <?php foreach($clients as $x): ?>
-              <option value="<?php echo $x->id; ?>"><?php echo $x->name; ?></option>
-              <?php endforeach; ?>
+              @foreach($clients as $x)
+              <option value="{{ $x->id }}">{{ $x->name }}</option>
+              @endforeach
             </select>
           </div>
         </div>

@@ -115,8 +115,8 @@
                 <li id="activity"><a href="/dashboard/activity"><i class="fa  fa-check"></i> Activity Log</a></li>
                 <li id="topic"><a href="/dashboard/topicdelivery"><i class="fa fa-truck "></i> Topic Delivery Log</a></li>
                 <li id="client-service"><a href="/dashboard/clientservice"><i class="fa fa-graduation-cap"></i> Client Service Log</a></li>
-                <li><a href="pages/forms/editors.html"><i class="fa fa-calculator"></i> Topic Statistics</a></li>
-                <li><a href="pages/forms/editors.html"><i class="fa  fa-pie-chart"></i> Use-Of-Time Analysis</a></li>
+                <li id="topic-stat"><a href="/dashboard/topicstat"><i class="fa fa-calculator"></i> Topic Statistics</a></li>
+                <li id="use-of-time"><a href="/dashboard/useoftime"><i class="fa  fa-pie-chart"></i> Use-Of-Time Analysis</a></li>
               </ul>
             </li>
              <li><a href="/dashboard/client"><i class="fa fa-user"></i> <span>Clients</span></a></li>

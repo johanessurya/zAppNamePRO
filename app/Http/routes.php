@@ -152,6 +152,12 @@ Route::group(['middleware' => ['web']], function () {
   // Client service log
   Route::get('/dashboard/clientservice', 'LogController@clientService');
 
+  // Topic statistic
+  Route::get('/dashboard/topicstat', 'LogController@topicStat');
+
+  // Use of time
+  Route::get('/dashboard/useoftime', 'LogController@useOfTime');
+
   // ==== API Route ====
   // Prefix : /api/v1/
   Route::group(['prefix' => '/api/v1/'], function () {
