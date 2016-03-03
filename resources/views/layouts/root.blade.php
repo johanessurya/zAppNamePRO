@@ -106,7 +106,7 @@
                   <small class="label pull-right bg-red">3</small>
                </a>
             </li>
-            <li class="treeview">
+            <li class="treeview @yield('log-tree')">
               <a id="tabs-log" href="#">
                 <i class="fa fa-edit"></i> <span>Logs</span>
                 <i class="fa fa-angle-left pull-right"></i>

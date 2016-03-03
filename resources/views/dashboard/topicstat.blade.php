@@ -1,4 +1,4 @@
-@extends('layouts.default-admin')
+@extends('layouts.log-admin')
 
 @section('title-h1', 'Topic Statistics')
 @section('title-small', ' ')

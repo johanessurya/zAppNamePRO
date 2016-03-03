@@ -1,6 +1,6 @@
 $(document).ready(function() {
   // Auto open tab
-  $('#tabs-log').trigger('click');
+  // $('#tabs-log').trigger('click');
 
   var timerId = setInterval(function() {
     var el = $('#' + $('#daterange-btn').attr('data-type'));
@@ -12,7 +12,7 @@ $(document).ready(function() {
 
     console.log('test');
   }, 500);
-
+  
   // Init pie chart
   $global.initPieChart();
 
