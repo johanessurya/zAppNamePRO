@@ -79,6 +79,12 @@ class LogController extends Controller
                 ->groupBy('categoryID', 'subCategoryID')
                 ->orderBy('total', 'DESC')
                 ->get();
+      } elseif($params['type'] == 'use-of-time') {
+        $rows = $query->select('categoryID', DB::raw('SUM(TIMESTAMPDIFF(minute, start, end)) as total'), DB::raw('COUNT(*) as freq'))
+                ->where('user_id', Auth::user()->id)
+                ->groupBy('categoryID')
+                ->orderBy('total', 'DESC')
+                ->get();
       }
 
       if(in_array($params['type'], ['activity', 'topic', 'client-service'])) {
@@ -112,7 +118,7 @@ class LogController extends Controller
             'note' => $x['note']
           ];
         }
-      } elseif($params['type'] == 'topic-stat') {
+      } elseif(in_array($params['type'], ['topic-stat', 'use-of-time'])) {
         $totalTime = 0;
         $currTotalTime = 0;
 
@@ -154,7 +160,57 @@ class LogController extends Controller
           $return = $this->getClientService($params);
         elseif($params['type'] == 'topic-stat')
           $return = $this->getTopicStat($params);
+        elseif($params['type'] == 'use-of-time')
+          $return = $this->getUseOfTime($params);
       }
+      return $return;
+    }
+
+    private function getUseOfTime($params) {
+      $return = [];
+
+      $grayColor = config('steve.gray_color');
+      $user = User::find(Auth::user()->id);
+
+      $start = DateTime::createFromFormat(DATETIME_FORMAT, $params['start']);
+      $end = DateTime::createFromFormat(DATETIME_FORMAT, $params['end']);
+      $start = $start->format(config('steve.mysql_datetime_format'));
+      $end = $end->format(config('steve.mysql_datetime_format'));
+
+      // Get calendar associated with client id
+      $rows = Calendar::select('categoryID', DB::raw('SUM(TIMESTAMPDIFF(minute, start, end)) as total'), DB::raw('COUNT(*) as freq'))
+              ->where('start', '>=', $start)
+              ->where('end', '<=', $end)
+              ->where('user_id', Auth::user()->id)
+              ->groupBy('categoryID')
+              ->orderBy('total', 'DESC')
+              ->get();
+
+      $total = 0;
+      foreach($rows as $x)
+        $total += $x['total'];
+
+      $total2 = 0;
+
+      for($i = 0; $i < count($rows); $i++) {
+        $x = $rows[$i];
+
+        if($i < count($rows) - 1)
+          $value = round($x['total'] / $total * 100, 1);
+        else
+          $value = round(100 - $total2, 1);
+
+        $label = $x->category->abbrev;
+        $return[] = [
+          'value' => $value,
+          'color' => $x->category->color,
+          'highlight' => $x->category->color,
+          'label' => $label
+        ];
+
+        $total2 += $value;
+      }
+
       return $return;
     }
 
