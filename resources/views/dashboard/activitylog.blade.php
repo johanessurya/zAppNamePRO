@@ -40,7 +40,7 @@
     <div class="col-md-6">
       <div class="box box-default">
         <div class="box-header with-border">
-          <h3 class="box-title">Report Graph</h3>
+          <h3 class="box-title">Graph</h3>
           <div class="box-tools pull-right">
             <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
           </div>
@@ -87,7 +87,10 @@
     <!-- TABLE: LATEST ORDERS -->
     <div class="box">
       <div class="box-header with-border">
-        <h3>Activities Found</h3>
+        <h3 class="box-title">Activities Found</h3>
+        <div class="box-tools pull-right">
+          <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        </div>
       </div><!-- /.box-header -->
       <div class="box-body">
         <table id="activity-table" class="table table-bordered table-striped">
