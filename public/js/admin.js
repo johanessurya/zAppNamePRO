@@ -386,31 +386,63 @@ $global.reportInit = function() {
 }
 
 $global.reloadActivityTable = function(start, end) {
-    if($global.activityFirstTime)
-      $global.activityTable = $('#activity-table').DataTable( {
-          'ajax': {
-            url: $global.api.getReport,
-            type: 'POST',
-            data: function(d) {
-              d.start = $global.dateTime.start;
-              d.end = $global.dateTime.end;
-              d.type = $('#daterange-btn').attr('data-type');
-              d.value = $('#report-value').val();
-            }
-          },
-          'columns': [
-            {'data': 'date', 'searchable': true},
-            {'data': 'start', 'searchable': true},
-            {'data': 'end', 'searchable': true},
-            {'data': 'description', 'searchable': true},
-            {'data': 'note', 'searchable': true},
-          ]
-      } );
-    else {
+    if($global.activityFirstTime) {
+      var temp = null;
+      var el = null;
+      el = $('#activity-table');
+
+      // Mean exists
+      if(el.length > 0) {
+        temp = el.DataTable( {
+            'ajax': {
+              url: $global.api.getReport,
+              type: 'POST',
+              data: function(d) {
+                d.start = $global.dateTime.start;
+                d.end = $global.dateTime.end;
+                d.type = $('#daterange-btn').attr('data-type');
+                d.value = $('#report-value').val();
+              }
+            },
+            'columns': [
+              {'data': 'date', 'searchable': true},
+              {'data': 'start', 'searchable': true},
+              {'data': 'end', 'searchable': true},
+              {'data': 'description', 'searchable': true},
+              {'data': 'note', 'searchable': true},
+            ]
+        } );
+      } else {
+        el = $('#topic-stat-table');
+
+        temp = el.DataTable( {
+            'ajax': {
+              url: $global.api.getReport,
+              type: 'POST',
+              data: function(d) {
+                d.start = $global.dateTime.start;
+                d.end = $global.dateTime.end;
+                d.type = $('#daterange-btn').attr('data-type');
+                d.value = $('#report-value').val();
+              }
+            },
+            'columns': [
+              {'data': 'category', 'searchable': true},
+              {'data': 'subcategory', 'searchable': true},
+              {'data': 'time', 'searchable': true},
+              {'data': 'freq', 'searchable': true},
+              {'data': 'total', 'searchable': true},
+            ],
+            'order': [[ 2, "desc" ]]
+        } );
+      }
+
+      $global.activityTable = temp;
+    } else {
       $global.activityTable.ajax.reload();
     }
 
-    $global.activityFirstTime = false;
+    $global.activityFirstTime = false; 085100028491
 }
 
 // ==== List of function (START) ====

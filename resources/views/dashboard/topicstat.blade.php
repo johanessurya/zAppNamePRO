@@ -1,6 +1,6 @@
 @extends('layouts.default-admin')
 
-@section('title-h1', 'Client Service Log')
+@section('title-h1', 'Topic Statistics')
 @section('title-small', ' ')
 
 @push('scripts')
@@ -19,25 +19,13 @@
       </div>
 
       <!-- Date and time range -->
-      <div class="col-md-5 form-group pull-right">
-        <div class="col-lg-6">
-          <div class="input-group">
-            <select id="report-value" class="form-control pull-right">
-              <option value="0">Select a client</option>
-              @foreach($clients as $x)
-              <option value="{{ $x->id }}">{{ $x->name }}</option>
-              @endforeach
-            </select>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="input-group">
-            <button class="btn btn-default pull-right" id="daterange-btn" data-type="topic-stat">
-              <i class="fa fa-calendar"></i>
-              <span>Please select a date</span>
-              <i class="fa fa-caret-down"></i>
-            </button>
-          </div>
+      <div class="form-group pull-right">
+        <div class="input-group">
+          <button class="btn btn-default pull-right" id="daterange-btn" data-type="topic-stat">
+            <i class="fa fa-calendar"></i>
+            <span>Please select a date</span>
+            <i class="fa fa-caret-down"></i>
+          </button>
         </div>
       </div><!-- /.form group -->
     </div><!-- /.box-body -->
@@ -99,14 +87,14 @@
         <p><strong>Activities Found</strong></p>
       </div><!-- /.box-header -->
       <div class="box-body">
-        <table id="activity-table" class="table table-bordered table-striped">
+        <table id="topic-stat-table" class="table table-bordered table-striped">
           <thead>
             <tr>
-              <th>Date</th>
-              <th>Start</th>
-              <th>End</th>
-              <th>Topic/description</th>
-              <th>Notes</th>
+              <th>Category</th>
+              <th>Topic</th>
+              <th>% Time</th>
+              <th>Freq</th>
+              <th>% Total Time</th>
             </tr>
           </thead>
           <tbody>

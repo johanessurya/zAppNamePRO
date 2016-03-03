@@ -69,37 +69,69 @@ class LogController extends Controller
           $calendarList[] = $x->calendar_id;
 
         $rows = $query->whereIn('id', $calendarList)->get();
+      } elseif($params['type'] == 'topic-stat') {
+        $rows = $query->select('categoryID', 'subCategoryID', DB::raw('SUM(TIMESTAMPDIFF(minute, start, end)) as total'), DB::raw('COUNT(*) as freq'))
+                ->where('user_id', Auth::user()->id)
+                ->groupBy('categoryID', 'subCategoryID')
+                ->orderBy('total', 'DESC')
+                ->get();
       }
 
-      $start = null;
-      $end = null;
-      foreach($rows as $x) {
-        $start = DateTime::createFromFormat(DATETIME_FORMAT, $x->start);
-        $end = DateTime::createFromFormat(DATETIME_FORMAT, $x->end);
+      if(in_array($params['type'], ['activity', 'topic', 'client-service'])) {
+        $start = null;
+        $end = null;
+        foreach($rows as $x) {
+          $start = DateTime::createFromFormat(DATETIME_FORMAT, $x->start);
+          $end = DateTime::createFromFormat(DATETIME_FORMAT, $x->end);
 
-        $clients = DB::table('calendar_client')
-          ->where('calendar_id', $x->id)
-          ->join('client', 'calendar_client.client_id', '=', 'client.id')->get();
+          $clients = DB::table('calendar_client')
+            ->where('calendar_id', $x->id)
+            ->join('client', 'calendar_client.client_id', '=', 'client.id')->get();
 
-        $clientName = [];
-        for($i = 0; $i < count($clients); $i++)
-          $clientName[] = $clients[$i]->name;
+          $clientName = [];
+          for($i = 0; $i < count($clients); $i++)
+            $clientName[] = $clients[$i]->name;
 
-        if(!empty($clientName)) {
-          $clientName = '[' . implode(', ', $clientName) . ']';
-        } else {
-          $clientName = null;
+          if(!empty($clientName)) {
+            $clientName = '[' . implode(', ', $clientName) . ']';
+          } else {
+            $clientName = null;
+          }
+
+          $topic = $x->category['abbrev'] . ' | ' . $x->subCategory['title'] . ' ' . $clientName . ' - ' . $x['description'];
+
+          $return[] = [
+            'date' => $start->format(DATE_FORMAT),
+            'start' => $start->format(config('steve.time_format')),
+            'end' => $end->format(config('steve.time_format')),
+            'description' => $topic,
+            'note' => $x['note']
+          ];
         }
+      } elseif($params['type'] == 'topic-stat') {
+        $totalTime = 0;
+        $currTotalTime = 0;
 
-        $topic = $x->category['abbrev'] . ' | ' . $x->subCategory['title'] . ' ' . $clientName . ' - ' . $x['description'];
+        foreach($rows as $x)
+          $totalTime += $x->total;
 
-        $return[] = [
-          'date' => $start->format(DATE_FORMAT),
-          'start' => $start->format(config('steve.time_format')),
-          'end' => $end->format(config('steve.time_format')),
-          'description' => $topic,
-          'note' => $x['note']
-        ];
+        for($i = 0; $i < count($rows); $i++) {
+          $x = $rows[$i];
+
+          $time = round($x->total / $totalTime * 100, 1);
+          if($i == count($rows) - 1)
+            $time = 100 - $currTotalTime;
+
+          $currTotalTime += $time;
+
+          $return[] = [
+            'category' => $x->category['abbrev'],
+            'subcategory' => $x->subcategory['title'],
+            'time' => $time,
+            'freq' => $x->freq,
+            'total' => $currTotalTime
+          ];
+        }
       }
 
       return ['data' => $return];
@@ -116,7 +148,57 @@ class LogController extends Controller
           $return = $this->getTopicReport($params);
         elseif($params['type'] == 'client-service')
           $return = $this->getClientService($params);
+        elseif($params['type'] == 'topic-stat')
+          $return = $this->getTopicStat($params);
       }
+      return $return;
+    }
+
+    private function getTopicStat($params) {
+      $return = [];
+
+      $grayColor = config('steve.gray_color');
+      $user = User::find(Auth::user()->id);
+
+      $start = DateTime::createFromFormat(DATETIME_FORMAT, $params['start']);
+      $end = DateTime::createFromFormat(DATETIME_FORMAT, $params['end']);
+      $start = $start->format(config('steve.mysql_datetime_format'));
+      $end = $end->format(config('steve.mysql_datetime_format'));
+
+      // Get calendar associated with client id
+      $rows = Calendar::select('categoryID', 'subCategoryID', DB::raw('SUM(TIMESTAMPDIFF(minute, start, end)) as total'), DB::raw('COUNT(*) as freq'))
+              ->where('start', '>=', $start)
+              ->where('end', '<=', $end)
+              ->where('user_id', Auth::user()->id)
+              ->groupBy('categoryID', 'subCategoryID')
+              ->orderBy('total', 'DESC')
+              ->get();
+
+      $total = 0;
+      foreach($rows as $x)
+        $total += $x['total'];
+
+      $total2 = 0;
+
+      for($i = 0; $i < count($rows); $i++) {
+        $x = $rows[$i];
+
+        if($i < count($rows) - 1)
+          $value = round($x['total'] / $total * 100, 1);
+        else
+          $value = round(100 - $total2, 1);
+
+        $label = $x->category->abbrev . '-' . $x->subcategory->title;
+        $return[] = [
+          'value' => $value,
+          'color' => $x->subcategory->color,
+          'highlight' => $x->subcategory->color,
+          'label' => $label
+        ];
+
+        $total2 += $value;
+      }
+
       return $return;
     }
 
