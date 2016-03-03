@@ -9,10 +9,41 @@ $(document).ready(function() {
       el.addClass("active");
     else
       clearInterval(timerId);
-
-    console.log('test');
   }, 500);
-  
+
+  // When graph min button clicked
+  $('.min-max').click(function() {
+    var $scope = {};
+    $scope.el = $(this);
+
+    switch($scope.el.attr('data-type')) {
+      // For graph
+      case 'graph':
+        if($scope.el.hasClass('fa-plus')) {
+          // fa-plus
+          $('#graph-title').html('Graph');
+        } else {
+          // fa-minus
+          $scope.title = $('#title-h1').html();
+
+          $('#graph-title').html($scope.title);
+        }
+
+        break;
+
+      case 'table':
+        if($scope.el.hasClass('fa-plus')) {
+          // fa-plus
+          $('#table-title').html('Event Found');
+        } else {
+          // fa-minus
+          $('#table-title').html('Data');
+        }
+
+        break;
+    }
+  });
+
   // Init pie chart
   $global.initPieChart();
 

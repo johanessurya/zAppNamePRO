@@ -40,9 +40,9 @@
     <div class="col-md-6">
       <div class="box box-default">
         <div class="box-header with-border">
-          <h3 class="box-title">Graph</h3>
+          <h3 id="graph-title" class="box-title">Graph</h3>
           <div class="box-tools pull-right">
-            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+            <button class="btn btn-box-tool" data-widget="collapse"><i class="min-max fa fa-minus" data-type="graph"></i></button>
           </div>
         </div><!-- /.box-header -->
         <div class="box-body">
@@ -70,7 +70,7 @@
           <h3 class="box-title">Comments</h3>
           <div class="box-tools pull-right">
             <button id="load-last-comment" class="btn btn-box-tool"><i class="fa fa-fw fa-refresh"></i></button>
-            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+            <button class="btn btn-box-tool" data-widget="collapse"><i class="min-max fa fa-minus"></i></button>
           </div>
         </div><!-- /.box-header -->
         <div class="box-body pad">
@@ -87,9 +87,9 @@
     <!-- TABLE: LATEST ORDERS -->
     <div class="box">
       <div class="box-header with-border">
-        <h3 class="box-title">Activities Found</h3>
+        <h3 id="table-title" class="box-title">Event Found</h3>
         <div class="box-tools pull-right">
-          <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+          <button class="btn btn-box-tool" data-widget="collapse"><i class="min-max fa fa-minus" data-type="table"></i></button>
         </div>
       </div><!-- /.box-header -->
       <div class="box-body">
