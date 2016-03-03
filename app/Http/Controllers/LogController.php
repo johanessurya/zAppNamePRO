@@ -137,10 +137,10 @@ class LogController extends Controller
           $return[] = [
             'category' => $x->category['abbrev'],
             'subcategory' => $x->subcategory['title'],
-            'time' => $time,
-            'hours' => round($x->total / 60, 1),
+            'time' => number_format($time, 1),
+            'hours' => number_format(round($x->total / 60, 1), 1),
             'freq' => $x->freq,
-            'total' => $currTotalTime
+            'total' => number_format($currTotalTime, 1)
           ];
         }
       }
