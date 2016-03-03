@@ -138,6 +138,7 @@ class LogController extends Controller
             'category' => $x->category['abbrev'],
             'subcategory' => $x->subcategory['title'],
             'time' => $time,
+            'hours' => round($x->total / 60, 1),
             'freq' => $x->freq,
             'total' => $currTotalTime
           ];

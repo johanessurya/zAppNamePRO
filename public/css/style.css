@@ -9,3 +9,8 @@
 .ui-widget-content{
   z-index: 9999;
 }
+
+table.use-of-time th:nth-child(2),
+table.use-of-time td:nth-child(2){
+  display: none;
+}

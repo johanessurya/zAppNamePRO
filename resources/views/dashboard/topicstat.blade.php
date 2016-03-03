@@ -93,6 +93,7 @@
               <th>Category</th>
               <th>Topic</th>
               <th>% Time</th>
+              <th>Hours</th>
               <th>Freq</th>
               <th>% Total Time</th>
             </tr>

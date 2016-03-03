@@ -87,12 +87,13 @@
         <p><strong>Activities Found</strong></p>
       </div><!-- /.box-header -->
       <div class="box-body">
-        <table id="topic-stat-table" class="table table-bordered table-striped">
+        <table id="topic-stat-table" class="use-of-time table table-bordered table-striped">
           <thead>
             <tr>
               <th>Category</th>
               <th>Topic</th>
               <th>% Time</th>
+              <th>Hours</th>
               <th>Freq</th>
               <th>% Total Time</th>
             </tr>

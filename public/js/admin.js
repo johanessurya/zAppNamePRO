@@ -430,6 +430,7 @@ $global.reloadActivityTable = function(start, end) {
               {'data': 'category', 'searchable': true},
               {'data': 'subcategory', 'searchable': true},
               {'data': 'time', 'searchable': true},
+              {'data': 'hours', 'searchable': true},
               {'data': 'freq', 'searchable': true},
               {'data': 'total', 'searchable': true},
             ],
