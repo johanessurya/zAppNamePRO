@@ -87,7 +87,7 @@
     <!-- TABLE: LATEST ORDERS -->
     <div class="box">
       <div class="box-header with-border">
-        <p><strong>Activities Found</strong></p>
+        <h3>Activities Found</h3>
       </div><!-- /.box-header -->
       <div class="box-body">
         <table id="activity-table" class="table table-bordered table-striped">
