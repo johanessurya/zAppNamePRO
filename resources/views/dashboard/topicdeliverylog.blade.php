@@ -19,27 +19,25 @@
       </div>
 
       <!-- Date and time range -->
-      <div class="col-md-5 form-group pull-right">
-        <div class="col-lg-6">
-          <div class="input-group">
-            <select id="report-value" class="form-control pull-right">
-              <option>Please select a Topic</option>
-              @foreach($subCategory as $x)
-              <option value="{{ $x['value'] }}">{{ $x['title'] }}</option>
-              @endforeach
-            </select>
-          </div>
+      <div class="pull-right">
+        <div class="input-group">
+          <button class="btn btn-default pull-right" id="daterange-btn" data-type="topic">
+            <i class="fa fa-calendar"></i>
+            <span>Please select a date</span>
+            <i class="fa fa-caret-down"></i>
+          </button>
         </div>
-        <div class="col-lg-6">
-          <div class="input-group">
-            <button class="btn btn-default pull-right" id="daterange-btn" data-type="topic">
-              <i class="fa fa-calendar"></i>
-              <span>Please select a date</span>
-              <i class="fa fa-caret-down"></i>
-            </button>
-          </div>
+      </div>
+      <div class="pull-right">
+        <div class="input-group">
+          <select id="report-value" class="form-control pull-right">
+            <option>Please select a Topic</option>
+            @foreach($subCategory as $x)
+            <option value="{{ $x['value'] }}">{{ $x['title'] }}</option>
+            @endforeach
+          </select>
         </div>
-      </div><!-- /.form group -->
+      </div>
     </div><!-- /.box-body -->
   </div><!-- /.col -->
 </div>
