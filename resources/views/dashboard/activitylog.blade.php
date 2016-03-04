@@ -42,7 +42,7 @@
         <div class="box-header with-border">
           <h3 id="graph-title" class="box-title">Graph</h3>
           <div class="box-tools pull-right">
-            <button class="btn btn-box-tool" data-widget="collapse"><i class="min-max fa fa-minus" data-type="graph"></i></button>
+            <button class="min-max btn btn-box-tool" data-widget="collapse" data-type="graph"><i class="fa fa-minus"></i></button>
           </div>
         </div><!-- /.box-header -->
         <div class="box-body">
@@ -89,7 +89,7 @@
       <div class="box-header with-border">
         <h3 id="table-title" class="box-title">Event Found</h3>
         <div class="box-tools pull-right">
-          <button class="btn btn-box-tool" data-widget="collapse"><i class="min-max fa fa-minus" data-type="table"></i></button>
+          <button class="min-max btn btn-box-tool" data-widget="collapse" data-type="table"><i class="fa fa-minus"></i></button>
         </div>
       </div><!-- /.box-header -->
       <div class="box-body">

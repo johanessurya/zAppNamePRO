@@ -15,11 +15,12 @@ $(document).ready(function() {
   $('.min-max').click(function() {
     var $scope = {};
     $scope.el = $(this);
+    $scope.i = $scope.el.find('i');
 
     switch($scope.el.attr('data-type')) {
       // For graph
       case 'graph':
-        if($scope.el.hasClass('fa-plus')) {
+        if($scope.i.hasClass('fa-plus')) {
           // fa-plus
           $('#graph-title').html('Graph');
         } else {
@@ -33,7 +34,7 @@ $(document).ready(function() {
 
       // For table
       case 'table':
-        if($scope.el.hasClass('fa-plus')) {
+        if($scope.i.hasClass('fa-plus')) {
           // fa-plus
           $('#table-title').html('Event Found');
         } else {
