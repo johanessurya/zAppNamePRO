@@ -40,7 +40,7 @@
     <div class="col-md-6">
       <div class="box box-default">
         <div class="box-header with-border">
-          <h3 id="graph-title" class="box-title">Graph</h3>
+          <h3 id="graph-title" class="box-title">Activity Log</h3>
           <div class="box-tools pull-right">
             <button class="min-max btn btn-box-tool" data-widget="collapse" data-type="graph"><i class="fa fa-minus"></i></button>
           </div>
