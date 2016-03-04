@@ -36,7 +36,7 @@ $(document).ready(function() {
       case 'table':
         if($scope.i.hasClass('fa-plus')) {
           // fa-plus
-          $('#table-title').html('Event Found');
+          $('#table-title').html('Activity Found');
         } else {
           // fa-minus
           $('#table-title').html('Data');
