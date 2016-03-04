@@ -21,16 +21,17 @@ $(document).ready(function() {
       case 'graph':
         if($scope.el.hasClass('fa-plus')) {
           // fa-plus
+          $('#graph-title').html('Graph');
+        } else {
+          // fa-minus
           $scope.title = $('#title-h1').html();
 
           $('#graph-title').html($scope.title);
-        } else {
-          // fa-minus
-          $('#graph-title').html('Graph');
         }
 
         break;
 
+      // For table
       case 'table':
         if($scope.el.hasClass('fa-plus')) {
           // fa-plus
