@@ -30,7 +30,7 @@
       </div>
       <div class="pull-right">
         <div class="input-group">
-          <select id="report-value" class="form-control pull-right">
+          <select id="report-value" class="form-control pull-right margin-right-1">
             <option>Please select a Topic</option>
             @foreach($subCategory as $x)
             <option value="{{ $x['value'] }}">{{ $x['title'] }}</option>
