@@ -87,7 +87,7 @@
     <!-- TABLE: LATEST ORDERS -->
     <div class="box">
       <div class="box-header with-border">
-        <h3 id="table-title" class="box-title">Activity Found</h3>
+        <h3 id="table-title" class="box-title">Activities Found</h3>
         <div class="box-tools pull-right">
           <button class="min-max btn btn-box-tool" data-widget="collapse" data-type="table"><i class="fa fa-minus"></i></button>
         </div>
