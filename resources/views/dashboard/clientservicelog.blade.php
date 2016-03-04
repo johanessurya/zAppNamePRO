@@ -19,27 +19,25 @@
       </div>
 
       <!-- Date and time range -->
-      <div class="col-md-5 form-group pull-right">
-        <div class="col-lg-6">
-          <div class="input-group">
-            <select id="report-value" class="form-control pull-right">
-              <option value="0">Select a client</option>
-              @foreach($clients as $x)
-              <option value="{{ $x->id }}">{{ $x->name }}</option>
-              @endforeach
-            </select>
-          </div>
+      <div class="pull-right">
+        <div class="input-group">
+          <button class="btn btn-default pull-right" id="daterange-btn" data-type="client-service">
+            <i class="fa fa-calendar"></i>
+            <span>Please select a date</span>
+            <i class="fa fa-caret-down"></i>
+          </button>
         </div>
-        <div class="col-lg-6">
-          <div class="input-group">
-            <button class="btn btn-default pull-right" id="daterange-btn" data-type="client-service">
-              <i class="fa fa-calendar"></i>
-              <span>Please select a date</span>
-              <i class="fa fa-caret-down"></i>
-            </button>
-          </div>
+      </div>
+      <div class="pull-right">
+        <div class="input-group">
+          <select id="report-value" class="form-control pull-right margin-right-1">
+            <option value="0">Select a client</option>
+            @foreach($clients as $x)
+            <option value="{{ $x->id }}">{{ $x->name }}</option>
+            @endforeach
+          </select>
         </div>
-      </div><!-- /.form group -->
+      </div>
     </div><!-- /.box-body -->
   </div><!-- /.col -->
 </div>
