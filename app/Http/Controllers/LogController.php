@@ -52,16 +52,24 @@ class LogController extends Controller
 
       $rows = [];
       if($params['type'] == 'activity') {
-        $rows = $query->get();
+        $rows = $query
+                ->where('user_id', Auth::user()->id)
+                ->get();
       } elseif($params['type'] == 'topic' && !empty($params['value'])) {
         $filter = explode('=', $params['value']);
 
         switch($filter[0]) {
           case 'c':
-            $rows = $query->where('categoryID', $filter[1])->get();
+            $rows = $query
+              ->where('user_id', Auth::user()->id)
+              ->where('categoryID', $filter[1])
+              ->get();
             break;
           case 'sc':
-            $rows = $query->where('subCategoryID', $filter[1])->get();
+            $rows = $query
+              ->where('user_id', Auth::user()->id)
+              ->where('subCategoryID', $filter[1])
+              ->get();
             break;
         }
       } elseif($params['type'] == 'client-service' && !empty($params['value'])) {
