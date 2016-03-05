@@ -106,7 +106,7 @@
               <th>Date</th>
               <th>Start</th>
               <th>End</th>
-              <th>Topic/description</th>
+              <th>Topic/Description</th>
               <th>Notes</th>
             </tr>
           </thead>
