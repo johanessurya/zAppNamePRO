@@ -396,7 +396,7 @@ class LogController extends Controller
             $x = $rows[$i];
 
             // CategoryList
-            $categoryList[] = $x['categoryID'];
+            $categoryList[] = $x['subCategoryID'];
 
             // Get % of each sub category
             if($i < count($rows) - 1)
