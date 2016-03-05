@@ -120,14 +120,14 @@ class LogController extends Controller
             $clientName = null;
           }
 
-          $topic = $x->category['abbrev'] . ' | ' . $x->subCategory['title'] . ' ' . $clientName . ' - ' . $x['description'];
+          $topic = $x->category['abbrev'] . ' | ' . $x->subCategory['title'] . ' ' . $clientName;
 
           $return[] = [
             'date' => $start->format(DATE_FORMAT),
             'start' => $start->format(config('steve.time_format')),
             'end' => $end->format(config('steve.time_format')),
             'description' => $topic,
-            'note' => $x['note']
+            'note' => $x['description']
           ];
         }
       } elseif(in_array($params['type'], ['topic-stat', 'use-of-time'])) {
