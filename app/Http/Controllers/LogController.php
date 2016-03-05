@@ -39,6 +39,10 @@ class LogController extends Controller
       $return = [];
       $params = $request->all();
 
+      // Return
+      if(empty($params['start']) && empty($params['end']))
+        return ['data' => $return];
+
       $start = DateTime::createFromFormat(DATETIME_FORMAT, $params['start']);
       $end = DateTime::createFromFormat(DATETIME_FORMAT, $params['end']);
       $start = $start->format(config('steve.mysql_datetime_format'));
@@ -151,6 +155,10 @@ class LogController extends Controller
     public function getActivityPieChart(Request $request) {
       $return = [];
       $params = $request->all();
+
+      // Return
+      if(empty($params['start']) && empty($params['end']))
+        return $return;
 
       if(isset($params['type'])){
         if($params['type'] == 'activity')
