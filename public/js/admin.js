@@ -410,7 +410,8 @@ $global.reloadActivityTable = function(start, end) {
               {'data': 'end', 'searchable': true},
               {'data': 'description', 'searchable': true},
               {'data': 'note', 'searchable': true},
-            ]
+            ],
+            "autoWidth": false
         } );
       } else {
         el = $('#topic-stat-table');
@@ -434,7 +435,8 @@ $global.reloadActivityTable = function(start, end) {
               {'data': 'freq', 'searchable': true},
               {'data': 'total', 'searchable': true},
             ],
-            'order': [[ 2, "desc" ]]
+            'order': [[ 2, "desc" ]],
+            "autoWidth": false
         } );
       }
 
@@ -563,7 +565,8 @@ $(function () {
         targets: [0,1,2],
         orderable: false
       }],
-      "order": [[ 3, "asc" ]]
+      "order": [[ 3, "asc" ]],
+      "autoWidth": false
   } );
 
   // class prefix: "js-"" mean that class related to javascript method/function
@@ -592,7 +595,8 @@ $(function () {
         targets: [0,1],
         orderable: false
       }],
-      "order": [[ 2, "asc" ]]
+      "order": [[ 2, "asc" ]],
+      "autoWidth": false
   } );
 
   // Load sub category option
